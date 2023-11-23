@@ -16,7 +16,7 @@ Programs <- Programs[ -c(5:25) ]
 rownames(Programs)
 Programs$SS <- rownames(Programs)
 Programs <- Programs[order(Programs$SS), ]
-Programs <- Programs[490:535,]
+Programs <- Programs[1:35,]
 Programs <- Programs[1:4]
 colnames(Programs)[4] <- "Eigenvector"
 
