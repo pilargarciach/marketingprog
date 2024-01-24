@@ -1,7 +1,7 @@
 # Step 1: Opening the sample of texts
 # this local folder is a clone of the GitHub Repo
 library(readtext)
-textos <- readtext("Raw Data/")
+textos <- readtext("Programs/")
 textos$doc_id <- gsub("[^0-9_-]", "", textos$doc_id)
 # The following code allows us  to 
 # classify the type of program (e.g., Master or doctorate)
