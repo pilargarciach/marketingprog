@@ -9,7 +9,7 @@ Network$pattern[Network$pattern=="comunica*"] <- "S3"
 Network$pattern[Network$pattern=="crea*"] <- "S4"
 Network$pattern[Network$pattern=="paciencia"] <- "S5"
 Network$pattern[Network$pattern=="lider*"] <- "S6"
-Network$pattern[Network$pattern=="resolver"] <- "S7"
+Network$pattern[Network$pattern=="resolv*"] <- "S7"
 Network$pattern[Network$pattern=="comprom*"] <- "S8"
 Network$pattern[Network$pattern=="emprende*"] <- "S9"
 Network$pattern[Network$pattern=="gesti*"] <- "S10"
@@ -51,6 +51,9 @@ Network$pattern[Network$pattern=="flexibilidad"] <- "S45"
 Network$pattern[Network$pattern=="persua*"] <- "S46"
 Network$pattern[Network$pattern=="convenc*"] <- "S47"
 Network$pattern[Network$pattern=="inspir*"] <- "S48"
+Network$pattern[Network$pattern=="estrat*"] <- "S49"
+Network$pattern[Network$pattern=="recre*"] <- "S50"
+
 
 table(Network$pattern)
 network <- Network[!duplicated(Network[c(1,2)]),]
