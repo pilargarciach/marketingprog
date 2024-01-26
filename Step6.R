@@ -130,4 +130,10 @@ SKILLS[[4]] <- Programs4[5:6]
 
 irr::iota(SKILLS, scaledata = "nominal")
 
-Programs1[5] == Programs2[5]
+library(irr)
+data("diagnoses")
+kappam.fleiss(diagnoses) 
+
+kappam.fleiss(diagnoses, exact=TRUE)
+kappam.fleiss(diagnoses, detail=TRUE)
+kappam.fleiss(diagnoses[,1:4])
