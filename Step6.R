@@ -1,4 +1,5 @@
 load("Results/Result3.RData")
+library(igraph)
 BNA <- graph.data.frame(Network, directed = FALSE)
 Programs <- data.frame(Degree = igraph::degree(BNA),
                        Closeness = igraph::closeness(BNA),
@@ -130,7 +131,7 @@ SKILLS[[4]] <- Programs4[5:6]
 
 irr::iota(SKILLS, scaledata = "nominal")
 
-library(irr)
+library(irr)n
 data("diagnoses")
 kappam.fleiss(diagnoses) 
 
