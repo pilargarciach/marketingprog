@@ -32,7 +32,9 @@ library(quanteda)
 Textos <- corpus(textos$text)
 docvars(Textos, "Program") <- textos$doc_id
 docvars(Textos, "University") <- textos$University
-
+summary(Textos)
+TextosData <- data.frame(summary(Textos))
+hist(TextosData$Sentences)
 Programs <- tokens(Textos, 
                      remove_numbers = TRUE, 
                      remove_punct = TRUE, 
