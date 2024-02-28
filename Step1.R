@@ -1,3 +1,4 @@
+# 1.Initialization ----
 # Step 1: Opening the sample of texts
 # this local folder is a clone of the GitHub Repo
 library(readtext)
@@ -43,3 +44,28 @@ Programs <- tokens(Textos,
   tokens_remove(stopwords("spanish"))
 
 save.image("Results/Result1.RData")
+# Saved_Results ----
+
+
+library(readr)
+Inst <- read_csv("GeolocationInstitutions.csv")
+library(treemap)
+colnames(Inst)[1] <- "School Type"
+colnames(Inst)[2] <- "Geolocation"
+colnames(Inst)[3] <- "value"
+variable.names(Inst)
+
+library(png)
+library(treemap)
+png("F00.png", width = 15, height = 7, units = 'in', res = 300)
+treemap(Inst,
+        index=c("Geolocation", "School Type"),
+        vSize="value",
+        vColor = "School Type",
+        type="index",
+        title = "",
+        algorithm = "pivotSize",
+        mirror.x = TRUE,
+        mirror.y = FALSE,
+        palette = "Set1")
+dev.off()
