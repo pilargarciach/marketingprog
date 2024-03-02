@@ -1,6 +1,6 @@
 load("Results/Result1.RData")
 load("Results/Result2.RData")
-textos$docname <- paste0("text", 1:633)
+textos$docname <- paste0("text", 1:length(textos$doc_id))
 rm(list=setdiff(ls(), c("textos","SS")))
 
 
