@@ -7,44 +7,59 @@ rm(list=setdiff(ls(), c("textos","SS")))
 SoftSkills <- merge(SS, textos, by.x = "docname", by.y = "docname", all.x = TRUE)
 
 library(dplyr)
-Bachelor <- SoftSkills %>% filter(., Program=="Bachelor") %>% select(., c(pattern, doc_id))
-Postgraduate <- SoftSkills %>% filter(., Program!="Bachelor") %>% select(., c(pattern, doc_id))
-
-
+AM <- SoftSkills %>% filter(., Region=="AM") %>% select(., c(pattern, docname))
+EU.ME.AF <- SoftSkills %>% filter(., Region=="EU-ME-AF") %>% select(., c(pattern, docname))
+AP <- SoftSkills %>% filter(., Region=="AP") %>% select(., c(pattern, docname))
 
 library(igraph)
-bachelor <- graph.data.frame(Bachelor, directed = FALSE)
-postgraduate <- graph.data.frame(Postgraduate, directed = FALSE)
+eu.me.af <- graph.data.frame(EU.ME.AF, directed = FALSE)
+am <- graph.data.frame(AM, directed = FALSE)
+ap <- graph.data.frame(AP, directed = FALSE)
 
-Bach <- data.frame(Degree = igraph::degree(bachelor),
-                   Closeness = igraph::closeness(bachelor),
-                   Betweennes = igraph::betweenness(bachelor),
-                   Eigen = igraph::eigen_centrality(bachelor))
-Bach <- Bach[ -c(5:25) ]
-rownames(Bach)
-Bach$SS <- rownames(Bach)
-Bach <- Bach[order(Bach$SS), ]
-Bach <- Bach[101:144,]
-Bach$Program <- "Bachelor"
+Region1 <- data.frame(Degree = igraph::degree(am),
+                      Closeness = igraph::closeness(am),
+                      Betweennes = igraph::betweenness(am),
+                      Eigen = igraph::eigen_centrality(am))
+Region1 <- Region1[ -c(5:25) ]
+rownames(Region1)
+Region1$SS <- rownames(Region1)
+Region1 <- Region1[order(Region1$SS), ]
+Region1 <- Region1[!grepl('text', Region1$SS), ]
+Region1$Region <- "AM"
+
+Region2 <- data.frame(Degree = igraph::degree(eu.me.af),
+                      Closeness = igraph::closeness(eu.me.af),
+                      Betweennes = igraph::betweenness(eu.me.af),
+                      Eigen = igraph::eigen_centrality(eu.me.af))
+Region2 <- Region2[ -c(5:25) ]
+rownames(Region2)
+Region2$SS <- rownames(Region2)
+Region2 <- Region2[order(Region2$SS), ]
+Region2 <- Region2[!grepl('text', Region2$SS), ]
+Region2$Region <- "EU-ME-AF"
+
+Region3 <- data.frame(Degree = igraph::degree(ap),
+                      Closeness = igraph::closeness(ap),
+                      Betweennes = igraph::betweenness(ap),
+                      Eigen = igraph::eigen_centrality(ap))
+Region3 <- Region3[ -c(5:25) ]
+rownames(Region3)
+Region3$SS <- rownames(Region3)
+Region3 <- Region3[order(Region3$SS), ]
+Region3 <- Region3[!grepl('text', Region3$SS), ]
+Region3$Region <- "AP"
 
 
-postg <- data.frame(Degree = igraph::degree(postgraduate),
-                    Closeness = igraph::closeness(postgraduate),
-                    Betweennes = igraph::betweenness(postgraduate),
-                    Eigen = igraph::eigen_centrality(postgraduate))
-postg <- postg[ -c(5:25) ]
-rownames(postg)
-postg$SS <- rownames(postg)
-postg <- postg[order(postg$SS), ]
-postg <- postg[390:434,]
-postg$Program <- "Postgraduate"
-rm(list=setdiff(ls(), c("Bach","postg")))
 
-Programs <- rbind(Bach, postg)
+
+
+rm(list=setdiff(ls(), c("Region1","Region2", "Region3")))
+
+Programs <- rbind(Region1, Region2, Region3)
 scaled_programs <- scale(Programs[c(1:4)])
 rescaled <- data.frame(apply(scaled_programs, 2, function(x) (x - min(x)) / (max(x) - min(x))))
 rescaled$SS <- Programs$SS
-rescaled$Program <- Programs$Program
+rescaled$Region <- Programs$Region
 
 library(tidyverse)
 Program <- rescaled %>% 
@@ -54,8 +69,7 @@ Program <- rescaled %>%
 
 library(ggplot2)
 ggplot(rescaled, aes(x=reorder(SS, Eigen.vector), y=Eigen.vector)) +
-  geom_point(size=5, aes(colour=Program), alpha=0.6) +
-  scale_color_manual(values=c("orange", "darkgreen")) +  # Set colors
+  geom_point(size=5, aes(colour=Region), alpha=0.6) + 
   theme_bw() +
   theme(axis.text.x = element_text(angle=60, hjust=1),
         panel.grid.major.y = element_line(colour="grey60", linetype="dashed"),
