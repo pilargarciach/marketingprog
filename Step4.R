@@ -27,7 +27,7 @@ library(psych)
 png("F2.png", width = 15, height = 7, units = 'in', res = 300)
 pairs.panels(Programs, 
              method = "spearman", 
-             hist.col = "orange",
+             hist.col = "#C71135",
              density = TRUE,  
              ellipses = TRUE,
              pch = 15,
