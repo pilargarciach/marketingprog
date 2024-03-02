@@ -11,22 +11,20 @@ textos <- mutate(textos, Institution = ifelse(grepl("Yes", Flag), AU$Institution
 textos <- mutate(textos, InstitutionType = ifelse(grepl("Yes", Flag), AU$`Type of School`, "Private"))
 textos <- mutate(textos, Region = ifelse(grepl("Yes", Flag), AU$Region, "AP"))
 
-
-
-
 library(quanteda)
 Textos <- corpus(textos$text)
-docvars(Textos, "Program") <- textos$doc_id
-docvars(Textos, "University") <- textos$University
+docvars(Textos, "Region") <- textos$Region
+docvars(Textos, "Institution") <- textos$Institution
+docvars(Textos, "InstitutionType") <- textos$InstitutionType
 summary(Textos)
-TextosData <- data.frame(summary(Textos))
+TextosData <- data.frame(summary(Textos, n = length(textos$text)))
 hist(TextosData$Sentences)
 Programs <- tokens(Textos, 
                      remove_numbers = TRUE, 
                      remove_punct = TRUE, 
                      remove_url = TRUE, 
                      remove_symbols = TRUE) %>%  
-  tokens_remove(stopwords("spanish"))
+  tokens_remove(stopwords("english"))
 
 save.image("Results/Result1.RData")
 # Saved_Results ----
