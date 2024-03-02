@@ -3,7 +3,7 @@ library(igraph)
 set.seed(56)
 png("F1.png", width = 15, height = 7, units = 'in', res = 300)
 
-plot(Terms, vertex.label.color = "black", vertex.label.cex = 0.8, vertex.color = node_colors, vertex.size = 15, edge.width = 0.5, edge.color = "lightgray", layout = layout_with_drl, main = "")
+plot(Terms, vertex.label = NA, vertex.label.color = "black", vertex.label.cex = 0.8, vertex.color = node_colors, vertex.size = 15, edge.width = 0.5, edge.color = "lightgray", layout = layout_with_drl, main = "")
 
 dev.off()
 
