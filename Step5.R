@@ -68,88 +68,105 @@ Program <- rescaled %>%
 
 
 library(ggplot2)
-ggplot(rescaled, aes(x=reorder(SS, Eigen.vector), y=Eigen.vector)) +
+R1 <- ggplot(rescaled, aes(x=reorder(SS, Eigen.vector), y=Eigen.vector)) +
   geom_point(size=5, aes(colour=Region), alpha=0.6) + 
+  scale_color_manual(values=c("#C71135", "#1a50a6", "#2E851B")) +
   theme_bw() +
   theme(axis.text.x = element_text(angle=60, hjust=1),
-        panel.grid.major.y = element_line(colour="grey60", linetype="dashed"),
+        panel.grid.major.y = element_line(colour="grey80", linetype="dashed"),
         panel.grid.minor.y = element_blank(),
-        panel.grid.major.x = element_line(colour="grey60", linetype="dashed")) +
+        panel.grid.major.x = element_line(colour="grey80", linetype="dashed")) +
   coord_flip() +
   theme(legend.position="top",
-        axis.text.x=element_text(size=15, colour="black"),
-        axis.text.y=element_text(size=15, colour="black"),
-        axis.title.x=element_text(face="italic", colour="black", size=20),
-        axis.title.y=element_text(face="italic", colour="black", size=20)) +
+        axis.text.x=element_text(size=30, colour="black"),
+        axis.text.y=element_text(size=30, colour="black"),
+        axis.title.x=element_text(face="italic", colour="black", size=30),
+        axis.title.y=element_text(face="italic", colour="black", size=30),
+        legend.text = element_text(size = 30),
+        legend.title = element_text(size = 30)) + # Increase legend font size
   xlab("Soft Skills") +
   ylab("Eigenvector Centrality") +
-  theme(legend.position=c(0.95,0.1), legend.justification=c(0.95,0.1))
+  theme(legend.position=c(0.95,0.02), legend.justification=c(0.95,0.1))
 
-ggplot(rescaled, aes(x=reorder(SS, Closeness), y=Closeness)) +
-  geom_point(size=5, aes(colour=Program), alpha=0.6) +
-  scale_color_manual(values=c("orange", "darkgreen")) +  # Set colors
+R2 <- ggplot(rescaled, aes(x=reorder(SS, Closeness), y=Closeness)) +
+  geom_point(size=5, aes(colour=Region), alpha=0.6) +
+  scale_color_manual(values=c("#C71135", "#1a50a6", "#2E851B")) +
   theme_bw() +
   theme(axis.text.x = element_text(angle=60, hjust=1),
-        panel.grid.major.y = element_line(colour="grey60", linetype="dashed"),
+        panel.grid.major.y = element_line(colour="grey80", linetype="dashed"),
         panel.grid.minor.y = element_blank(),
-        panel.grid.major.x = element_line(colour="grey60", linetype="dashed")) +
+        panel.grid.major.x = element_line(colour="grey80", linetype="dashed")) +
   coord_flip() +
   theme(legend.position="top",
-        axis.text.x=element_text(size=15, colour="black"),
-        axis.text.y=element_text(size=15, colour="black"),
-        axis.title.x=element_text(face="italic", colour="black", size=20),
-        axis.title.y=element_text(face="italic", colour="black", size=20)) +
+        axis.text.x=element_text(size=30, colour="black"),
+        axis.text.y=element_text(size=30, colour="black"),
+        axis.title.x=element_text(face="italic", colour="black", size=30),
+        axis.title.y=element_text(face="italic", colour="black", size=30),
+        legend.text = element_text(size = 30),
+        legend.title = element_text(size = 30)) + # Increase legend font size
   xlab("Soft Skills") +
   ylab("Closeness Centrality") +
-  theme(legend.position=c(0.95,0.1), legend.justification=c(0.95,0.1))
+  theme(legend.position=c(0.95,0.02), legend.justification=c(0.95,0.1))
 
-ggplot(rescaled, aes(x=reorder(SS, Betweennes), y=Betweennes)) +
-  geom_point(size=5, aes(colour=Program), alpha=0.6) +
-  scale_color_manual(values=c("orange", "darkgreen")) +  # Set colors
+R3 <- ggplot(rescaled, aes(x=reorder(SS, Betweennes), y=Betweennes)) +
+  geom_point(size=5, aes(colour=Region), alpha=0.6) +
+  scale_color_manual(values=c("#C71135", "#1a50a6", "#2E851B")) +  # Set colors
   theme_bw() +
   theme(axis.text.x = element_text(angle=60, hjust=1),
-        panel.grid.major.y = element_line(colour="grey60", linetype="dashed"),
+        panel.grid.major.y = element_line(colour="grey80", linetype="dashed"),
         panel.grid.minor.y = element_blank(),
-        panel.grid.major.x = element_line(colour="grey60", linetype="dashed")) +
+        panel.grid.major.x = element_line(colour="grey80", linetype="dashed")) +
   coord_flip() +
   theme(legend.position="top",
-        axis.text.x=element_text(size=15, colour="black"),
-        axis.text.y=element_text(size=15, colour="black"),
-        axis.title.x=element_text(face="italic", colour="black", size=20),
-        axis.title.y=element_text(face="italic", colour="black", size=20)) +
+        axis.text.x=element_text(size=30, colour="black"),
+        axis.text.y=element_text(size=30, colour="black"),
+        axis.title.x=element_text(face="italic", colour="black", size=30),
+        axis.title.y=element_text(face="italic", colour="black", size=30),
+        legend.text = element_text(size = 30),
+        legend.title = element_text(size = 30)) + # Increase legend font size
   xlab("Soft Skills") +
   ylab("Betweenness Centrality") +
-  theme(legend.position=c(0.95,0.1), legend.justification=c(0.95,0.1))
+  theme(legend.position=c(0.95,0.02), legend.justification=c(0.95,0.1))
 
-ggplot(rescaled, aes(x=reorder(SS, Degree), y=Degree)) +
-  geom_point(size=5, aes(colour=Program), alpha=0.6) +
-  scale_color_manual(values=c("orange", "darkgreen")) +  # Set colors
+R4 <- ggplot(rescaled, aes(x=reorder(SS, Degree), y=Degree)) +
+  geom_point(size=5, aes(colour=Region), alpha=0.6) +
+  scale_color_manual(values=c("#C71135", "#1a50a6", "#2E851B")) +
   theme_bw() +
   theme(axis.text.x = element_text(angle=60, hjust=1),
-        panel.grid.major.y = element_line(colour="grey60", linetype="dashed"),
+        panel.grid.major.y = element_line(colour="grey80", linetype="dashed"),
         panel.grid.minor.y = element_blank(),
-        panel.grid.major.x = element_line(colour="grey60", linetype="dashed")) +
+        panel.grid.major.x = element_line(colour="grey80", linetype="dashed")) +
   coord_flip() +
   theme(legend.position="top",
-        axis.text.x=element_text(size=15, colour="black"),
-        axis.text.y=element_text(size=15, colour="black"),
-        axis.title.x=element_text(face="italic", colour="black", size=20),
-        axis.title.y=element_text(face="italic", colour="black", size=20)) +
+        axis.text.x=element_text(size=30, colour="black"),
+        axis.text.y=element_text(size=30, colour="black"),
+        axis.title.x=element_text(face="italic", colour="black", size=30),
+        axis.title.y=element_text(face="italic", colour="black", size=30),
+        legend.text = element_text(size = 30),
+        legend.title = element_text(size = 30)) + # Increase legend font size
   xlab("Soft Skills") +
   ylab("Degree Centrality") +
-  theme(legend.position=c(0.95,0.1), legend.justification=c(0.95,0.1))
+  theme(legend.position=c(0.95,0.02), legend.justification=c(0.95,0.1))
+
+
+
+library(ggpubr)
+png("R1.png", width = 32, height = 18, units = 'in', res = 300)
+ggarrange(R1, R2, R3, R4, ncol = 4, nrow = 1)
+dev.off()
+
 
 
 library(ggridges)
-ggplot(Programs, aes(x = Closeness, y = Program, fill = Program)) +
+ggplot(Programs, aes(x = Closeness, y = Region, fill = Program)) +
   geom_density_ridges(alpha = 0.3) +
   scale_fill_manual(values = c("orange", "darkgreen")) +  # Set colors
   theme_ridges() + 
   theme(legend.position = "none",
-        axis.text.x=element_text(size=20, colour="black"),
-        axis.text.y=element_text(size=20, colour="black"),
-        axis.title.x=element_text(face="italic", colour="black", size=20),
-        axis.title.y=element_text(face="italic", colour="black", size=20)) +
+        axis.text.x=element_text(size=30, colour="black"),
+        axis.text.y=element_text(size=30, colour="black"),
+        axis.title.x=element_text(face="italic", colour="black", size=30),
+        axis.title.y=element_text(face="italic", colour="black", size=30)) +
   xlab("Closeness Centrality") + 
   ylab("Academic Program")
 
@@ -158,10 +175,10 @@ ggplot(Programs, aes(x = Degree, y = Program, fill = Program)) +
   scale_fill_manual(values = c("orange", "darkgreen")) +  # Set colors
   theme_ridges() + 
   theme(legend.position = "none",
-        axis.text.x=element_text(size=20, colour="black"),
-        axis.text.y=element_text(size=20, colour="black"),
-        axis.title.x=element_text(face="italic", colour="black", size=20),
-        axis.title.y=element_text(face="italic", colour="black", size=20)) +
+        axis.text.x=element_text(size=30, colour="black"),
+        axis.text.y=element_text(size=30, colour="black"),
+        axis.title.x=element_text(face="italic", colour="black", size=30),
+        axis.title.y=element_text(face="italic", colour="black", size=30)) +
   xlab("Degree Centrality") + 
   ylab("Academic Program")
 
@@ -170,10 +187,10 @@ ggplot(Programs, aes(x = Betweennes, y = Program, fill = Program)) +
   scale_fill_manual(values = c("orange", "darkgreen")) +  # Set colors
   theme_ridges() + 
   theme(legend.position = "none",
-        axis.text.x=element_text(size=20, colour="black"),
-        axis.text.y=element_text(size=20, colour="black"),
-        axis.title.x=element_text(face="italic", colour="black", size=20),
-        axis.title.y=element_text(face="italic", colour="black", size=20)) +
+        axis.text.x=element_text(size=30, colour="black"),
+        axis.text.y=element_text(size=30, colour="black"),
+        axis.title.x=element_text(face="italic", colour="black", size=30),
+        axis.title.y=element_text(face="italic", colour="black", size=30)) +
   xlab("Betweenness Centrality") + 
   ylab("Academic Program")
 
