@@ -3,13 +3,11 @@
 # this local folder is a clone of the GitHub Repo
 library(readtext)
 textos <- readtext("Programs/")
-
-Programas <- data.frame(table(textos$doc_id))
-
-textos$doc_id <- sort(as.numeric(gsub("[^0-9]", "", textos$doc_id)), decreasing = FALSE)
-sort(textos$doc_id, decreasing = FALSE)
 library(readr)
 AU <- read_csv("Accredited Universities.csv")
+library(stringr)
+textos$Flag <- ifelse(str_detect(textos$doc_id, paste(AU$Institution, collapse = "|")), "Yes", "No")
+textos <- mutate(textos, Institution = ifelse(grepl("Yes", Flag), AU$Institution, "T. A. Pai Management Institute"))
 
 
 library(quanteda)
