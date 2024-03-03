@@ -5,18 +5,17 @@ library(readtext)
 textos <- readtext("Programs/")
 library(readr)
 AU <- read_csv("Accredited Universities.csv")
+colnames(AU)[4] <- "SchoolType"
 library(tools)
 textos$institution <- file_path_sans_ext(textos$doc_id)
 textos$Institution <- gsub("^P\\w+(\\.)?", "", textos$institution)
 textos$Institution <- gsub("\\.docx$", "", textos$Institution)
+textos$Institution <- sub("^ ", "", textos$Institution)
 textos$institution <- NULL
 
-library(stringr)
-textos$Flag <- ifelse(str_detect(textos$Institution, paste(AU$Institution, collapse = "|")), "Yes", "No")
-table(textos$Flag)
-textos <- mutate(textos, Institution = ifelse(grepl("Yes", Flag), AU$Institution, "T. A. Pai Management Institute"))
-textos <- mutate(textos, InstitutionType = ifelse(grepl("Yes", Flag), AU$`Type of School`, "Private"))
-textos <- mutate(textos, Region = ifelse(grepl("Yes", Flag), AU$Region, "AP"))
+library(tidyverse)
+textos <- left_join(textos, AU, by = "Institution", keep = FALSE)
+Institutions <- data.frame(table(textos$Institution))
 
 library(quanteda)
 Textos <- corpus(textos$text)
