@@ -21,7 +21,7 @@ library(quanteda)
 Textos <- corpus(textos$text)
 docvars(Textos, "Region") <- textos$Region
 docvars(Textos, "Institution") <- textos$Institution
-docvars(Textos, "InstitutionType") <- textos$InstitutionType
+docvars(Textos, "InstitutionType") <- textos$SchoolType
 summary(Textos)
 TextosData <- data.frame(summary(Textos, n = length(textos$text)))
 hist(TextosData$Sentences)
