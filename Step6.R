@@ -37,16 +37,7 @@ IM2 <- as.matrix(IM)
 
 # Subset the matrix by column names
 IM3 <- IM2[, SkillsEigen, drop = FALSE]
-colnames(IM3)[colnames(IM3) == "S49"] <- "Strategy"
-colnames(IM3)[colnames(IM3) == "S10"] <- "Management"
-colnames(IM3)[colnames(IM3) == "S43"] <- "Innovation"
-colnames(IM3)[colnames(IM3) == "S21"] <- "Generate"
-colnames(IM3)[colnames(IM3) == "S6"] <- "Leadership"
-colnames(IM3)[colnames(IM3) == "S3"] <- "Communication"
-colnames(IM3)[colnames(IM3) == "S44"] <- "Decision-Making"
-colnames(IM3)[colnames(IM3) == "S25"] <- "Acknowledge"
-colnames(IM3)[colnames(IM3) == "S4"] <- "Create"
-colnames(IM3)[colnames(IM3) == "S13"] <- "Ethics"
+
 
 
 library(bipartite)
