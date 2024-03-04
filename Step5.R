@@ -158,9 +158,9 @@ dev.off()
 
 
 library(ggridges)
-ggplot(Programs, aes(x = Closeness, y = Region, fill = Program)) +
+ggplot(Programs, aes(x = Closeness, y = Region, fill = Region)) +
   geom_density_ridges(alpha = 0.3) +
-  scale_fill_manual(values = c("orange", "darkgreen")) +  # Set colors
+  scale_fill_manual(values = c("#C71135", "#1a50a6", "#2E851B")) +
   theme_ridges() + 
   theme(legend.position = "none",
         axis.text.x=element_text(size=30, colour="black"),
@@ -168,11 +168,11 @@ ggplot(Programs, aes(x = Closeness, y = Region, fill = Program)) +
         axis.title.x=element_text(face="italic", colour="black", size=30),
         axis.title.y=element_text(face="italic", colour="black", size=30)) +
   xlab("Closeness Centrality") + 
-  ylab("Academic Program")
+  ylab("")
 
-ggplot(Programs, aes(x = Degree, y = Program, fill = Program)) +
+ggplot(Programs, aes(x = closeness, y = Region, fill = Region)) +
   geom_density_ridges(alpha = 0.3) +
-  scale_fill_manual(values = c("orange", "darkgreen")) +  # Set colors
+  scale_fill_manual(values = c("#C71135", "#1a50a6", "#2E851B")) +  # Set colors
   theme_ridges() + 
   theme(legend.position = "none",
         axis.text.x=element_text(size=30, colour="black"),
