@@ -85,3 +85,41 @@ plotweb(IM3, method = "normal",
         text.rot = 90,
         ybig = 2)
 dev.off()
+
+Asia <- SoftSkills %>% filter(., Region=="AP") %>% select(., c(pattern, docname))
+library(igraph)
+asia <- graph.data.frame(Asia, directed = FALSE)
+ASIA <- data.frame(Degree = igraph::degree(asia),
+                   Closeness = igraph::closeness(asia),
+                   Betweennes = igraph::betweenness(asia),
+                   Eigen = igraph::eigen_centrality(asia))
+ASIA <- ASIA[ -c(5:25) ]
+rownames(ASIA)
+ASIA$SS <- rownames(ASIA)
+ASIA <- ASIA[order(ASIA$SS), ]
+ASIA <- ASIA[!grepl('text', ASIA$SS), ]
+ASIA$Region <- "AP"
+
+TopAsia <- head(ASIA[order(-ASIA$Closeness), ], 10)
+selected_columns <- rownames(TopAsia)
+
+IM.b <- as_incidence_matrix(asia, names = TRUE, sparse = TRUE, types = bipartite_mapping(asia)$type)
+IM2 <- t(as.matrix(IM.b))
+# Subset the matrix by column names
+IM3 <- IM2[, selected_columns, drop = FALSE]
+
+library(bipartite)
+png("B4.png", width = 25, height = 7, units = 'in', res = 300)
+plotweb(IM3, method = "normal", 
+        col.high = "#377eb8", 
+        bor.col.high = "#377eb8",
+        col.low = "gray50", 
+        bor.col.low = "gray50",
+        col.interaction = "grey90",
+        bor.col.interaction = "grey90",
+        low.lablength = 0,
+        labsize = 3,
+        text.rot = 90,
+        ybig = 2)
+dev.off()
+
