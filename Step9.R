@@ -22,15 +22,11 @@ PUBLIC <- PUBLIC[!grepl('text', PUBLIC$SS), ]
 PUBLIC$SchoolType <- "Public"
 
 TopPublic <- head(PUBLIC[order(-PUBLIC$Closeness), ], 10)
-selected_columns <- rownames(TopPublic)
+selectedPU <- rownames(TopPublic)
 
 IM.b <- as_incidence_matrix(public, names = TRUE, sparse = TRUE, types = bipartite_mapping(public)$type)
 IM2 <- t(as.matrix(IM.b))
-
-
-
-# Subset the matrix by column names
-IM3 <- IM2[, selected_columns, drop = FALSE]
+IM3 <- IM2[, selectedPU, drop = FALSE]
 
 library(bipartite)
 png("B1.png", width = 25, height = 7, units = 'in', res = 300)
@@ -62,15 +58,11 @@ PRIVATE <- PRIVATE[!grepl('text', PRIVATE$SS), ]
 PRIVATE$SchoolType <- "Private"
 
 TopPrivate <- head(PRIVATE[order(-PRIVATE$Closeness), ], 10)
-selected_columns <- rownames(TopPrivate)
+selectedPR <- rownames(TopPrivate)
 
 IM.b <- as_incidence_matrix(private, names = TRUE, sparse = TRUE, types = bipartite_mapping(private)$type)
 IM2 <- t(as.matrix(IM.b))
-
-
-
-# Subset the matrix by column names
-IM3 <- IM2[, selected_columns, drop = FALSE]
+IM3 <- IM2[, selectedPR, drop = FALSE]
 
 png("B2.png", width = 25, height = 7, units = 'in', res = 300)
 plotweb(IM3, method = "normal", 
@@ -101,12 +93,11 @@ ASIA <- ASIA[!grepl('text', ASIA$SS), ]
 ASIA$Region <- "AP"
 
 TopAsia <- head(ASIA[order(-ASIA$Closeness), ], 10)
-selected_columns <- rownames(TopAsia)
+selectedAS <- rownames(TopAsia)
 
 IM.b <- as_incidence_matrix(asia, names = TRUE, sparse = TRUE, types = bipartite_mapping(asia)$type)
 IM2 <- t(as.matrix(IM.b))
-# Subset the matrix by column names
-IM3 <- IM2[, selected_columns, drop = FALSE]
+IM3 <- IM2[, selectedAS, drop = FALSE]
 
 library(bipartite)
 png("B4.png", width = 25, height = 7, units = 'in', res = 300)
