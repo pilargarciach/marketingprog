@@ -114,3 +114,37 @@ plotweb(IM3, method = "normal",
         ybig = 2)
 dev.off()
 
+Euro <- SoftSkills %>% filter(., Region=="EU-ME-AF") %>% select(., c(pattern, docname))
+euro <- graph.data.frame(Euro, directed = FALSE)
+EURO <- data.frame(Degree = igraph::degree(euro),
+                   Closeness = igraph::closeness(euro),
+                   Betweennes = igraph::betweenness(euro),
+                   Eigen = igraph::eigen_centrality(euro))
+EURO <- EURO[ -c(5:25) ]
+rownames(euro)
+EURO$SS <- rownames(EURO)
+EURO <- EURO[order(EURO$SS), ]
+EURO <- EURO[!grepl('text', EURO$SS), ]
+EURO$Region <- "EU-ME-AF"
+
+TopEURO <- head(EURO[order(-EURO$Closeness), ], 10)
+selectedEU <- rownames(TopEURO)
+
+IM.b <- as_incidence_matrix(euro, names = TRUE, sparse = TRUE, types = bipartite_mapping(euro)$type)
+IM2 <- t(as.matrix(IM.b))
+IM3 <- IM2[, selectedEU, drop = FALSE]
+
+library(bipartite)
+png("B5.png", width = 25, height = 7, units = 'in', res = 300)
+plotweb(IM3, method = "normal", 
+        col.high = "#4daf4a", 
+        bor.col.high = "#4daf4a",
+        col.low = "gray50", 
+        bor.col.low = "gray50",
+        col.interaction = "grey90",
+        bor.col.interaction = "grey90",
+        low.lablength = 0,
+        labsize = 3,
+        text.rot = 90,
+        ybig = 2)
+dev.off()
