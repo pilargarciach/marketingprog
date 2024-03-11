@@ -18,6 +18,11 @@ SOFTSKILLS$SS <- rownames(SOFTSKILLS)
 SOFTSKILLS <- SOFTSKILLS[order(SOFTSKILLS$SS), ]
 SOFTSKILLS <- SOFTSKILLS[!grepl('text', SOFTSKILLS$SS), ]
 
+library(irr)
+irr::icc(t(SOFTSKILLS[1:4]), model = "twoway", type = "agreement", unit = "average")
+
+
+
 scaled_SOFTSKILLS <- scale(SOFTSKILLS[c(1:4)])
 rescaled <- data.frame(apply(scaled_SOFTSKILLS, 2, function(x) (x - min(x)) / (max(x) - min(x))))
 rescaled$SS <- SOFTSKILLS$SS
