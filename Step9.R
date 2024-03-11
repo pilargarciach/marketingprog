@@ -5,6 +5,8 @@ rm(list=setdiff(ls(), c("textos","SS")))
 
 SoftSkills <- merge(SS, textos, by.x = "docname", by.y = "docname", all.x = TRUE)
 
+
+
 library(dplyr)
 Public <- SoftSkills %>% filter(., SchoolType=="Public") %>% select(., c(pattern, docname))
 library(igraph)
@@ -20,6 +22,8 @@ PUBLIC$SS <- rownames(PUBLIC)
 PUBLIC <- PUBLIC[order(PUBLIC$SS), ]
 PUBLIC <- PUBLIC[!grepl('text', PUBLIC$SS), ]
 PUBLIC$SchoolType <- "Public"
+
+irr::icc(t(PUBLIC[1:4]), model = "twoway", type = "consistency", unit = "average")
 
 TopPublic <- head(PUBLIC[order(-PUBLIC$Closeness), ], 10)
 selectedPU <- rownames(TopPublic)
@@ -57,6 +61,8 @@ PRIVATE <- PRIVATE[order(PRIVATE$SS), ]
 PRIVATE <- PRIVATE[!grepl('text', PRIVATE$SS), ]
 PRIVATE$SchoolType <- "Private"
 
+irr::icc(t(PRIVATE[1:4]), model = "twoway", type = "consistency", unit = "average")
+
 TopPrivate <- head(PRIVATE[order(-PRIVATE$Closeness), ], 10)
 selectedPR <- rownames(TopPrivate)
 
@@ -78,6 +84,51 @@ plotweb(IM3, method = "normal",
         ybig = 2)
 dev.off()
 
+
+America <- SoftSkills %>% filter(., Region=="AP") %>% select(., c(pattern, docname))
+
+america <- graph.data.frame(America, directed = FALSE)
+AMERICA <- data.frame(Degree = igraph::degree(america),
+                      Closeness = igraph::closeness(america),
+                      Betweennes = igraph::betweenness(america),
+                      Eigen = igraph::eigen_centrality(america))
+AMERICA <- AMERICA[ -c(5:25) ]
+rownames(AMERICA)
+AMERICA$SS <- rownames(AMERICA)
+AMERICA <- AMERICA[order(AMERICA$SS), ]
+AMERICA <- AMERICA[!grepl('text', AMERICA$SS), ]
+AMERICA$Region <- "AM"
+
+irr::icc(t(AMERICA[1:4]), model = "twoway", type = "consistency", unit = "average")
+
+TopAmerica <- head(AMERICA[order(-AMERICA$Closeness), ], 10)
+selected_columns <- rownames(TopAmerica)
+
+IM.b <- as_incidence_matrix(america, names = TRUE, sparse = TRUE, types = bipartite_mapping(america)$type)
+IM2 <- t(as.matrix(IM.b))
+
+
+
+# Subset the matrix by column names
+IM3 <- IM2[, selected_columns, drop = FALSE]
+
+library(bipartite)
+png("B3.png", width = 25, height = 7, units = 'in', res = 300)
+plotweb(IM3, method = "normal", 
+        col.high = "red", 
+        bor.col.high = "red",
+        col.low = "gray50", 
+        bor.col.low = "gray50",
+        col.interaction = "grey90",
+        bor.col.interaction = "grey90",
+        low.lablength = 0,
+        labsize = 3,
+        text.rot = 90,
+        ybig = 2)
+dev.off()
+
+
+
 Asia <- SoftSkills %>% filter(., Region=="AP") %>% select(., c(pattern, docname))
 library(igraph)
 asia <- graph.data.frame(Asia, directed = FALSE)
@@ -91,6 +142,8 @@ ASIA$SS <- rownames(ASIA)
 ASIA <- ASIA[order(ASIA$SS), ]
 ASIA <- ASIA[!grepl('text', ASIA$SS), ]
 ASIA$Region <- "AP"
+
+irr::icc(t(ASIA[1:4]), model = "twoway", type = "consistency", unit = "average")
 
 TopAsia <- head(ASIA[order(-ASIA$Closeness), ], 10)
 selectedAS <- rownames(TopAsia)
@@ -127,6 +180,8 @@ EURO <- EURO[order(EURO$SS), ]
 EURO <- EURO[!grepl('text', EURO$SS), ]
 EURO$Region <- "EU-ME-AF"
 
+irr::icc(t(EURO[1:4]), model = "twoway", type = "consistency", unit = "average")
+
 TopEURO <- head(EURO[order(-EURO$Closeness), ], 10)
 selectedEU <- rownames(TopEURO)
 
@@ -148,3 +203,4 @@ plotweb(IM3, method = "normal",
         text.rot = 90,
         ybig = 2)
 dev.off()
+
