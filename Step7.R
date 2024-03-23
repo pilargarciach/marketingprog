@@ -48,7 +48,7 @@ igraph::edge_density(private)
 igraph::diameter(all)
 igraph::diameter(public)
 igraph::diameter(private)
-igraph::modularity(public)
+
 
 rm(list=setdiff(ls(), c("PUBLIC","PRIVATE")))
 
