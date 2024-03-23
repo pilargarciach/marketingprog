@@ -4,11 +4,15 @@ textos$docname <- paste0("text", 1:length(textos$doc_id))
 rm(list=setdiff(ls(), c("textos","SS")))
 SoftSkills <- merge(SS, textos, by.x = "docname", by.y = "docname", all.x = TRUE)
 
+
+
 library(dplyr)
+All <- SoftSkills %>% select(., c(pattern, docname))
 Public <- SoftSkills %>% filter(., SchoolType=="Public") %>% select(., c(pattern, docname))
 Private <- SoftSkills %>% filter(., SchoolType=="Private") %>% select(., c(pattern, docname))
 
 library(igraph)
+all <- graph.data.frame(All, directed = FALSE)
 public <- graph.data.frame(Public, directed = FALSE)
 private <- graph.data.frame(Private, directed = FALSE)
 
@@ -34,6 +38,13 @@ PRIVATE$SS <- rownames(PRIVATE)
 PRIVATE <- PRIVATE[order(PRIVATE$SS), ]
 PRIVATE <- PRIVATE[!grepl('text', PRIVATE$SS), ]
 PRIVATE$SchoolType <- "Private"
+
+igraph::ecount(all)
+igraph::ecount(public)
+igraph::ecount(private)
+
+
+
 
 rm(list=setdiff(ls(), c("PUBLIC","PRIVATE")))
 
