@@ -40,8 +40,20 @@ Programs <- c(sum(table(textos$Region)),
               table(textos$Region)[1],
               table(textos$Region)[2],
               table(textos$Region)[3])
+Institution <- c("Public", "Private")
+Inodes <- c(igraph::vcount(public),
+            igraph::vcount(private))
+Iedges <- c(igraph::ecount(public),
+            igraph::ecount(private))
+Idensity <- c(igraph::edge_density(public),
+              igraph::edge_density(private))
+Iprograms <- c(table(textos$SchoolType)[2],
+               table(textos$SchoolType)[1])
 
-Systems <- data.frame(Region, Nodes, Edges, Density, Programs)
+
+
+Systems <- data.frame(Region, Nodes, Edges, Density, Programs, 
+                      Inodes, Iedges, Idensity, Iprograms)
 write.csv(Systems, file = "Systems.csv")
 
 Region1 <- data.frame(Degree = igraph::degree(am),
