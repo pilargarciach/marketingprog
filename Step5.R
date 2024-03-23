@@ -11,12 +11,17 @@ ALL <- SoftSkills %>% select(., c(pattern, docname))
 AM <- SoftSkills %>% filter(., Region=="AM") %>% select(., c(pattern, docname))
 EU.ME.AF <- SoftSkills %>% filter(., Region=="EU-ME-AF") %>% select(., c(pattern, docname))
 AP <- SoftSkills %>% filter(., Region=="AP") %>% select(., c(pattern, docname))
+PUBLIC <- SoftSkills %>% filter(., SchoolType=="Public") %>% select(., c(pattern, docname))
+PRIVATE <- SoftSkills %>% filter(., SchoolType=="Private") %>% select(., c(pattern, docname))
 
 library(igraph)
 all <- graph.data.frame(ALL, directed = FALSE)
 eu.me.af <- graph.data.frame(EU.ME.AF, directed = FALSE)
 am <- graph.data.frame(AM, directed = FALSE)
 ap <- graph.data.frame(AP, directed = FALSE)
+public <- graph.data.frame(PUBLIC, directed = FALSE)
+private <- graph.data.frame(PRIVATE, directed = FALSE)
+
 
 Region <- c("Global", "AM", "AP", "EU-ME-AF")
 Nodes <- c(igraph::vcount(all),
@@ -37,6 +42,7 @@ Programs <- c(sum(table(textos$Region)),
               table(textos$Region)[3])
 
 Systems <- data.frame(Region, Nodes, Edges, Density, Programs)
+write.csv(Systems, file = "Systems.csv")
 
 Region1 <- data.frame(Degree = igraph::degree(am),
                       Closeness = igraph::closeness(am),
