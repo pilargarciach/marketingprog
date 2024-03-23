@@ -16,6 +16,16 @@ eu.me.af <- graph.data.frame(EU.ME.AF, directed = FALSE)
 am <- graph.data.frame(AM, directed = FALSE)
 ap <- graph.data.frame(AP, directed = FALSE)
 
+igraph::ecount(eu.me.af)
+igraph::ecount(am)
+igraph::ecount(ap)
+igraph::edge_density(eu.me.af)
+igraph::edge_density(am)
+igraph::edge_density(ap)
+igraph::diameter(all)
+igraph::diameter(public)
+igraph::diameter(private)
+
 Region1 <- data.frame(Degree = igraph::degree(am),
                       Closeness = igraph::closeness(am),
                       Betweennes = igraph::betweenness(am),
