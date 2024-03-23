@@ -31,13 +31,12 @@ Density <- c(igraph::edge_density(all),
              igraph::edge_density(am),
              igraph::edge_density(ap),
              igraph::edge_density(eu.me.af))
-Programs <- c()
+Programs <- c(sum(table(textos$Region)),
+              table(textos$Region)[1],
+              table(textos$Region)[2],
+              table(textos$Region)[3])
 
-
-igraph::diameter(all)
-igraph::diameter(eu.me.af)
-igraph::diameter(am)
-igraph::diameter(ap)
+Systems <- data.frame(Region, Nodes, Edges, Density, Programs)
 
 Region1 <- data.frame(Degree = igraph::degree(am),
                       Closeness = igraph::closeness(am),
