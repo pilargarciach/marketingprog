@@ -7,24 +7,33 @@ rm(list=setdiff(ls(), c("textos","SS")))
 SoftSkills <- merge(SS, textos, by.x = "docname", by.y = "docname", all.x = TRUE)
 
 library(dplyr)
+ALL <- SoftSkills %>% select(., c(pattern, docname))
 AM <- SoftSkills %>% filter(., Region=="AM") %>% select(., c(pattern, docname))
 EU.ME.AF <- SoftSkills %>% filter(., Region=="EU-ME-AF") %>% select(., c(pattern, docname))
 AP <- SoftSkills %>% filter(., Region=="AP") %>% select(., c(pattern, docname))
 
 library(igraph)
+all <- graph.data.frame(ALL, directed = FALSE)
 eu.me.af <- graph.data.frame(EU.ME.AF, directed = FALSE)
 am <- graph.data.frame(AM, directed = FALSE)
 ap <- graph.data.frame(AP, directed = FALSE)
 
+igraph::vcount(all)
+igraph::vcount(eu.me.af)
+igraph::vcount(am)
+igraph::vcount(ap)
+
+igraph::ecount(all)
 igraph::ecount(eu.me.af)
 igraph::ecount(am)
 igraph::ecount(ap)
+igraph::edge_density(all)
 igraph::edge_density(eu.me.af)
 igraph::edge_density(am)
 igraph::edge_density(ap)
-igraph::diameter(all)
-igraph::diameter(public)
-igraph::diameter(private)
+igraph::diameter(eu.me.af)
+igraph::diameter(am)
+igraph::diameter(ap)
 
 Region1 <- data.frame(Degree = igraph::degree(am),
                       Closeness = igraph::closeness(am),
