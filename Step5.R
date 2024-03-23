@@ -18,19 +18,22 @@ eu.me.af <- graph.data.frame(EU.ME.AF, directed = FALSE)
 am <- graph.data.frame(AM, directed = FALSE)
 ap <- graph.data.frame(AP, directed = FALSE)
 
-igraph::vcount(all)
-igraph::vcount(eu.me.af)
-igraph::vcount(am)
-igraph::vcount(ap)
+Region <- c("Global", "AM", "AP", "EU-ME-AF")
+Nodes <- c(igraph::vcount(all),
+           igraph::vcount(am),
+           igraph::vcount(ap),
+           igraph::vcount(eu.me.af))
+Edges <- c(igraph::ecount(all),
+           igraph::ecount(am),
+           igraph::ecount(ap),
+           igraph::ecount(eu.me.af))
+Density <- c(igraph::edge_density(all),
+             igraph::edge_density(am),
+             igraph::edge_density(ap),
+             igraph::edge_density(eu.me.af))
+Programs <- c()
 
-igraph::ecount(all)
-igraph::ecount(eu.me.af)
-igraph::ecount(am)
-igraph::ecount(ap)
-igraph::edge_density(all)
-igraph::edge_density(eu.me.af)
-igraph::edge_density(am)
-igraph::edge_density(ap)
+
 igraph::diameter(all)
 igraph::diameter(eu.me.af)
 igraph::diameter(am)
@@ -189,3 +192,4 @@ ggplot(Programs, aes(x = Closeness, y = Region, fill = Region)) +
         axis.title.y=element_text(face="italic", colour="black", size=30)) +
   xlab("Closeness Centrality") + 
   ylab("")
+
