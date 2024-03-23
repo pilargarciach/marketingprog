@@ -189,38 +189,3 @@ ggplot(Programs, aes(x = Closeness, y = Region, fill = Region)) +
         axis.title.y=element_text(face="italic", colour="black", size=30)) +
   xlab("Closeness Centrality") + 
   ylab("")
-
-ggplot(Programs, aes(x = closeness, y = Region, fill = Region)) +
-  geom_density_ridges(alpha = 0.3) +
-  scale_fill_manual(values = c("#C71135", "#1a50a6", "#2E851B")) +  # Set colors
-  theme_ridges() + 
-  theme(legend.position = "none",
-        axis.text.x=element_text(size=30, colour="black"),
-        axis.text.y=element_text(size=30, colour="black"),
-        axis.title.x=element_text(face="italic", colour="black", size=30),
-        axis.title.y=element_text(face="italic", colour="black", size=30)) +
-  xlab("Degree Centrality") + 
-  ylab("Academic Program")
-
-ggplot(Programs, aes(x = Betweennes, y = Program, fill = Program)) +
-  geom_density_ridges(alpha = 0.3) +
-  scale_fill_manual(values = c("orange", "darkgreen")) +  # Set colors
-  theme_ridges() + 
-  theme(legend.position = "none",
-        axis.text.x=element_text(size=30, colour="black"),
-        axis.text.y=element_text(size=30, colour="black"),
-        axis.title.x=element_text(face="italic", colour="black", size=30),
-        axis.title.y=element_text(face="italic", colour="black", size=30)) +
-  xlab("Betweenness Centrality") + 
-  ylab("Academic Program")
-
-ggplot(Program, aes(x = cases, y = Centrality, color = Program, point_color = Program, fill = Program)) +
-  geom_density_ridges(
-    jittered_points = TRUE, scale = .95, rel_min_height = .01,
-    point_shape = "|", point_size = 3, size = 0.25,
-    position = position_points_jitter(height = 0)
-  ) +
-  scale_y_discrete(expand = c(0, 0)) +
-  scale_x_continuous(expand = c(0, 0), name = "Centrality (rescaled 0-1)") +
-  scale_fill_manual(values = c("orange", "darkgreen"), labels = c("bachelor", "postgraduate")) +
-  coord_cartesian(clip = "off") + theme_minimal()
