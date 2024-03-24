@@ -111,7 +111,12 @@ AMERICA <- AMERICA[order(AMERICA$SS), ]
 AMERICA <- AMERICA[!grepl('text', AMERICA$SS), ]
 AMERICA$Region <- "AM"
 
-irr::icc(t(AMERICA[1:4]), model = "twoway", type = "consistency", unit = "average")
+IAmerica <- icc(t(AMERICA[1:4]), model = "twoway", type = "consistency", unit = "average")
+IAmerica$value
+IAmerica$Fvalue
+IAmerica$p.value
+IAmerica$lbound
+IAmerica$ubound
 
 TopAmerica <- head(AMERICA[order(-AMERICA$Closeness), ], 10)
 selected_columns <- rownames(TopAmerica)
@@ -155,7 +160,12 @@ ASIA <- ASIA[order(ASIA$SS), ]
 ASIA <- ASIA[!grepl('text', ASIA$SS), ]
 ASIA$Region <- "AP"
 
-irr::icc(t(ASIA[1:4]), model = "twoway", type = "consistency", unit = "average")
+IAsia <- icc(t(ASIA[1:4]), model = "twoway", type = "consistency", unit = "average")
+IAsia$value
+IAsia$Fvalue
+IAsia$p.value
+IAsia$lbound
+IAsia$ubound
 
 TopAsia <- head(ASIA[order(-ASIA$Closeness), ], 10)
 selectedAS <- rownames(TopAsia)
@@ -192,7 +202,15 @@ EURO <- EURO[order(EURO$SS), ]
 EURO <- EURO[!grepl('text', EURO$SS), ]
 EURO$Region <- "EU-ME-AF"
 
-irr::icc(t(EURO[1:4]), model = "twoway", type = "consistency", unit = "average")
+IEuro <- icc(t(EURO[1:4]), model = "twoway", type = "consistency", unit = "average")
+IEuro$value
+IEuro$Fvalue
+IEuro$p.value
+IEuro$lbound
+IEuro$ubound
+
+
+
 
 TopEURO <- head(EURO[order(-EURO$Closeness), ], 10)
 selectedEU <- rownames(TopEURO)
