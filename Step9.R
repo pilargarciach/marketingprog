@@ -23,7 +23,13 @@ PUBLIC <- PUBLIC[order(PUBLIC$SS), ]
 PUBLIC <- PUBLIC[!grepl('text', PUBLIC$SS), ]
 PUBLIC$SchoolType <- "Public"
 
-irr::icc(t(PUBLIC[1:4]), model = "twoway", type = "consistency", unit = "average")
+library(irr)
+IPublic <- icc(t(PUBLIC[1:4]), model = "twoway", type = "consistency", unit = "average")
+IPublic$value
+IPublic$Fvalue
+IPublic$p.value
+IPublic$lbound
+IPublic$ubound
 
 TopPublic <- head(PUBLIC[order(-PUBLIC$Closeness), ], 10)
 selectedPU <- rownames(TopPublic)
@@ -61,7 +67,13 @@ PRIVATE <- PRIVATE[order(PRIVATE$SS), ]
 PRIVATE <- PRIVATE[!grepl('text', PRIVATE$SS), ]
 PRIVATE$SchoolType <- "Private"
 
-irr::icc(t(PRIVATE[1:4]), model = "twoway", type = "consistency", unit = "average")
+IPrivate <- icc(t(PRIVATE[1:4]), model = "twoway", type = "consistency", unit = "average")
+IPrivate$value
+IPrivate$Fvalue
+IPrivate$p.value
+IPrivate$lbound
+IPrivate$ubound
+
 
 TopPrivate <- head(PRIVATE[order(-PRIVATE$Closeness), ], 10)
 selectedPR <- rownames(TopPrivate)
