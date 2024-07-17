@@ -1,15 +1,15 @@
 load("Results/Result2.RData")
-Network <- SS[c(1,7)]
+Network <- SS[c(1,8)]
 rm(list=setdiff(ls(), "Network"))
-Network$pattern <- tolower(Network$pattern)
+Network$Competence <- tolower(Network$Competence)
 
-table(Network$pattern)
+table(Network$Competence)
 network <- Network[!duplicated(Network[c(1,2)]),]
 
 
 library(igraph)
-bn2 <- graph.data.frame(network,directed=FALSE)
-bipartite.mapping(bn2)
+bn2 <- graph_from_data_frame(network,directed=FALSE)
+bipartite_mapping(bn2)
 V(bn2)$type <- bipartite_mapping(bn2)$type
 V(bn2)$color <- ifelse(V(bn2)$type, "red", "green")
 V(bn2)$shape <- ifelse(V(bn2)$type, "circle", "square")
@@ -17,7 +17,7 @@ V(bn2)$label.cex <- ifelse(V(bn2)$type, 0.5, 1)
 V(bn2)$size <- sqrt(igraph::degree(bn2))
 E(bn2)$color <- "lightgrey"
 
-bn2.pr <- bipartite.projection(bn2)
+bn2.pr <- bipartite_projection(bn2)
 Terms <- bn2.pr$proj2
 
 centrality_scores <- igraph::eigen_centrality(Terms)
