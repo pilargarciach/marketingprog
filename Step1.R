@@ -23,7 +23,7 @@ docvars(Textos, "Region") <- textos$Region
 docvars(Textos, "Institution") <- textos$Institution
 docvars(Textos, "InstitutionType") <- textos$SchoolType
 summary(Textos)
-TextosData <- data.frame(summary(Textos, n = length(textos$text)))
+TextosData <- as.data.frame(summary(Textos, n = length(textos$text)))
 hist(TextosData$Sentences)
 Programs <- tokens(Textos, 
                      remove_numbers = TRUE, 
