@@ -1,5 +1,5 @@
 load("Results/Result2.RData")
-Network <- SS[c(1,8)]
+Network <- SS[c(8,1)]
 rm(list=setdiff(ls(), "Network"))
 Network$Competence <- tolower(Network$Competence)
 
@@ -11,6 +11,19 @@ library(igraph)
 bn2 <- graph_from_data_frame(network,directed=FALSE)
 bipartite_mapping(bn2)
 V(bn2)$type <- bipartite_mapping(bn2)$type
+
+BiM <- as_biadjacency_matrix(bn2, types = V(bn2)$type, names = TRUE)
+library(network)
+red <- network(BiM, 
+               directed = FALSE, 
+               hyper = FALSE, 
+               loops = FALSE, 
+               multiple = FALSE, 
+               bipartite = TRUE)
+is.network(red)
+red
+
+
 V(bn2)$color <- ifelse(V(bn2)$type, "red", "green")
 V(bn2)$shape <- ifelse(V(bn2)$type, "circle", "square")
 V(bn2)$label.cex <- ifelse(V(bn2)$type, 0.5, 1)
