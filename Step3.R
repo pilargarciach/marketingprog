@@ -13,6 +13,16 @@ bipartite_mapping(bn2)
 V(bn2)$type <- bipartite_mapping(bn2)$type
 
 BiM <- as_biadjacency_matrix(bn2, types = V(bn2)$type, names = TRUE)
+statisticalSummary <- function(x) {
+  data.frame(
+    Mean = apply(x, 2, mean),
+    Median = apply(x, 2, median),
+    StandardDeviation = apply(x, 2, sd),
+    Min = apply(x, 2, min),
+    Max = apply(x, 2, max)
+  )
+}
+pave <- statisticalSummary(BiM)
 library(network)
 red <- network(BiM, 
                directed = FALSE, 
