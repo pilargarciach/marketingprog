@@ -1,11 +1,15 @@
 load("Results/Result2.RData")
-Network <- SS[c(8,1,10:14)]
+Network <- SS[c(8,1,10:15)]
 rm(list=setdiff(ls(), "Network"))
 Network$Competence <- tolower(Network$Competence)
 
 table(Network$Competence)
 network <- Network[!duplicated(Network[c(1,2,4,6,7)]),]
 
+seleccionados <- unique(network$docname)
+load("Results/Result1.RData")
+todos <- unique(TextosData$Text)
+setdiff(todos, seleccionados)
 
 library(igraph)
 bn2 <- graph_from_data_frame(network,directed=FALSE)
@@ -33,10 +37,12 @@ red <- network(BiM,
 is.network(red)
 red
 
-sna::gden(red)
-Region <- unique(network$Region)
+write.csv(BiM, file = "MarketingNetwork.csv")
 
-set.network.attribute(red, "Region")
+
+sna::gden(red)
+Atributos <- TextosData[TextosData$Text %in% seleccionados, ]
+write.csv(Atributos, file = "Atributos.csv")
 
 
 save.image("Results/Result3.RData")
