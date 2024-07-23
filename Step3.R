@@ -37,7 +37,7 @@ red <- network(BiM,
 is.network(red)
 red
 
-write.csv(BiM, file = "MarketingNetwork.csv")
+#write.csv(BiM, file = "MarketingNetwork.csv")
 
 
 sna::gden(red)
