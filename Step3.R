@@ -42,7 +42,7 @@ red
 
 sna::gden(red)
 Atributos <- TextosData[TextosData$Text %in% seleccionados, ]
-write.csv(Atributos, file = "Atributos.csv")
+#write.csv(Atributos, file = "Atributos.csv")
 
 
 save.image("Results/Result3.RData")
