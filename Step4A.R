@@ -19,8 +19,7 @@ sna::gden(red)
 
 model1 <- ergm(red ~ b1sociality(nodes = c(1:15)))
 summary(model1)
-model1 <- ergm(red ~ gwb1dsp(decay=0, cutoff=30))
-mcmc.diagnostics(model0)
+mcmc.diagnostics(model1)
 library(tnet)
 
 
