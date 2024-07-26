@@ -15,9 +15,9 @@ sna::gden(red)
 #gwb1degree
 #gwb1dsp
 #isolatededges
+search.ergmTerms(keywords = c("bipartite"))
 
-
-model1 <- ergm(red ~ b1sociality(nodes = c(1:15)))
+model1 <- ergm(red ~ b1sociality(nodes = c(1:28)))
 summary(model1)
 mcmc.diagnostics(model1)
 
