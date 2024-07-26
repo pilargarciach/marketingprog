@@ -109,7 +109,7 @@ s7 <- data.frame(kwic(Programs, pattern = c(phrase("decision making"),
                                             phrase("confidence"),
                                             phrase("accountability"),
                                             phrase("leadership"))))
-s7$Competence <- "Decision Making and Judgment"
+s7$Competence <- "Judgment and Decision Making"
 s7$SkillCode <- "S7"
 
 
@@ -285,7 +285,7 @@ s15 <- data.frame(kwic(Programs, pattern = c(phrase("supervision"),
                                              phrase("discipline"),
                                              phrase("ethics"),
                                              phrase("change management"))))
-s15$Competence <- "Supervision and Personnel Management"
+s15$Competence <- "Management of Personnel Resources"
 s15$SkillCode <- "S15"
 
 
@@ -333,7 +333,7 @@ s18 <- data.frame(kwic(Programs, pattern = c(phrase("written communication"),
                                             phrase("web content writing"),
                                             phrase("blogging"),
                                             phrase("social media writing"))))
-s18$Competence <- "Written Communication"
+s18$Competence <- "Writing"
 s18$SkillCode <- "S18"
 
 
@@ -376,6 +376,8 @@ s21 <- data.frame(kwic(Programs, pattern = c(phrase("instructing"),
                                              phrase("teaching others"),
                                              phrase("how to do"),
                                              phrase("explain to others"),
+                                             phrase("explaining"),
+                                             phrase("teaching"),
                                              phrase("explanation"),
                                              phrase("how to deal with"),
                                              phrase("how to solve"))))
@@ -398,7 +400,7 @@ s22 <- data.frame(kwic(Programs, pattern = c(phrase("financial resources"),
                                              phrase("acquisition"),
                                              phrase("budget*"),
                                              phrase("costs"))))
-s22$Competence <- "Financial Resources Management"
+s22$Competence <- "Management of Financial Resources"
 s22$SkillCode <- "S22"
 
 
@@ -422,7 +424,7 @@ s24 <- data.frame(kwic(Programs, pattern = c(phrase("material resources"),
                                              phrase("merch"),
                                              phrase("merchandise"),
                                              phrase("materials"))))
-s24$Competence <- "Material Resources Management"
+s24$Competence <- "Management of Material Resources"
 s24$SkillCode <- "S24"
 
 
@@ -452,7 +454,7 @@ s26 <- data.frame(kwic(Programs, pattern = c(phrase("quality"),
                                              phrase("quality standard"),
                                              phrase("quality analysis"),
                                              phrase("product inspection"))))
-s26$Competence <- "Quality Control"
+s26$Competence <- "Quality Control Analysis"
 s26$SkillCode <- "S26"
 
 s27 <- data.frame(kwic(Programs, pattern = c(phrase("operations monitoring"),
@@ -501,9 +503,6 @@ SS <- do.call(rbind, df_list)
 patrones <- data.frame(table(SS$pattern))
 Patrones <- data.frame(table(SS$Competence))
 SS <- merge(SS, TextosData, by.x = "docname", by.y = "Text")
-#rm(list=setdiff(ls(), "SS"))
-save.image("Results/Result2.RData")
-
 
 
 rm(list=setdiff(ls(), "SS"))

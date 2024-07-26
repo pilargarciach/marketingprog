@@ -1,6 +1,6 @@
 load("Results/Result2.RData")
 Network <- SS[c(8,1,10:15)]
-rm(list=setdiff(ls(), "Network"))
+rm(list=setdiff(ls(), c("Network", "SS")))
 Network$Competence <- tolower(Network$Competence)
 
 table(Network$Competence)
@@ -41,8 +41,12 @@ red
 
 
 sna::gden(red)
-Atributos <- TextosData[TextosData$Text %in% seleccionados, ]
+ProgramAttributes <- TextosData[TextosData$Text %in% seleccionados, ]
 #write.csv(Atributos, file = "Atributos.csv")
+SkillAttributes <- data.frame(Competence = unique(SS$Competence))
+library(readr)
+ONET_SkillsImportance <- read_csv("ONET_SkillsImportance.csv")
+SkillAttributes <- merge(SkillAttributes, ONET_SkillsImportance, by.x = "Competence", by.y = "Skill", all.x = TRUE)
 
 
 save.image("Results/Result3.RData")

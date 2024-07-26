@@ -17,8 +17,13 @@ sna::gden(red)
 #isolatededges
 search.ergmTerms(keywords = c("bipartite"))
 
-model1 <- ergm(red ~ b1sociality(nodes = c(1:28)))
+model0 <- ergm(red ~ edges)
+summary(model0)
+model1 <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
 summary(model1)
+model1A <- ergm(red ~ b1sociality(nodes = c(1:28)))
+summary(model1A)
+
 mcmc.diagnostics(model1)
 
 control.
