@@ -20,6 +20,8 @@ sna::gden(red)
 model1 <- ergm(red ~ b1sociality(nodes = c(1:15)))
 summary(model1)
 mcmc.diagnostics(model1)
+
+control.
 library(tnet)
 
 

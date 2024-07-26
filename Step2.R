@@ -1,5 +1,127 @@
 load("Results/Result1.RData")
 library(quanteda)
+s1 <- data.frame(kwic(Programs, pattern = c(phrase("active learning"),
+                                             phrase("new information"),
+                                             phrase("future problem solving"),
+                                             phrase("future decision-making"),
+                                             phrase("implication"),
+                                             phrase("implications"),
+                                             phrase("current problems"),
+                                             phrase("current solutions"),
+                                             phrase("strategic marketing"))))
+s1$Competence <- "Active Learning"
+s1$SkillCode <- "S1"
+
+s2 <- data.frame(kwic(Programs, pattern = c(phrase("active listening"),
+                                            phrase("listening skills"),
+                                            phrase("effective listening"),
+                                            phrase("attentive listening"),
+                                            phrase("listen actively"),
+                                            phrase("understand others"),
+                                            phrase("engaged listening"),
+                                            phrase("client insights"),
+                                            phrase("responsive listening"),
+                                            phrase("listening to feedback"),
+                                            phrase("customer feedback"),
+                                            phrase("listening to clients"),
+                                            phrase("mindfulness"),
+                                            phrase("understanding"),
+                                            phrase("information retention"),
+                                            phrase("paraphrasing"))))
+s2$Competence <- "Active Listening"
+s2$SkillCode <- "S2"
+
+s3 <- data.frame(kwic(Programs, pattern = c(phrase("critical thinking"),
+                                            phrase("think critically"), 
+                                            phrase("critical analysis"),
+                                            phrase("reasoning skills"),
+                                            phrase("analytical thinking"),
+                                            phrase("evaluative thinking"),
+                                            phrase("critical evaluation"),
+                                            phrase("strategic analysis"),
+                                            phrase("problem analysis"),
+                                            phrase("critical problem solving"),
+                                            phrase("analytical reasoning"),
+                                            phrase("evaluating information"),
+                                            phrase("argumentation"),
+                                            phrase("logic"),
+                                            phrase("reasoning"),
+                                            phrase("complex problem-solving"))))
+s3$Competence <- "Critical Thinking"
+s3$SkillCode <- "S3"
+
+
+s4 <- data.frame(kwic(Programs, pattern = c(phrase("reading comprehension"),
+                                            phrase("written sentences"), 
+                                            phrase("understanding documents"),
+                                            phrase("work-related documents"),
+                                            phrase("read"),
+                                            phrase("reading communications"),
+                                            phrase("understanding texts"))))
+s4$Competence <- "Reading Comprehension"
+s4$SkillCode <- "S4"
+
+s5 <- data.frame(kwic(Programs, pattern = c(phrase("social perception"),
+                                            phrase("empathy"), 
+                                            phrase("understanding others"),
+                                            phrase("social awareness"),
+                                            phrase("social sensitivity"),
+                                            phrase("others reactions"),
+                                            phrase("social behavior"))))
+s5$Competence <- "Social Perceptiveness"
+s5$SkillCode <- "S5"
+
+s6 <- data.frame(kwic(Programs, pattern = c(phrase("speaking"),
+                                            phrase("talking"),
+                                            phrase("telling stories"),
+                                            phrase("communicating"),
+                                            phrase("effectively"),
+                                            phrase("talking with others"),
+                                            phrase("conveying information"))))
+s6$Competence <- "Speaking"
+s6$SkillCode <- "S6"
+
+s7 <- data.frame(kwic(Programs, pattern = c(phrase("decision making"),
+                                            phrase("making decisions"),
+                                            phrase("judgment skills"),
+                                            phrase("decisive action"),
+                                            phrase("evaluate options"),
+                                            phrase("choose solutions"),
+                                            phrase("decision strategies"),
+                                            phrase("strategic decision making"),
+                                            phrase("decisive judgment"),
+                                            phrase("business decision making"),
+                                            phrase("executive decision making"),
+                                            phrase("critical judgment"),
+                                            phrase("risk assessment"),
+                                            phrase("intuition"),
+                                            phrase("experience"),
+                                            phrase("confidence"),
+                                            phrase("accountability"),
+                                            phrase("leadership"))))
+s7$Competence <- "Decision Making and Judgment"
+s7$SkillCode <- "S7"
+
+
+s8 <- data.frame(kwic(Programs, pattern = c(phrase("monitoring"), 
+                                           phrase("assessing performance"),
+                                           phrase("self-assessment"),
+                                           phrase("corrective action"),
+                                           phrase("make improvement"),
+                                           phrase("organization performance"),
+                                           phrase("individual performance"),
+                                           phrase("enhance"),
+                                           phrase("enhancement"))))
+s8$Competence <- "Monitoring"
+s8$SkillCode <- "S8"
+
+
+
+
+
+
+
+
 s1 <- data.frame(kwic(Programs, pattern = c(phrase("oral communication"), 
                                             phrase("verbal communication"),
                                             phrase("public speaking"),
@@ -16,7 +138,7 @@ s1 <- data.frame(kwic(Programs, pattern = c(phrase("oral communication"),
                                             phrase("rapport building"),
                                             phrase("intercultural communication"),
                                             phrase("global communication"))))
-s1$Competence <- "Oral Communication"
+s1$Competence <- "Speaking"
 s1$SkillCode <- "S1"
 
 s2 <- data.frame(kwic(Programs, pattern = c(phrase("written communication"),
@@ -41,24 +163,7 @@ s2 <- data.frame(kwic(Programs, pattern = c(phrase("written communication"),
 s2$Competence <- "Written Communication"
 s2$SkillCode <- "S2"
 
-s3 <- data.frame(kwic(Programs, pattern = c(phrase("active listening"),
-                                            phrase("listening skills"),
-                                            phrase("effective listening"),
-                                            phrase("attentive listening"),
-                                            phrase("listen actively"),
-                                            phrase("understand others"),
-                                            phrase("engaged listening"),
-                                            phrase("client insights"),
-                                            phrase("responsive listening"),
-                                            phrase("listening to feedback"),
-                                            phrase("customer feedback"),
-                                            phrase("listening to clients"),
-                                            phrase("mindfulness"),
-                                            phrase("understanding"),
-                                            phrase("information retention"),
-                                            phrase("paraphrasing"))))
-s3$Competence <- "Active Listening"
-s3$SkillCode <- "S3"
+
 
 s4 <- data.frame(kwic(Programs, pattern = c(phrase("negotiation"),
                                             phrase("negotiating skills"),
@@ -120,24 +225,7 @@ s6 <- data.frame(kwic(Programs, pattern = c(phrase("service orientation"),
 s6$Competence <- "Service Orientation"
 s6$SkillCode <- "S6"
 
-s7 <- data.frame(kwic(Programs, pattern = c(phrase("critical thinking"),
-                                            phrase("think critically"), 
-                                            phrase("critical analysis"),
-                                            phrase("reasoning skills"),
-                                            phrase("analytical thinking"),
-                                            phrase("evaluative thinking"),
-                                            phrase("critical evaluation"),
-                                            phrase("strategic analysis"),
-                                            phrase("problem analysis"),
-                                            phrase("critical problem solving"),
-                                            phrase("analytical reasoning"),
-                                            phrase("evaluating information"),
-                                            phrase("argumentation"),
-                                            phrase("logic"),
-                                            phrase("reasoning"),
-                                            phrase("complex problem-solving"))))
-s7$Competence <- "Critical Thinking"
-s7$SkillCode <- "S7"
+
 
 s8 <- data.frame(kwic(Programs, pattern = c(phrase("solving complex problems"),
                                             phrase("problem solving"),
@@ -162,26 +250,7 @@ s8 <- data.frame(kwic(Programs, pattern = c(phrase("solving complex problems"),
 s8$Competence <- "Solving Complex Problems"
 s8$SkillCode <- "S8"
 
-s9 <- data.frame(kwic(Programs, pattern = c(phrase("decision making"),
-                                            phrase("making decisions"),
-                                            phrase("judgment skills"),
-                                            phrase("decisive action"),
-                                            phrase("evaluate options"),
-                                            phrase("choose solutions"),
-                                            phrase("decision strategies"),
-                                            phrase("strategic decision making"),
-                                            phrase("decisive judgment"),
-                                            phrase("business decision making"),
-                                            phrase("executive decision making"),
-                                            phrase("critical judgment"),
-                                            phrase("risk assessment"),
-                                            phrase("intuition"),
-                                            phrase("experience"),
-                                            phrase("confidence"),
-                                            phrase("accountability"),
-                                            phrase("leadership"))))
-s9$Competence <- "Decision Making and Judgment"
-s9$SkillCode <- "S9"
+
 
 s10 <- data.frame(kwic(Programs, pattern = c(phrase("time management"),
                                              phrase("manage time"),
