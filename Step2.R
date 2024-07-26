@@ -115,6 +115,226 @@ s8 <- data.frame(kwic(Programs, pattern = c(phrase("monitoring"),
 s8$Competence <- "Monitoring"
 s8$SkillCode <- "S8"
 
+s9 <- data.frame(kwic(Programs, pattern = c(phrase("persuading"), 
+                                         phrase("persuading others"),
+                                         phrase("persuading skills"),
+                                         phrase("influencing others"),
+                                         phrase("convincing others"),
+                                         phrase("selling ideas"),
+                                         phrase("effective persuasion"),
+                                         phrase("persuasive communication"),
+                                         phrase("influence marketing"),
+                                         phrase("marketing influence"),
+                                         phrase("persuasive skills"),
+                                         phrase("persuasive strategies"),
+                                         phrase("social influence"),
+                                         phrase("argumentation"),
+                                         phrase("appealing to emotions"),
+                                         phrase("motivation"),
+                                         phrase("credibility"),
+                                         phrase("trust"),
+                                         phrase("convince"),
+                                         phrase("persuasion"),
+                                         phrase("change behavior"),
+                                         phrase("change minds"),
+                                         phrase("persuade"))))
+s9$Competence <- "Persuasion"
+s9$SkillCode <- "S9"
+
+
+s10 <- data.frame(kwic(Programs, pattern = c(phrase("complex problem solving"), 
+                                             phrase("complex problems"),
+                                             phrase("implement solutions"),
+                                             phrase("evaluate options"),
+                                             phrase("complexity"),
+                                             phrase("review information"),
+                                             phrase("develop solutions"),
+                                             phrase("identify problems"))))
+s10$Competence <- "Complex Problem Solving"
+s10$SkillCode <- "S10"
+
+s11 <- data.frame(kwic(Programs, pattern = c(phrase("negotiation"),
+                                            phrase("negotiating skills"),
+                                            phrase("bargaining"),
+                                            phrase("reconcile differences"),
+                                            phrase("deal making"),
+                                            phrase("conflict resolution"),
+                                            phrase("mediate"),
+                                            phrase("negotiation tactics"),
+                                            phrase("win-win negotiation"),
+                                            phrase("negotiation strategies"),
+                                            phrase("negotiation skills"),
+                                            phrase("business negotiation"),
+                                            phrase("contract negotiation"),
+                                            phrase("price negotiation"),
+                                            phrase("deal negotiation"),
+                                            phrase("conflict negotiation"),
+                                            phrase("intercultural negotiation"),
+                                            phrase("global negotiation"))))
+s11$Competence <- "Negotiation"
+s11$SkillCode <- "S11"
+
+s12 <- data.frame(kwic(Programs, pattern = c(phrase("coordination"),
+                                             phrase("coordinat*"),
+                                             phrase("adjusting actions"),
+                                             phrase("coordinate behavior"),
+                                             phrase("cooperate with others"),
+                                             phrase("cooperat*"),
+                                             phrase("collaborat*"),
+                                             phrase("coordinate tasks"),
+                                             phrase("team coordination"),
+                                             phrase("organizational skills"),
+                                             phrase("work together"),
+                                             phrase("task management"),
+                                             phrase("coordinating activities"),
+                                             phrase("inter-department coordination"),
+                                             phrase("coordinated efforts"),
+                                             phrase("team coordination strategies"),
+                                             phrase("collaborative coordination"),
+                                             phrase("project management"),
+                                             phrase("effective communication"),
+                                             phrase("delegation"),
+                                             phrase("conflict resolution"),
+                                             phrase("leadership"),
+                                             phrase("tracking"),
+                                             phrase("evaluation"),
+                                             phrase("collaborate with others"))))
+s12$Competence <- "Coordination"
+s12$SkillCode <- "S12"
+
+
+s13 <- data.frame(kwic(Programs, pattern = c(phrase("systems evaluation"),
+                                             phrase("identifying measures"),
+                                             phrase("identifying indicators"),
+                                             phrase("system performance"),
+                                             phrase("needs"),
+                                             phrase("improve performance"),
+                                             phrase("correct performance"),
+                                             phrase("goals of the system"),
+                                             phrase("systems thinking"),
+                                             phrase("systemic"))))
+s13$Competence <- "Systems Evaluation"
+s13$SkillCode <- "S13"
+
+
+s14 <- data.frame(kwic(Programs, pattern = c(phrase("time management"), 
+                                             phrase("timing"),
+                                             phrase("managing one's own time"),
+                                             phrase("managing time of others"),
+                                             phrase("punctual"),
+                                             phrase("on time"),
+                                             phrase("time management skills"),
+                                             phrase("organize time"),
+                                             phrase("efficient scheduling"),
+                                             phrase("prioritize tasks"),
+                                             phrase("time optimization"),
+                                             phrase("schedule management"),
+                                             phrase("task prioritization"),
+                                             phrase("effective time management"),
+                                             phrase("time management strategies"),
+                                             phrase("organization"),
+                                             phrase("planning"),
+                                             phrase("delegation"),
+                                             phrase("multitasking"),
+                                             phrase("stress management"),
+                                             phrase("productivity"),
+                                             phrase("efficiency"),
+                                             phrase("self-discipline"),
+                                             phrase("timely"),
+                                             phrase("punctuality"))))
+s14$Competence <- "Time Management"
+s14$SkillCode <- "S14"
+
+s15 <- data.frame(kwic(Programs, pattern = c(phrase("supervision"),
+                                             phrase("supervise"),
+                                             phrase("supervising"),
+                                             phrase("management"),
+                                             phrase("manage personnel"),
+                                             phrase("manage staff"),
+                                             phrase("team leadership"),
+                                             phrase("lead teams"),
+                                             phrase("employee supervision"),
+                                             phrase("staff management"),
+                                             phrase("effective supervision"),
+                                             phrase("motivation"),
+                                             phrase("coaching"),
+                                             phrase("team development"),
+                                             phrase("performance management"),
+                                             phrase("discipline"),
+                                             phrase("ethics"),
+                                             phrase("change management"))))
+s15$Competence <- "Supervision and Personnel Management"
+s15$SkillCode <- "S15"
+
+
+
+s16 <- data.frame(kwic(Programs, pattern = c(phrase("operation analysis"),
+                                             phrase("analyzing needs"),
+                                             phrase("analysing needs"),
+                                             phrase("product requirement"),
+                                             phrase("create designs"),
+                                             phrase("designing products"),
+                                             phrase("product design"),
+                                             phrase("marketing products"),
+                                             phrase("design of products"))))
+
+
+s17 <- data.frame(kwic(Programs, pattern = c(phrase("systems analysis"),
+                                             phrase("determining how"),
+                                             phrase("systems should work"),
+                                             phrase("outcome changes"),
+                                             phrase("system conditions"),
+                                             phrase("system functioning"),
+                                             phrase("working system"),
+                                             phrase("system operations"))))
+
+s18 <- data.frame(kwic(Programs, pattern = c(phrase("written communication"),
+                                            phrase("writing skills"),
+                                            phrase("professional writing"),
+                                            phrase("report writing"),
+                                            phrase("business writing"),
+                                            phrase("create marketing content"),
+                                            phrase("marketing reports"),
+                                            phrase("content creation"),
+                                            phrase("marketing copywriting"),
+                                            phrase("marketing messages"),
+                                            phrase("written marketing materials"),
+                                            phrase("writing for marketing"),
+                                            phrase("persuasive writing"),
+                                            phrase("creative writing"),
+                                            phrase("proposal writing"),
+                                            phrase("copywriting"),
+                                            phrase("web content writing"),
+                                            phrase("blogging"),
+                                            phrase("social media writing"))))
+s18$Competence <- "Written Communication"
+s18$SkillCode <- "S18"
+
+
+s19 <- data.frame(kwic(Programs, pattern = c(phrase("learning strategies"),
+                                             phrase("learning strategy"),
+                                             phrase("teaching strategy"),
+                                             phrase("teaching strategies"),
+                                             phrase("training"),
+                                             phrase("instructional methods"),
+                                             phrase("appropriate learning"),
+                                             phrase("teaching new things"),
+                                             phrase("learning new things"),
+                                             phrase("selecting and using"),
+                                             phrase("learning procedures"))))
+s19$Competence <- "Learning Strategies"
+s19$SkillCode <- "S19"
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -141,70 +361,12 @@ s1 <- data.frame(kwic(Programs, pattern = c(phrase("oral communication"),
 s1$Competence <- "Speaking"
 s1$SkillCode <- "S1"
 
-s2 <- data.frame(kwic(Programs, pattern = c(phrase("written communication"),
-                                            phrase("writing skills"),
-                                            phrase("professional writing"),
-                                            phrase("report writing"),
-                                            phrase("business writing"),
-                                            phrase("create marketing content"),
-                                            phrase("marketing reports"),
-                                            phrase("content creation"),
-                                            phrase("marketing copywriting"),
-                                            phrase("marketing messages"),
-                                            phrase("written marketing materials"),
-                                            phrase("writing for marketing"),
-                                            phrase("persuasive writing"),
-                                            phrase("creative writing"),
-                                            phrase("proposal writing"),
-                                            phrase("copywriting"),
-                                            phrase("web content writing"),
-                                            phrase("blogging"),
-                                            phrase("social media writing"))))
-s2$Competence <- "Written Communication"
-s2$SkillCode <- "S2"
 
 
 
-s4 <- data.frame(kwic(Programs, pattern = c(phrase("negotiation"),
-                                            phrase("negotiating skills"),
-                                            phrase("bargaining"),
-                                            phrase("deal making"),
-                                            phrase("conflict resolution"),
-                                            phrase("mediate"),
-                                            phrase("negotiation tactics"),
-                                            phrase("win-win negotiation"),
-                                            phrase("negotiation strategies"),
-                                            phrase("negotiation skills"),
-                                            phrase("business negotiation"),
-                                            phrase("contract negotiation"),
-                                            phrase("price negotiation"),
-                                            phrase("deal negotiation"),
-                                            phrase("conflict negotiation"),
-                                            phrase("intercultural negotiation"),
-                                            phrase("global negotiation"))))
-s4$Competence <- "Negotiation"
-s4$SkillCode <- "S4"
 
-s5 <- data.frame(kwic(Programs, pattern = c(phrase("persuasion"),
-                                            phrase("persuading skills"),
-                                            phrase("influencing others"),
-                                            phrase("convincing others"),
-                                            phrase("selling ideas"),
-                                            phrase("effective persuasion"),
-                                            phrase("persuasive communication"),
-                                            phrase("influence marketing"),
-                                            phrase("marketing influence"),
-                                            phrase("persuasive skills"),
-                                            phrase("persuasive strategies"),
-                                            phrase("social influence"),
-                                            phrase("leadership"),
-                                            phrase("argumentation"),
-                                            phrase("appealing to emotions"),
-                                            phrase("motivation"),
-                                            phrase("credibility"),
-                                            phrase("trust"))))
-s5$Competence <- "Persuasion"
-s5$SkillCode <- "S5"
+
+
 
 s6 <- data.frame(kwic(Programs, pattern = c(phrase("service orientation"),
                                             phrase("customer service"),
@@ -252,69 +414,8 @@ s8$SkillCode <- "S8"
 
 
 
-s10 <- data.frame(kwic(Programs, pattern = c(phrase("time management"),
-                                             phrase("manage time"),
-                                             phrase("time management skills"),
-                                             phrase("organize time"),
-                                             phrase("efficient scheduling"),
-                                             phrase("prioritize tasks"),
-                                             phrase("time optimization"),
-                                             phrase("schedule management"),
-                                             phrase("task prioritization"),
-                                             phrase("effective time management"),
-                                             phrase("time management strategies"),
-                                             phrase("organization"),
-                                             phrase("planning"),
-                                             phrase("delegation"),
-                                             phrase("multitasking"),
-                                             phrase("stress management"),
-                                             phrase("productivity"),
-                                             phrase("efficiency"),
-                                             phrase("self-discipline"))))
-s10$Competence <- "Time Management"
-s10$SkillCode <- "S10"
 
-s11 <- data.frame(kwic(Programs, pattern = c(phrase("coordination"),
-                                             phrase("coordinate tasks"),
-                                             phrase("team coordination"),
-                                             phrase("organizational skills"),
-                                             phrase("work together"),
-                                             phrase("task management"),
-                                             phrase("coordinating activities"),
-                                             phrase("inter-department coordination"),
-                                             phrase("coordinated efforts"),
-                                             phrase("team coordination strategies"),
-                                             phrase("collaborative coordination"),
-                                             phrase("project management"),
-                                             phrase("effective communication"),
-                                             phrase("delegation"),
-                                             phrase("conflict resolution"),
-                                             phrase("leadership"),
-                                             phrase("tracking"),
-                                             phrase("evaluation"))))
-s11$Competence <- "Coordination"
-s11$SkillCode <- "S11"
 
-s12 <- data.frame(kwic(Programs, pattern = c(phrase("supervision"),
-                                             phrase("supervise"),
-                                             phrase("supervising"),
-                                             phrase("management"),
-                                             phrase("manage personnel"),
-                                             phrase("manage staff"),
-                                             phrase("team leadership"),
-                                             phrase("lead teams"),
-                                             phrase("employee supervision"),
-                                             phrase("staff management"),
-                                             phrase("effective supervision"),
-                                             phrase("motivation"),
-                                             phrase("coaching"),
-                                             phrase("team development"),
-                                             phrase("performance management"),
-                                             phrase("discipline"),
-                                             phrase("ethics"),
-                                             phrase("change management"))))
-s12$Competence <- "Supervision and Personnel Management"
-s12$SkillCode <- "S12"
 
 s13 <- data.frame(kwic(Programs, pattern = c(phrase("creativity"),
                                              phrase("creative thinking"),
