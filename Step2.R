@@ -299,6 +299,8 @@ s16 <- data.frame(kwic(Programs, pattern = c(phrase("operation analysis"),
                                              phrase("product design"),
                                              phrase("marketing products"),
                                              phrase("design of products"))))
+s16$Competence <- "Operations Analysis"
+s16$SkillCode <- "S16"
 
 
 s17 <- data.frame(kwic(Programs, pattern = c(phrase("systems analysis"),
@@ -309,6 +311,8 @@ s17 <- data.frame(kwic(Programs, pattern = c(phrase("systems analysis"),
                                              phrase("system functioning"),
                                              phrase("working system"),
                                              phrase("system operations"))))
+s17$Competence <- "Systems Analysis"
+s17$SkillCode <- "S17"
 
 s18 <- data.frame(kwic(Programs, pattern = c(phrase("written communication"),
                                             phrase("writing skills"),
