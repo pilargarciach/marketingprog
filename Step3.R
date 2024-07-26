@@ -47,6 +47,9 @@ SkillAttributes <- data.frame(Competence = unique(SS$Competence))
 library(readr)
 ONET_SkillsImportance <- read_csv("ONET_SkillsImportance.csv")
 SkillAttributes <- merge(SkillAttributes, ONET_SkillsImportance, by.x = "Competence", by.y = "Skill", all.x = TRUE)
-
-
+set.vertex.attribute(red, "OnetImportance", SkillAttributes$Importance)
+OnetImportance <- data.frame(OnetImportance = get.vertex.attribute(red, "OnetImportance"))
+OnetImportance$OnetImportance[29:286] <- NA 
+set.vertex.attribute(red, "OnetImportance", OnetImportance$OnetImportance)
+red
 save.image("Results/Result3.RData")
