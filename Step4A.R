@@ -5,7 +5,7 @@ red
 sna::gden(red)
 sna::centralgraph(red)
 sna::components(red)
-mixingmatrix(red, 'OnetImportance')
+mixingmatrix(red, 'SchoolType')
 # terminos dependientes de díadas
 #b1concurrent (Descartado por ser infinito su estimado)
 #b1degrange
