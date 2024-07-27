@@ -43,6 +43,15 @@ model4A <- ergm(red ~ nodefactor("Region") + nodefactor('SchoolType'))
 summary(model4A)
 model4B <- ergm(red ~ nodefactor("Region") + nodefactor('SchoolType') + b1sociality(nodes = c(1:28)))
 summary(model4B)
+# Homofilia por tipo de escuela
+model5 <- ergm(red ~ nodefactor("SchoolType"))
+summary(model5)
+# Homofilia por Region
+model5A <- ergm(red ~ nodefactor("Region"))
+summary(model5A)
+# Homofilia de region y tipo de escuela
+model5B <- ergm(red ~ nodefactor("Region") + nodefactor("SchoolType"))
+summary(model5B)
 
 control = control.ergm(MCMC.burnin = 10000, MCMC.samplesize = 50000)
 model4 <- ergm(red ~ b1dsp(5), control = control)
