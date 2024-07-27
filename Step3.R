@@ -49,7 +49,18 @@ ONET_SkillsImportance <- read_csv("ONET_SkillsImportance.csv")
 SkillAttributes <- merge(SkillAttributes, ONET_SkillsImportance, by.x = "Competence", by.y = "Skill", all.x = TRUE)
 set.vertex.attribute(red, "OnetImportance", SkillAttributes$Importance)
 OnetImportance <- data.frame(OnetImportance = get.vertex.attribute(red, "OnetImportance"))
-OnetImportance$OnetImportance[29:286] <- NA 
+OnetImportance$OnetImportance[29:286] <- 0 
+SchoolType <- data.frame(SchoolType = c(rep(0, 28), ProgramAttributes$InstitutionType))
+
+# Create a vector for SchoolType, initializing with zeros
+schoolTypeVector <- rep(0, network.size(red))
+
+# Assign InstitutionType values to mode2 nodes in the vector
+schoolTypeVector[mode2Nodes] <- ProgramAttributes$InstitutionType
+
+set.vertex.attribute(red, "SchoolType", ProgramAttributes$InstitutionType)
+get.vertex.attribute(red, "SchoolType")
 set.vertex.attribute(red, "OnetImportance", OnetImportance$OnetImportance)
 red
+get.vertex.attribute(red, "OnetImportance")
 save.image("Results/Result3.RData")
