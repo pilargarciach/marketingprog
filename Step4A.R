@@ -3,6 +3,9 @@ library(network)
 library(ergm)
 red
 sna::gden(red)
+sna::centralgraph(red)
+sna::components(red)
+mixingmatrix(red, 'OnetImportance')
 # terminos dependientes de díadas
 #b1concurrent (Descartado por ser infinito su estimado)
 #b1degrange
@@ -23,6 +26,25 @@ model1 <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
 summary(model1)
 model1A <- ergm(red ~ b1sociality(nodes = c(1:28)))
 summary(model1A)
+a <- summary(model1A)
+a <- data.frame(a$coefficients)
+a$Skill <- SkillAttributes$Competence
+a <- a %>% dplyr::relocate(Skill, .before = everything())
+model2 <- ergm(red ~ b1cov("OnetImportance"))
+summary(model2)
+model2A <- ergm(red ~ b1cov("OnetImportance") + b1sociality(nodes = c(1:28)))
+summary(model2A)
+model3 <- ergm(red ~ b1sociality(nodes = c(3,11,13)))
+summary(model3)
+model3A <- ergm(red ~ b1cov("OnetImportance") + b1sociality(nodes = c(3,11,13)))
+summary(model3A)
+control = control.ergm(MCMC.burnin = 10000, MCMC.samplesize = 50000)
+model4 <- ergm(red ~ b1dsp(5), control = control)
+summary(model4)
+
+
+
+
 
 mcmc.diagnostics(model1)
 

@@ -36,7 +36,7 @@ red <- network(BiM,
                bipartite = TRUE)
 is.network(red)
 red
-
+get.vertex.attribute(red, "vertex.names")
 #write.csv(BiM, file = "MarketingNetwork.csv")
 
 
