@@ -52,10 +52,14 @@ summary(model5A)
 # Homofilia de region y tipo de escuela
 model5B <- ergm(red ~ nodefactor("Region") + nodefactor("SchoolType"))
 summary(model5B)
+sink("ergm_output.txt") # Redirects standard output to a file named ergm_output.txt
+model6 <- ergm(red ~ gwb1dsp(decay = 0, fixed = TRUE),
+               control = control.ergm(MCMC.burnin = 20000, MCMC.samplesize = 20000))
+sink() # Resets standard output to go to the console again
+sink
 
-control = control.ergm(MCMC.burnin = 10000, MCMC.samplesize = 50000)
-model4 <- ergm(red ~ b1dsp(5), control = control)
-summary(model4)
+
+summary(model6)
 
 
 
