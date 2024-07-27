@@ -51,11 +51,11 @@ set.vertex.attribute(red, "OnetImportance", SkillAttributes$Importance)
 OnetImportance <- data.frame(OnetImportance = get.vertex.attribute(red, "OnetImportance"))
 OnetImportance$OnetImportance[29:286] <- 0 
 SchoolType <- data.frame(SchoolType = c(rep(0, 28), ProgramAttributes$InstitutionType))
-
-
+Region <- data.frame(Region = c(rep(0,28), ProgramAttributes$Region))
 set.vertex.attribute(red, "SchoolType", SchoolType$SchoolType)
 get.vertex.attribute(red, "SchoolType")
 set.vertex.attribute(red, "OnetImportance", OnetImportance$OnetImportance)
+set.vertex.attribute(red, "Region", Region$Region)
 red
 get.vertex.attribute(red, "OnetImportance")
 save.image("Results/Result3.RData")
