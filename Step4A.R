@@ -55,6 +55,19 @@ summary(model5B)
 sink("ergm_output.txt") # Redirects standard output to a file named ergm_output.txt
 model6 <- ergm(red ~ gwb1dsp(decay = 0, fixed = TRUE),
                control = control.ergm(MCMC.burnin = 20000, MCMC.samplesize = 20000))
+
+Starting maximum pseudolikelihood estimation (MPLE):
+  Obtaining the responsible dyads.
+Evaluating the predictor and response matrix.
+Maximizing the pseudolikelihood.
+Finished MPLE.
+Starting Monte Carlo maximum likelihood estimation (MCMLE):
+  Iteration 1 of at most 60:
+  Error in ergm.MCMLE(init, s, s.obs, control = control, verbose = verbose,  : 
+                        Unconstrained MCMC sampling did not mix at all. Optimization cannot continue.
+                      In addition: Warning message:
+                        In ergm_MCMC_sample(s, control, theta = mcmc.init, verbose = max(verbose -  :
+                                                                                           Unable to reach target effective size in iterations alotted.
 sink() # Resets standard output to go to the console again
 sink
 
