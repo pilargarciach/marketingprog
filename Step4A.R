@@ -23,6 +23,7 @@ search.ergmTerms(keywords = c("bipartite"))
 
 model0 <- ergm(red ~ edges)
 summary(model0)
+mcmc.diagnostics(model0)
 model1 <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
 summary(model1)
 model1A <- ergm(red ~ b1sociality(nodes = c(1:28)))
