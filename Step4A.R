@@ -21,11 +21,23 @@ mixingmatrix(red, 'Region')
 #isolatededges
 search.ergmTerms(keywords = c("bipartite"))
 
-model0 <- ergm(red ~ edges)
+set.seed(1107)
+model0 <- ergm(red ~ edges, control = control.ergm(MCMC.samplesize = 10000))
 summary(model0)
 mcmc.diagnostics(model0)
+pave <- gof(model0)
+plot(pave)
+Sim.M0 <- simulate(model.extract()Sim.M0 <- simulate(model0, nsim = 10, control = 
+                     control.simulate.ergm(
+                       MCMC.burnin = 10000,
+                       MCMC.interval = 100))
+print(Sim.M0[[10]])
+mcmc.diagnostics(Sim.M0)
+
+
 model1 <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
 summary(model1)
+
 model1A <- ergm(red ~ b1sociality(nodes = c(1:28)))
 summary(model1A)
 a <- summary(model1A)
@@ -53,9 +65,18 @@ summary(model5A)
 # Homofilia de region y tipo de escuela
 model5B <- ergm(red ~ nodefactor("Region") + nodefactor("SchoolType"))
 summary(model5B)
-sink("ergm_output.txt") # Redirects standard output to a file named ergm_output.txt
+#sink("ergm_output.txt") # Redirects standard output to a file named ergm_output.txt
+
 model6 <- ergm(red ~ gwb1dsp(decay = 0.1, fixed = TRUE),
                control = control.ergm(MCMC.burnin = 20000, MCMC.samplesize = 20000))
+
+
+control_params <- control.simulate.ergm(
+  MCMC.burnin = 10000,
+  MCMC.interval = 100,
+  MCMC.samplesize = 1000,
+  MCMC.maxit = 50000
+)
 
 Starting maximum pseudolikelihood estimation (MPLE):
   Obtaining the responsible dyads.
