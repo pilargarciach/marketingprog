@@ -53,7 +53,7 @@ summary(model5A)
 model5B <- ergm(red ~ nodefactor("Region") + nodefactor("SchoolType"))
 summary(model5B)
 sink("ergm_output.txt") # Redirects standard output to a file named ergm_output.txt
-model6 <- ergm(red ~ gwb1dsp(decay = 0, fixed = TRUE),
+model6 <- ergm(red ~ gwb1dsp(decay = 0.1, fixed = TRUE),
                control = control.ergm(MCMC.burnin = 20000, MCMC.samplesize = 20000))
 
 Starting maximum pseudolikelihood estimation (MPLE):
