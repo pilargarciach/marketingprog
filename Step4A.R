@@ -33,8 +33,6 @@ if (!is.null(model0$MCMC.samples)) {
 } else {
   print("No MCMC samples found.")
 }
-model0$
-mcmc.diagnostics(model0)
 pave <- gof(model0)
 plot(pave)
 Sim.M0 <- simulate(model0, nsim = 1000, control = 
