@@ -27,13 +27,14 @@ summary(model0)
 mcmc.diagnostics(model0)
 pave <- gof(model0)
 plot(pave)
-Sim.M0 <- simulate(model.extract()Sim.M0 <- simulate(model0, nsim = 10, control = 
+Sim.M0 <- simulate(model0, nsim = 10, control = 
                      control.simulate.ergm(
-                       MCMC.burnin = 10000,
+                       MCMC.burnin = 10000, 
                        MCMC.interval = 100))
-print(Sim.M0[[10]])
+print(Sim.M0[[1]])
 mcmc.diagnostics(Sim.M0)
-
+summary(Sim.M0)
+Sim.M0
 
 model1 <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
 summary(model1)
