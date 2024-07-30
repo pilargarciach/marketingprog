@@ -1,6 +1,7 @@
 load("Results/Result3.RData")
 library(network)
 library(ergm)
+library(coda)
 red
 sna::gden(red)
 sna::centralgraph(red)
@@ -22,12 +23,21 @@ mixingmatrix(red, 'Region')
 search.ergmTerms(keywords = c("bipartite"))
 
 set.seed(1107)
-model0 <- ergm(red ~ edges, control = control.ergm(MCMC.samplesize = 10000))
+model0 <- ergm(red ~ edges, control = control.ergm(
+  MCMC.burnin = 10000,
+  MCMC.interval = 100
+))
 summary(model0)
+if (!is.null(model0$MCMC.samples)) {
+  print("MCMC samples are available.")
+} else {
+  print("No MCMC samples found.")
+}
+model0$
 mcmc.diagnostics(model0)
 pave <- gof(model0)
 plot(pave)
-Sim.M0 <- simulate(model0, nsim = 10, control = 
+Sim.M0 <- simulate(model0, nsim = 1000, control = 
                      control.simulate.ergm(
                        MCMC.burnin = 10000, 
                        MCMC.interval = 100))
