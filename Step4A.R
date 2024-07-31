@@ -33,16 +33,20 @@ if (!is.null(model0$MCMC.samples)) {
 } else {
   print("No MCMC samples found.")
 }
+model0$coefficients
 pave <- gof(model0)
+pave2 <- gof(model0, GOF = ~model)
+pave
 plot(pave)
-Sim.M0 <- simulate(model0, nsim = 1000, control = 
+Sim.M0 <- simulate(model0, nsim = 1000, 
+                   coef = model0$coefficients,
+                   control = 
                      control.simulate.ergm(
                        MCMC.burnin = 10000, 
                        MCMC.interval = 100))
 print(Sim.M0[[1]])
-mcmc.diagnostics(Sim.M0)
-summary(Sim.M0)
 Sim.M0
+resumen <- summary(Sim.M0)
 
 model1 <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
 summary(model1)
