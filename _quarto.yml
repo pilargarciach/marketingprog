@@ -1,33 +1,33 @@
 project:
   type: website
 
-title: Modelos de Grafos Exponenciales Aleatorios
-subtitle: "***Una herramienta para investigadores aplicados***"
+title: Habilidades Blandas en Maestrías de Marketing Acreditadas en AACSB
+subtitle: "***Un Análisis de Red Bipartita con Grafo Exponencial Aleatorio***"
 author: 
-  - name: Juan C. Correa
-orcid: 0000-0002-0301-5641
-corresponding: TRUE
-affiliation: Critical Centrality Institute 
-url: 'https://correajc.com/'
-email: jcc@criticalcentrality.com
-date: "Julio 11 2024"
+    - name: Juan C. Correa
+      orcid: 0000-0002-0301-5641
+      corresponding: TRUE
+      affiliation: Critical Centrality Institute 
+      url: 'https://correajc.com/'
+      email: jcc@criticalcentrality.com
+date: "Julio 31 2024"
 lang: es
 bibliography: refs.bib
 number-sections: true
 
 website:
   title: ""
-sidebar:
-  left:
-  - href: index.qmd
-text: Home
-- about.qmd
+  sidebar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
 
 format:
   html:
-  theme: cosmo
-css: styles.css
-toc: true
+    theme: cosmo
+    css: styles.css
+    toc: true
 
 editor: visual
 

@@ -1,0 +1,12 @@
+---
+title: Formación de Habilidades en Maestrías de Marketing Acreditadas en AACSB
+format: html
+keywords:
+  - Oferta de Maestrías en Marketing
+  - Programas de Acreditados en AACSB
+  - Redes Bipartitas
+  - Modelos de Grafo Exponencial Aleatorio
+abstract: |
+  Las necesidades actuales del mercado laboral inciden sobre la educación universitaria para que se introduzcan los cambios requeridos en la formación de los nuevos profesionales del siglo 21. Al asumir que estos cambios son visibles desde los folletos que presentan el propósito y el perfil del egresado de los programas universitarios, aquí se modela a través de redes bipartitas y grafos exponenciales aleatorios la relación cuantitativa entre las habilidaes y la oferta comercial de maestrías de marketing con estándares de acreditación de la "_Association to Advance Collegiate Schools of Business_" ([AACSB](https://www.aacsb.edu/members?educations=masters)).
+---
+
