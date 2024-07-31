@@ -28,15 +28,12 @@ model0 <- ergm(red ~ edges, control = control.ergm(
   MCMC.interval = 100
 ))
 summary(model0)
-if (!is.null(model0$MCMC.samples)) {
-  print("MCMC samples are available.")
-} else {
-  print("No MCMC samples found.")
-}
+
 model0$coefficients
 pave <- gof(model0)
 pave2 <- gof(model0, GOF = ~model)
 pave
+pave2
 plot(pave)
 Sim.M0 <- simulate(model0, nsim = 1000, 
                    coef = model0$coefficients,
