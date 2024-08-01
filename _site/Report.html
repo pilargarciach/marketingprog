@@ -171,7 +171,11 @@ div.csl-indent {
   <li><a href="#configuración-de-la-matriz-término-documento-como-red-bipartita" id="toc-configuración-de-la-matriz-término-documento-como-red-bipartita" class="nav-link" data-scroll-target="#configuración-de-la-matriz-término-documento-como-red-bipartita"><span class="header-section-number">2.4</span> Configuración de la matriz término-documento como red bipartita</a></li>
   </ul></li>
   <li><a href="#especificación-y-modelación-de-red-bipartita-como-grafo-aleatorio" id="toc-especificación-y-modelación-de-red-bipartita-como-grafo-aleatorio" class="nav-link" data-scroll-target="#especificación-y-modelación-de-red-bipartita-como-grafo-aleatorio"><span class="header-section-number">3</span> Especificación y modelación de red bipartita como grafo aleatorio</a></li>
-  <li><a href="#contraste-de-hipótesis-sobre-la-conectividad-de-la-red" id="toc-contraste-de-hipótesis-sobre-la-conectividad-de-la-red" class="nav-link" data-scroll-target="#contraste-de-hipótesis-sobre-la-conectividad-de-la-red"><span class="header-section-number">4</span> Contraste de Hipótesis sobre la Conectividad de la Red</a></li>
+  <li><a href="#contraste-de-hipótesis" id="toc-contraste-de-hipótesis" class="nav-link" data-scroll-target="#contraste-de-hipótesis"><span class="header-section-number">4</span> Contraste de Hipótesis</a>
+  <ul class="collapse">
+  <li><a href="#la-conectividad-de-la-red-no-ocurre-por-azar" id="toc-la-conectividad-de-la-red-no-ocurre-por-azar" class="nav-link" data-scroll-target="#la-conectividad-de-la-red-no-ocurre-por-azar"><span class="header-section-number">4.1</span> La conectividad de la red no ocurre por azar</a></li>
+  <li><a href="#la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades" id="toc-la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades" class="nav-link" data-scroll-target="#la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades"><span class="header-section-number">4.2</span> La conectividad de la red se explica por un grupo limitado de habilidades</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -901,8 +905,11 @@ service orientation                   1      0       0       0       0</code></p
 </div>
 </div>
 </section>
-<section id="contraste-de-hipótesis-sobre-la-conectividad-de-la-red" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Contraste de Hipótesis sobre la Conectividad de la Red</h1>
+<section id="contraste-de-hipótesis" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Contraste de Hipótesis</h1>
+<p>El contraste de hipótesis sobre la red bipartita que representa la relación entre habilidades y programas contempla el planteamiento y contrastación empírica de una serie de modelos que se enumeran a continuación.</p>
+<section id="la-conectividad-de-la-red-no-ocurre-por-azar" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="la-conectividad-de-la-red-no-ocurre-por-azar"><span class="header-section-number">4.1</span> La conectividad de la red no ocurre por azar</h2>
 <p>Nuestro primer contraste de hipótesis supone descartar la idea de que la conexión entre habilidades y programas ocurre por azar. En otras palabras, debemos conocer si el total de conexiones está muy por encima o muy por debajo de lo que puede esperarse por azar.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1107</span>)</span>
@@ -929,10 +936,63 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 AIC: 8971  BIC: 8978  (Smaller is better. MC Std. Err. = 0)</code></pre>
 </div>
 </div>
-<p>Este primer modelo debe considerarse un modelo de línea base ya que solo incluye el término <code>edges</code>, lo que implica que la probabilidad de una conexión entre dos nodos es constante en toda la red. El coeficiente estimado para <code>edges</code> es -0.88529, lo que indica una tendencia negativa a formar enlaces (por debajo de lo esperado por azar). Es esencial interpretar este coeficiente en conjunto con otros términos del modelo (en modelos posteriores). El coeficiente es altamente significativo (p-valor &lt; 0.001), lo que sugiere que el número de enlaces es diferente de lo esperado por casualidad. La desviación nula y residual indican cuánto se reduce la falta de ajuste del modelo en comparación con un modelo nulo sin predictores. Los valores de AIC (Akaike Information Criterion) y BIC (Bayesian Information Criterion) son medidas de ajuste del modelo, y mientras más cercanos a cero tanto mejor el ajuste del modelo. Estos dos valores los usaremos para comparar este primer modelo que sirve como línea base para incorporar otros predictores.</p>
+<p>Este primer modelo debe considerarse un modelo de línea base ya que solo incluye el término <code>edges</code>, lo que implica que la probabilidad de una conexión entre dos nodos es constante en toda la red. El coeficiente estimado para <code>edges</code> es -0.91022, lo que indica una tendencia negativa a formar enlaces (por debajo de lo esperado por azar). Es esencial interpretar este coeficiente en conjunto con otros términos del modelo (en modelos posteriores). El coeficiente es altamente significativo (p-valor &lt; 0.001), lo que sugiere que el número de enlaces es diferente de lo esperado por casualidad. La desviación nula y residual indican cuánto se reduce la falta de ajuste del modelo en comparación con un modelo nulo sin predictores. Los valores de AIC (Akaike Information Criterion) y BIC (Bayesian Information Criterion) son medidas de ajuste del modelo, y mientras más cercanos a cero tanto mejor el ajuste del modelo. Estos dos valores los usaremos para comparar este primer modelo que sirve como línea base para incorporar otros predictores.</p>
+</section>
+<section id="la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades"><span class="header-section-number">4.2</span> La conectividad de la red se explica por un grupo limitado de habilidades</h2>
+<p>Un segundo modelo implica contrastar la hipótesis según la cual las habilidades más relevantes son las que mayor presencia tienen en los folletos promocionales de las maestrías de marketing.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(red <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">b1sociality</span>(<span class="at">nodes =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>)))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+ergm(formula = red ~ edges + b1sociality(nodes = c(1:28)))
+
+Maximum Likelihood Results:
+
+              Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
+edges          -4.8520     0.7099      0  -6.835  &lt; 1e-04 ***
+b1sociality1    4.1061     0.7223      0   5.685  &lt; 1e-04 ***
+b1sociality2    4.9141     0.7207      0   6.818  &lt; 1e-04 ***
+b1sociality3    7.3841     0.7488      0   9.861  &lt; 1e-04 ***
+b1sociality4    4.8520     0.7207      0   6.732  &lt; 1e-04 ***
+b1sociality5    3.0648     0.7317      0   4.188  &lt; 1e-04 ***
+b1sociality6    3.8444     0.7237      0   5.312  &lt; 1e-04 ***
+b1sociality7    4.0158     0.7227      0   5.557  &lt; 1e-04 ***
+b1sociality8    4.2279     0.7218      0   5.858  &lt; 1e-04 ***
+b1sociality9    6.4338     0.7289      0   8.827  &lt; 1e-04 ***
+b1sociality10   4.2618     0.7217      0   5.906  &lt; 1e-04 ***
+b1sociality11   3.9600     0.7230      0   5.477  &lt; 1e-04 ***
+b1sociality12   3.5462     0.7260      0   4.885  &lt; 1e-04 ***
+b1sociality13   5.5627     0.7221      0   7.703  &lt; 1e-04 ***
+b1sociality14   3.1857     0.7300      0   4.364  &lt; 1e-04 ***
+b1sociality15   3.4265     0.7271      0   4.712  &lt; 1e-04 ***
+b1sociality16   3.4993     0.7264      0   4.817  &lt; 1e-04 ***
+b1sociality17   3.9600     0.7230      0   5.477  &lt; 1e-04 ***
+b1sociality18   4.4433     0.7212      0   6.161  &lt; 1e-04 ***
+b1sociality19   1.9157     0.7648      0   2.505  0.01225 *  
+b1sociality20   1.9157     0.7648      0   2.505  0.01225 *  
+b1sociality21   4.6027     0.7209      0   6.385  &lt; 1e-04 ***
+b1sociality22   2.8611     0.7352      0   3.891  &lt; 1e-04 ***
+b1sociality23   3.8836     0.7234      0   5.368  &lt; 1e-04 ***
+b1sociality24   3.0648     0.7317      0   4.188  &lt; 1e-04 ***
+b1sociality25   3.4511     0.7269      0   4.748  &lt; 1e-04 ***
+b1sociality26   1.1144     0.8213      0   1.357  0.17484    
+b1sociality27   2.2004     0.7529      0   2.923  0.00347 ** 
+b1sociality28   0.7010     0.8705      0   0.805  0.42068    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+     Null Deviance: 10372  on 7482  degrees of freedom
+ Residual Deviance:  6982  on 7453  degrees of freedom
+ 
+AIC: 7040  BIC: 7241  (Smaller is better. MC Std. Err. = 0)</code></pre>
+</div>
+</div>
 
 
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Referencias</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">

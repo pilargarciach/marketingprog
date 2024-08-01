@@ -55,6 +55,7 @@ summary(model1)
 
 model1A <- ergm(red ~ b1sociality(nodes = c(1:28)))
 summary(model1A)
+
 a <- summary(model1A)
 a <- data.frame(a$coefficients)
 a$Skill <- SkillAttributes$Competence
