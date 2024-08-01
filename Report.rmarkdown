@@ -10,6 +10,7 @@ abstract: |
   Las necesidades actuales del mercado laboral están incidiendo sobre la oferta de la educación universitaria para promocionar la formación de diversas habilidades en los folletos promocionales que describen el propósito y el perfil de sus egresados. En esta investigación se modela a través de redes bipartitas y grafos exponenciales aleatorios la relación cuantitativa entre las habilidaes y la oferta comercial de maestrías de marketing con estándares de acreditación de la "_Association to Advance Collegiate Schools of Business_" ([AACSB](https://www.aacsb.edu/members?educations=masters)).
 ---
 
+
 # Introducción
 
 El valor de las habilidades o competencias y su vínculo con el alto rendimiento en el trabajo es una idea bien establecida desde hace décadas [@Spencer1993]. La investigación sobre las habilidades cuenta con varias aproximaciones conceptuales y metodológicas, entre las que resalta una enfoque que aprovecha el concepto de "datos relacionales" [@Butts2008]. Con datos relacionales se pueden analizar cuantitativamente las relaciones multivariadas entre las habilidades y los conocimientos educativos necesarios para ejecutar con destreza las tareas cotidianas de un puesto de trabajo. Esa multiplicidad de relaciones se conceptualizó como un red compleja de información ocupacional [@Peterson2001]. Dicha red compleja de información ocupacional ha estimulado una fructífera línea de investigación sobre competencias en varios países, incluyendo a los Estados Unidos de América [@Borner2018;@Vista2020], Hungría [@Gadar2018], o Colombia [@Garciachitiva2024] por mencionar unos pocos. 
@@ -19,6 +20,7 @@ En este reporte, usamos el perfil de habilidades asociadas con la posición de g
 # Contexto Empírico de los datos
 
 Para investigar la relación entre la oferta académica de los programas de maestría en marketing y el perfil profesional de ejecutivos de marketing según O*NET, aprovechamos la técnica conocida como "_búsqueda de palabras clave en contexto_" [@Benoit2018]. Esta técnica permite extraer de los folletos que promocionan los programas de marketing aquellas palabras o frases que describen las habilidades que debe reunir un profesional de marketing. Para realizar esta búsqueda, sin embargo, primero se hace necesario construir un corpus lingüístico digital en el que se registra palabra por palabra cada folleto de marketing. 
+
 
 ```{r, message=FALSE}
 library(readtext)
@@ -37,9 +39,11 @@ textos <- left_join(textos, AU, by = "Institution", keep = FALSE)
 Institutions <- data.frame(table(textos$Institution))
 ```
 
+
 ## Elaboración del Corpus Lingüístico
 
 Con el muestreo de estos folletos a partir de la información disponible en la página web oficial de la AACSB, procedimos a elaborar un corpus lingüístico de folletos de maestrías en marketing ofrecidas por 81 universidades públicas y 182 privadas, distribuidas en las siguientes tres regiones continentales: "Americas" (AM), "Asia-Pacífico" (AP) y "Europa-Medio Oriente-Africa" (EU-ME-AF). La elaboración del corpus lingüístico fue desarrollada con asistencia de la librería "`quanteda`" [@Benoit2018].
+
 
 ```{r, message=FALSE}
 library(quanteda)
@@ -69,7 +73,9 @@ treemap(Inst,
         palette = "Set1")
 ```
 
+
 Para la elaboración automatizada del corpus lingüístico se procedió a tokenizar palabra por palabra cada documento muestreado, removiendo números, signos de puntuación, direcciones URL y simbólos alfanuméricos para depurar la muestra de textos con la remoción de palabras comunes como artículos, adjetivos y conectores que no aportan información semántica relevante a este contexto.
+
 
 ```{r}
 Programs <- tokens(Textos, 
@@ -80,9 +86,11 @@ Programs <- tokens(Textos,
   tokens_remove(stopwords("english"))
 ```
 
+
 ## Construcción de diccionario de habilidades
 
 Llegados a este punto, pasamos a desarrollar un diccionario ad-hoc de habilidades que reflejen las habilidades del ejecutivo de marketing que describe O*NET.
+
 
 ```{r}
 s1 <- data.frame(kwic(Programs, pattern = c(phrase("active learning"),
@@ -588,8 +596,10 @@ Patrones <- data.frame(table(SS$Competence))
 SS <- merge(SS, TextosData, by.x = "docname", by.y = "Text")
 ```
 
+
 ## Construcción de la matriz término-documento
 Con la construcción del diccionario de habilidades, ahora es posible pasar a  construir una matriz rectangular término-documento [@Benoit2018]. Esta matriz término-documento está compuesta por un número _n_ de filas y un número _c_ de columnas, donde las habilidades se disponen en filas y los programas en columnas y los valores en las celdas de tal matriz solo pueden tener dos valores posibles (i.e., 1 para indicar que la habilidad está explícitamente mencionada en el folleto que promociona el programa o cero para indicar lo contrario).
+
 
 ```{r, message=FALSE, warning=FALSE}
 Network <- SS[c(8,1,10:15)]
@@ -600,9 +610,11 @@ network <- Network[!duplicated(Network[c(1,2,4,6,7)]),]
 ```
 
 
+
 ## Configuración de la matriz término-documento como red bipartita
 
 Ahora nuestro próximo paso consiste en configurar la matriz término-documento como una red bipartita para lo cual se necesita usar la librería `igraph` [@Csardi2024]. A continuación mostramos una fracción de dicha matriz al revelar las primeras cinco filas y las primeras cinco columnas. 
+
 
 ```{r, warning=FALSE, message=FALSE}
 library(igraph)
@@ -614,9 +626,11 @@ BiM[1:5,1:5]
 ```
 
 
+
 # Especificación y modelación de red bipartita como grafo aleatorio
 
 Llegados a este punto, ahora pasamos a definir la red bipartita como un grafo aleatorio. La hipótesis básica de este grafo aleatorio implica que el número de conexiones entre habilidades y programas es "esperable por azar". Este número, en terminología de grafos exponenciales aleatorios, está representado por el concepto de densidad de red, la cual se obtiene con el uso de la librería `network` [@Butts2008] y la librería `ergm` [@Krivistky2023].
+
 
 ```{r, warning=FALSE, message=FALSE}
 library(network)
@@ -634,7 +648,9 @@ library(coda)
 sna::gden(red)
 ```
 
+
 En esta red bipartita, las habilidades son definidas como nodos de la primera partición y los folletos promocionales de los programas de marketing se definen como los nodos de la segunda partición. A esta red se le pueden adjuntar atributos a dichos nodos de la siguiente manera.
+
 
 ```{r, echo=FALSE}
 seleccionados <- unique(network$docname)
@@ -642,7 +658,9 @@ load("Results/Result1.RData")
 todos <- unique(TextosData$Text)
 ```
 
+
 Los nodos de la primera partición (habilidades) tienen un atributo llamado `OnetImportance` que refleja la importancia de dicha habilidad según la red de información ocupacional O*NET. Otro atributo aplica para los nodos de la segunda partición (programas) se llama `SchoolType` para reflejar si el programa proviene de una universidad pública o privada. Otro atributo llamado `Region` también aplica para la segunda partición (programas) para reflejar si el programa es de una universidad ubicada geográficamente en la región Asia-Pacífico, Americas, o Europa-Medio Oriente-Africa.
+
 
 ```{r, message=FALSE, warning=FALSE}
 ProgramAttributes <- TextosData[TextosData$Text %in% seleccionados, ]
@@ -661,7 +679,9 @@ set.vertex.attribute(red, "Region", Region$Region)
 ```
 
 
+
 La red bipartita queda entonces conformada con 287 nodos, distribuidos en 29 nodos para la primera partición (habilidades) y 258 nodos para la segunda partición (programas) conectados a través de 2147 aristas.
+
 
 ```{r}
 red
