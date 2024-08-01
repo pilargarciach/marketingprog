@@ -45,6 +45,11 @@ print(Sim.M0[[1]])
 Sim.M0
 resumen <- summary(Sim.M0)
 
+
+
+pave3 <- gof(Sim.M0[[1]], GOF = ~model)
+
+
 model1 <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
 summary(model1)
 
