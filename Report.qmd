@@ -688,10 +688,11 @@ Este primer modelo debe considerarse un modelo de línea base ya que solo incluy
 
 ## La conectividad de la red se explica por un grupo limitado de habilidades
 
-Un segundo modelo implica contrastar la hipótesis según la cual las habilidades más relevantes son las que mayor presencia tienen en los folletos promocionales de las maestrías de marketing. 
+Un segundo modelo implica contrastar la hipótesis según la cual las escasas conexiones que observamos en el modelo anterior ocurren debido a un conjunto limitado de habilidades que resultan "más atractivas" para la formación profesional de los estudiantes que se matriculan en las maestrías de marketing. Para probar esta hipótesis, debemos añadir un término adicional en el modelo que incluya al conjunto de habilidades de nuestra red bipartita y observar cuáles de ellas cuentan con un estimado positivo y estadísticamente significativo. 
 
 ```{r, message=FALSE}
 model1 <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
 summary(model1)
 ```
 
+## 
