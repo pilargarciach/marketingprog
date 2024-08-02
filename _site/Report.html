@@ -175,6 +175,7 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#la-conectividad-de-la-red-no-ocurre-por-azar" id="toc-la-conectividad-de-la-red-no-ocurre-por-azar" class="nav-link" data-scroll-target="#la-conectividad-de-la-red-no-ocurre-por-azar"><span class="header-section-number">4.1</span> La conectividad de la red no ocurre por azar</a></li>
   <li><a href="#la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades" id="toc-la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades" class="nav-link" data-scroll-target="#la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades"><span class="header-section-number">4.2</span> La conectividad de la red se explica por un grupo limitado de habilidades</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">4.3</span> </a></li>
   </ul></li>
   </ul>
 </nav>
@@ -940,62 +941,66 @@ AIC: 8971  BIC: 8978  (Smaller is better. MC Std. Err. = 0)</code></pre>
 </section>
 <section id="la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades"><span class="header-section-number">4.2</span> La conectividad de la red se explica por un grupo limitado de habilidades</h2>
-<p>Un segundo modelo implica contrastar la hipótesis según la cual las escasas conexiones que observamos en el modelo anterior ocurren debido a un conjunto limitado de habilidades que resultan “más atractivas” para la formación profesional de los estudiantes que se matriculan en las maestrías de marketing. Para probar esta hipótesis, debemos añadir un término adicional en el modelo que incluya al conjunto de habilidades de nuestra red bipartita y observar cuáles de ellas cuentan con un estimado positivo y estadísticamente significativo.</p>
+<p>Un segundo modelo implica contrastar la hipótesis según la cual las escasas conexiones que observamos en el modelo anterior ocurren debido a un conjunto limitado de habilidades que resultan “más atractivas” para la formación profesional de los estudiantes que se matriculan en las maestrías de marketing. Para probar esta hipótesis, debemos concentrarnos en las competencias como predictoras de la conectividad de la red y observar cuáles de ellas cuentan con un estimado positivo y estadísticamente significativo.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(red <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">b1sociality</span>(<span class="at">nodes =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>)))</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1107</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(red <span class="sc">~</span> <span class="fu">b1sociality</span>(<span class="at">nodes =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>)))</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
-ergm(formula = red ~ edges + b1sociality(nodes = c(1:28)))
+ergm(formula = red ~ b1sociality(nodes = c(1:28)))
 
 Maximum Likelihood Results:
 
               Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
-edges          -4.8520     0.7099      0  -6.835  &lt; 1e-04 ***
-b1sociality1    4.1061     0.7223      0   5.685  &lt; 1e-04 ***
-b1sociality2    4.9141     0.7207      0   6.818  &lt; 1e-04 ***
-b1sociality3    7.3841     0.7488      0   9.861  &lt; 1e-04 ***
-b1sociality4    4.8520     0.7207      0   6.732  &lt; 1e-04 ***
-b1sociality5    3.0648     0.7317      0   4.188  &lt; 1e-04 ***
-b1sociality6    3.8444     0.7237      0   5.312  &lt; 1e-04 ***
-b1sociality7    4.0158     0.7227      0   5.557  &lt; 1e-04 ***
-b1sociality8    4.2279     0.7218      0   5.858  &lt; 1e-04 ***
-b1sociality9    6.4338     0.7289      0   8.827  &lt; 1e-04 ***
-b1sociality10   4.2618     0.7217      0   5.906  &lt; 1e-04 ***
-b1sociality11   3.9600     0.7230      0   5.477  &lt; 1e-04 ***
-b1sociality12   3.5462     0.7260      0   4.885  &lt; 1e-04 ***
-b1sociality13   5.5627     0.7221      0   7.703  &lt; 1e-04 ***
-b1sociality14   3.1857     0.7300      0   4.364  &lt; 1e-04 ***
-b1sociality15   3.4265     0.7271      0   4.712  &lt; 1e-04 ***
-b1sociality16   3.4993     0.7264      0   4.817  &lt; 1e-04 ***
-b1sociality17   3.9600     0.7230      0   5.477  &lt; 1e-04 ***
-b1sociality18   4.4433     0.7212      0   6.161  &lt; 1e-04 ***
-b1sociality19   1.9157     0.7648      0   2.505  0.01225 *  
-b1sociality20   1.9157     0.7648      0   2.505  0.01225 *  
-b1sociality21   4.6027     0.7209      0   6.385  &lt; 1e-04 ***
-b1sociality22   2.8611     0.7352      0   3.891  &lt; 1e-04 ***
-b1sociality23   3.8836     0.7234      0   5.368  &lt; 1e-04 ***
-b1sociality24   3.0648     0.7317      0   4.188  &lt; 1e-04 ***
-b1sociality25   3.4511     0.7269      0   4.748  &lt; 1e-04 ***
-b1sociality26   1.1144     0.8213      0   1.357  0.17484    
-b1sociality27   2.2004     0.7529      0   2.923  0.00347 ** 
-b1sociality28   0.7010     0.8705      0   0.805  0.42068    
+b1sociality1  -0.74595    0.13328      0  -5.597   &lt;1e-04 ***
+b1sociality2   0.06204    0.12457      0   0.498   0.6185    
+b1sociality3   2.53202    0.23836      0  10.623   &lt;1e-04 ***
+b1sociality4   0.00000    0.12451      0   0.000   1.0000    
+b1sociality5  -1.78724    0.17763      0 -10.062   &lt;1e-04 ***
+b1sociality6  -1.00764    0.14065      0  -7.164   &lt;1e-04 ***
+b1sociality7  -0.83625    0.13556      0  -6.169   &lt;1e-04 ***
+b1sociality8  -0.62415    0.13063      0  -4.778   &lt;1e-04 ***
+b1sociality9   1.58179    0.16553      0   9.556   &lt;1e-04 ***
+b1sociality10 -0.59020    0.12998      0  -4.541   &lt;1e-04 ***
+b1sociality11 -0.89200    0.13711      0  -6.506   &lt;1e-04 ***
+b1sociality12 -1.30587    0.15201      0  -8.591   &lt;1e-04 ***
+b1sociality13  0.71064    0.13246      0   5.365   &lt;1e-04 ***
+b1sociality14 -1.66633    0.17029      0  -9.785   &lt;1e-04 ***
+b1sociality15 -1.42552    0.15750      0  -9.051   &lt;1e-04 ***
+b1sociality16 -1.35272    0.15410      0  -8.778   &lt;1e-04 ***
+b1sociality17 -0.89200    0.13711      0  -6.506   &lt;1e-04 ***
+b1sociality18 -0.40870    0.12712      0  -3.215   0.0013 ** 
+b1sociality19 -2.93631    0.28461      0 -10.317   &lt;1e-04 ***
+b1sociality20 -2.93631    0.28461      0 -10.317   &lt;1e-04 ***
+b1sociality21 -0.24935    0.12548      0  -1.987   0.0469 *  
+b1sociality22 -1.99096    0.19148      0 -10.398   &lt;1e-04 ***
+b1sociality23 -0.96843    0.13940      0  -6.947   &lt;1e-04 ***
+b1sociality24 -1.78724    0.17763      0 -10.062   &lt;1e-04 ***
+b1sociality25 -1.40089    0.15633      0  -8.961   &lt;1e-04 ***
+b1sociality26 -3.73767    0.41308      0  -9.048   &lt;1e-04 ***
+b1sociality27 -2.65158    0.25094      0 -10.566   &lt;1e-04 ***
+b1sociality28 -4.15104    0.50391      0  -8.238   &lt;1e-04 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
      Null Deviance: 10372  on 7482  degrees of freedom
- Residual Deviance:  6982  on 7453  degrees of freedom
+ Residual Deviance:  7316  on 7454  degrees of freedom
  
-AIC: 7040  BIC: 7241  (Smaller is better. MC Std. Err. = 0)</code></pre>
+AIC: 7372  BIC: 7566  (Smaller is better. MC Std. Err. = 0)</code></pre>
 </div>
 </div>
+<p>De esta exploración, observamos que la habilidad de pensamiento crítico (<code>b1sociality3</code>), persuasión (<code>b1sociality9</code>), y monitoreo (<code>b1sociality13</code>) son las que destacan por su conectividad sistemáticamente superior a lo esperado por azar con la mayoría de folletos.</p>
+</section>
+<section id="section" class="level2" data-number="4.3">
+
 
 
 
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Referencias</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">4.3 </h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Benoit2018" class="csl-entry" role="listitem">
 Benoit, K., K. Watanabe, H. Wang, P. Nulty, A. Obeng, S. Müller, y A. Matsuo. 2018. <span>«<span>quanteda: An R package for the quantitative analysis of textual data</span>»</span>. <em>Journal of Open Source Software</em> 3 (30): 774. <a href="https://doi.org/10.21105/joss.00774">https://doi.org/10.21105/joss.00774</a>.
 </div>
