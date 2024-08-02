@@ -22,12 +22,14 @@ mixingmatrix(red, 'Region')
 #isolatededges
 search.ergmTerms(keywords = c("bipartite"))
 
+# Modelos Endógenos ----
+
 set.seed(1107)
 model0 <- ergm(red ~ edges, control = control.ergm(
   MCMC.burnin = 10000,
   MCMC.interval = 100
 ))
-summary(model0)
+summary(model0) # AIC = 8729
 
 model0$coefficients
 pave <- gof(model0)
@@ -51,16 +53,28 @@ pave3 <- gof(Sim.M0[[1]], GOF = ~model)
 
 
 model1 <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
-summary(model1)
+summary(model1) # AIC = 6828
 
 model1A <- ergm(red ~ b1sociality(nodes = c(1:28)))
-summary(model1A)
+summary(model1A) # AIC = 6826
 
 a <- summary(model1A)
 a <- data.frame(a$coefficients)
 a$Skill <- SkillAttributes$Competence
 a <- a %>% dplyr::relocate(Skill, .before = everything())
 
+
+library(igraph)
+# Convertir la matriz de adyacencia a un objeto de grafo
+g <- graph_from_adjacency_matrix(bn2, mode = "undirected")
+# Calcular la distancia de camino más corto
+dist_matrix <- distances(g, weights = NULL, algorithm = "dijkstra")
+
+model1B <- ergm(red ~ edges + gwb1dsp(fixed=FALSE, cutoff=258))
+
+
+
+# Modelos Exógenos ----
 
 model2 <- ergm(red ~ edges + b1cov("OnetImportance"))
 summary(model2)
