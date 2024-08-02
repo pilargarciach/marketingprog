@@ -60,24 +60,40 @@ a <- summary(model1A)
 a <- data.frame(a$coefficients)
 a$Skill <- SkillAttributes$Competence
 a <- a %>% dplyr::relocate(Skill, .before = everything())
-model2 <- ergm(red ~ b1cov("OnetImportance"))
+
+
+model2 <- ergm(red ~ edges + b1cov("OnetImportance"))
 summary(model2)
-model2A <- ergm(red ~ b1cov("OnetImportance") + b1sociality(nodes = c(1:28)))
-summary(model2A)
+
+
+model2B <- ergm(red ~ b1cov("OnetImportance"))
+summary(model2B)
+
+model2C <- ergm(red ~ b1cov("OnetImportance") + b1sociality(nodes = c(1:28)))
+summary(model2C)
+
+
 model3 <- ergm(red ~ b1sociality(nodes = c(3,11,13)))
 summary(model3)
+
+
 model3A <- ergm(red ~ b1cov("OnetImportance") + b1sociality(nodes = c(3,11,13)))
 summary(model3A)
+
 model4A <- ergm(red ~ nodefactor("Region") + nodefactor('SchoolType'))
 summary(model4A)
+
 model4B <- ergm(red ~ nodefactor("Region") + nodefactor('SchoolType') + b1sociality(nodes = c(1:28)))
 summary(model4B)
+
 # Homofilia por tipo de escuela
 model5 <- ergm(red ~ nodefactor("SchoolType"))
 summary(model5)
+
 # Homofilia por Region
 model5A <- ergm(red ~ nodefactor("Region"))
 summary(model5A)
+
 # Homofilia de region y tipo de escuela
 model5B <- ergm(red ~ nodefactor("Region") + nodefactor("SchoolType"))
 summary(model5B)
