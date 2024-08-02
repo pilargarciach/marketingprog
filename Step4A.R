@@ -64,13 +64,9 @@ a$Skill <- SkillAttributes$Competence
 a <- a %>% dplyr::relocate(Skill, .before = everything())
 
 
-library(igraph)
-# Convertir la matriz de adyacencia a un objeto de grafo
-g <- graph_from_adjacency_matrix(bn2, mode = "undirected")
-# Calcular la distancia de camino más corto
-dist_matrix <- distances(g, weights = NULL, algorithm = "dijkstra")
 
-model1B <- ergm(red ~ edges + gwb1dsp(fixed=FALSE, cutoff=258))
+
+model1B <- ergm(red ~ gwb1dsp(fixed=FALSE, cutoff=258))
 
 
 
