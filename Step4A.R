@@ -58,29 +58,64 @@ summary(model1) # AIC = 6828
 model1A <- ergm(red ~ b1sociality(nodes = c(1:28)))
 summary(model1A) # AIC = 6826
 
+model1a <- ergm(red ~ nodecov('OnetImportance'))
+summary(model1a) # AIC = 9024
+
+model1aa <- ergm(red ~ nodecov('OnetImportance') + b1sociality(nodes = c(1:28)))
+summary(model1aa) # AIC = 6828
+
+model1B <- ergm(red ~ nodecov('OnetImportance') + b1sociality(nodes = c(1:28)) + nodefactor('Region'))
+summary(model1B) # AIC = 6833
+
+model1C <- ergm(red ~ nodecov('OnetImportance') + b1sociality(nodes = c(1:28)) + nodefactor('Region') + nodefactor('SchoolType'))
+summary(model1C) # AIC = 6834
+
+model1D <- ergm(red ~ b2sociality(nodes = c(1:258)))
+summary(model1D) # AIC = 8550
+
+model1E <- ergm(red ~ b1sociality(nodes = c(1:28)) + b2sociality(nodes = c(1:258)))
+summary(model1E) # AIC = 6379
+
 a <- summary(model1A)
 a <- data.frame(a$coefficients)
 a$Skill <- SkillAttributes$Competence
 a <- a %>% dplyr::relocate(Skill, .before = everything())
 
+model1AA <- ergm(red ~ b1sociality(nodes = c(3,11,13)))
+summary(model1AA)
+
+model1AAA <- ergm(red ~ edges + b1sociality(nodes = c(3,11,13)))
+summary(model1AAA)
+
+model1a1 <- ergm(red ~ edges + nodecov('OnetImportance') + b1sociality(nodes = c(3,11,13)))
+summary(model1a1)
 
 
 
-model1B <- ergm(red ~ gwb1dsp(fixed=FALSE, cutoff=258))
+
+
+
+
+model1B <- ergm(red ~ gwb1dsp(fixed=FALSE, cutoff=258), control = control.ergm(
+  MCMC.burnin = 10000,
+  MCMC.interval = 100))
 
 
 
 # Modelos Exógenos ----
 
 model2 <- ergm(red ~ edges + b1cov("OnetImportance"))
-summary(model2)
+summary(model2) # AIC = 8654
 
 
 model2B <- ergm(red ~ b1cov("OnetImportance"))
-summary(model2B)
+summary(model2B) # AIC = 9024
+
+
+# Modelo Exogeno-Endógeno
 
 model2C <- ergm(red ~ b1cov("OnetImportance") + b1sociality(nodes = c(1:28)))
-summary(model2C)
+summary(model2C) # AIC = 6828
 
 
 model3 <- ergm(red ~ b1sociality(nodes = c(3,11,13)))
@@ -91,22 +126,22 @@ model3A <- ergm(red ~ b1cov("OnetImportance") + b1sociality(nodes = c(3,11,13)))
 summary(model3A)
 
 model4A <- ergm(red ~ nodefactor("Region") + nodefactor('SchoolType'))
-summary(model4A)
+summary(model4A) # AIC = 8734
 
 model4B <- ergm(red ~ nodefactor("Region") + nodefactor('SchoolType') + b1sociality(nodes = c(1:28)))
-summary(model4B)
+summary(model4B) # AIC = 6832
 
 # Homofilia por tipo de escuela
 model5 <- ergm(red ~ nodefactor("SchoolType"))
-summary(model5)
+summary(model5) # AIC = 8728
 
 # Homofilia por Region
 model5A <- ergm(red ~ nodefactor("Region"))
-summary(model5A)
+summary(model5A) # AIC = 8732
 
 # Homofilia de region y tipo de escuela
 model5B <- ergm(red ~ nodefactor("Region") + nodefactor("SchoolType"))
-summary(model5B)
+summary(model5B) # AIC = 8734
 #sink("ergm_output.txt") # Redirects standard output to a file named ergm_output.txt
 
 model6 <- ergm(red ~ gwb1dsp(decay = 0.1, fixed = TRUE),
