@@ -613,6 +613,15 @@ BiM <- as_biadjacency_matrix(bn2, types = V(bn2)$type, names = TRUE)
 BiM[1:5,1:5]
 ```
 
+# Exploración de la red bipartita
+
+Pasemos ahora a explorar la red bipartita que nos muestra la relación entre habilidades y programas.
+
+```{r}
+
+```
+
+
 
 # Especificación y modelación de red bipartita como grafo aleatorio
 
