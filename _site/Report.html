@@ -170,12 +170,13 @@ div.csl-indent {
   <li><a href="#construcción-de-la-matriz-término-documento" id="toc-construcción-de-la-matriz-término-documento" class="nav-link" data-scroll-target="#construcción-de-la-matriz-término-documento"><span class="header-section-number">2.3</span> Construcción de la matriz término-documento</a></li>
   <li><a href="#configuración-de-la-matriz-término-documento-como-red-bipartita" id="toc-configuración-de-la-matriz-término-documento-como-red-bipartita" class="nav-link" data-scroll-target="#configuración-de-la-matriz-término-documento-como-red-bipartita"><span class="header-section-number">2.4</span> Configuración de la matriz término-documento como red bipartita</a></li>
   </ul></li>
-  <li><a href="#especificación-y-modelación-de-red-bipartita-como-grafo-aleatorio" id="toc-especificación-y-modelación-de-red-bipartita-como-grafo-aleatorio" class="nav-link" data-scroll-target="#especificación-y-modelación-de-red-bipartita-como-grafo-aleatorio"><span class="header-section-number">3</span> Especificación y modelación de red bipartita como grafo aleatorio</a></li>
-  <li><a href="#contraste-de-hipótesis" id="toc-contraste-de-hipótesis" class="nav-link" data-scroll-target="#contraste-de-hipótesis"><span class="header-section-number">4</span> Contraste de Hipótesis</a>
+  <li><a href="#exploración-de-la-red-bipartita" id="toc-exploración-de-la-red-bipartita" class="nav-link" data-scroll-target="#exploración-de-la-red-bipartita"><span class="header-section-number">3</span> Exploración de la red bipartita</a></li>
+  <li><a href="#especificación-y-modelación-de-red-bipartita-como-grafo-aleatorio" id="toc-especificación-y-modelación-de-red-bipartita-como-grafo-aleatorio" class="nav-link" data-scroll-target="#especificación-y-modelación-de-red-bipartita-como-grafo-aleatorio"><span class="header-section-number">4</span> Especificación y modelación de red bipartita como grafo aleatorio</a></li>
+  <li><a href="#contraste-de-hipótesis" id="toc-contraste-de-hipótesis" class="nav-link" data-scroll-target="#contraste-de-hipótesis"><span class="header-section-number">5</span> Contraste de Hipótesis</a>
   <ul class="collapse">
-  <li><a href="#la-conectividad-de-la-red-no-ocurre-por-azar" id="toc-la-conectividad-de-la-red-no-ocurre-por-azar" class="nav-link" data-scroll-target="#la-conectividad-de-la-red-no-ocurre-por-azar"><span class="header-section-number">4.1</span> La conectividad de la red no ocurre por azar</a></li>
-  <li><a href="#la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades" id="toc-la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades" class="nav-link" data-scroll-target="#la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades"><span class="header-section-number">4.2</span> La conectividad de la red se explica por un grupo limitado de habilidades</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">4.3</span> </a></li>
+  <li><a href="#la-conectividad-de-la-red-no-ocurre-por-azar" id="toc-la-conectividad-de-la-red-no-ocurre-por-azar" class="nav-link" data-scroll-target="#la-conectividad-de-la-red-no-ocurre-por-azar"><span class="header-section-number">5.1</span> La conectividad de la red no ocurre por azar</a></li>
+  <li><a href="#la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades" id="toc-la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades" class="nav-link" data-scroll-target="#la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades"><span class="header-section-number">5.2</span> La conectividad de la red se explica por un grupo limitado de habilidades</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">5.3</span> </a></li>
   </ul></li>
   </ul>
 </nav>
@@ -844,25 +845,47 @@ service orientation                   1      0       0       0       0</code></p
 </div>
 </section>
 </section>
-<section id="especificación-y-modelación-de-red-bipartita-como-grafo-aleatorio" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Especificación y modelación de red bipartita como grafo aleatorio</h1>
+<section id="exploración-de-la-red-bipartita" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Exploración de la red bipartita</h1>
+<p>Pasemos ahora a explorar la red bipartita que nos muestra la relación entre habilidades y programas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(bn2)<span class="sc">$</span>shape <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">V</span>(bn2)<span class="sc">$</span>type, <span class="st">"circle"</span>, <span class="st">"square"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(bn2)<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="st">""</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bn2, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="fu">ifelse</span>(<span class="fu">V</span>(bn2)<span class="sc">$</span>type <span class="sc">==</span> <span class="cn">FALSE</span>, <span class="st">"#C8102E"</span>, <span class="st">"#003087"</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="fu">ifelse</span>(<span class="fu">V</span>(bn2)<span class="sc">$</span>type, <span class="dv">4</span>, <span class="dv">5</span>), </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.width =</span> <span class="fl">0.3</span>, </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">"#FFCD00"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_components, </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">""</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Report_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="especificación-y-modelación-de-red-bipartita-como-grafo-aleatorio" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Especificación y modelación de red bipartita como grafo aleatorio</h1>
 <p>Llegados a este punto, ahora pasamos a definir la red bipartita como un grafo aleatorio. La hipótesis básica de este grafo aleatorio implica que el número de conexiones entre habilidades y programas es “esperable por azar”. Este número, en terminología de grafos exponenciales aleatorios, está representado por el concepto de densidad de red, la cual se obtiene con el uso de la librería <code>network</code> <span class="citation" data-cites="Butts2008">(<a href="#ref-Butts2008" role="doc-biblioref">Butts 2008</a>)</span> y la librería <code>ergm</code> <span class="citation" data-cites="Krivistky2023">(<a href="#ref-Krivistky2023" role="doc-biblioref">Krivitsky et&nbsp;al. 2023</a>)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(network)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>red <span class="ot">&lt;-</span> <span class="fu">network</span>(BiM, </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">directed =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">hyper =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">loops =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">multiple =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">bipartite =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">is.network</span>(red)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(network)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>red <span class="ot">&lt;-</span> <span class="fu">network</span>(BiM, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">directed =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">hyper =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">loops =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">multiple =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">bipartite =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">is.network</span>(red)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(network)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ergm)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(coda)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>sna<span class="sc">::</span><span class="fu">gden</span>(red)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(network)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ergm)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(coda)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>sna<span class="sc">::</span><span class="fu">gden</span>(red)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.05231354</code></pre>
 </div>
@@ -870,23 +893,23 @@ service orientation                   1      0       0       0       0</code></p
 <p>En esta red bipartita, las habilidades son definidas como nodos de la primera partición y los folletos promocionales de los programas de marketing se definen como los nodos de la segunda partición. A esta red se le pueden adjuntar atributos a dichos nodos de la siguiente manera.</p>
 <p>Los nodos de la primera partición (habilidades) tienen un atributo llamado <code>OnetImportance</code> que refleja la importancia de dicha habilidad según la red de información ocupacional O*NET. Otro atributo aplica para los nodos de la segunda partición (programas) se llama <code>SchoolType</code> para reflejar si el programa proviene de una universidad pública o privada. Otro atributo llamado <code>Region</code> también aplica para la segunda partición (programas) para reflejar si el programa es de una universidad ubicada geográficamente en la región Asia-Pacífico, Americas, o Europa-Medio Oriente-Africa.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ProgramAttributes <span class="ot">&lt;-</span> TextosData[TextosData<span class="sc">$</span>Text <span class="sc">%in%</span> seleccionados, ]</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>SkillAttributes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Competence =</span> <span class="fu">unique</span>(SS<span class="sc">$</span>Competence))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ONET_SkillsImportance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ONET_SkillsImportance.csv"</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>SkillAttributes <span class="ot">&lt;-</span> <span class="fu">merge</span>(SkillAttributes, ONET_SkillsImportance, <span class="at">by.x =</span> <span class="st">"Competence"</span>, <span class="at">by.y =</span> <span class="st">"Skill"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(red, <span class="st">"OnetImportance"</span>, SkillAttributes<span class="sc">$</span>Importance)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>OnetImportance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">OnetImportance =</span> <span class="fu">get.vertex.attribute</span>(red, <span class="st">"OnetImportance"</span>))</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>OnetImportance<span class="sc">$</span>OnetImportance[<span class="dv">29</span><span class="sc">:</span><span class="dv">286</span>] <span class="ot">&lt;-</span> <span class="dv">0</span> </span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>SchoolType <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">SchoolType =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">28</span>), ProgramAttributes<span class="sc">$</span>InstitutionType))</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>Region <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Region =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">28</span>), ProgramAttributes<span class="sc">$</span>Region))</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(red, <span class="st">"SchoolType"</span>, SchoolType<span class="sc">$</span>SchoolType)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(red, <span class="st">"OnetImportance"</span>, OnetImportance<span class="sc">$</span>OnetImportance)</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(red, <span class="st">"Region"</span>, Region<span class="sc">$</span>Region)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ProgramAttributes <span class="ot">&lt;-</span> TextosData[TextosData<span class="sc">$</span>Text <span class="sc">%in%</span> seleccionados, ]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>SkillAttributes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Competence =</span> <span class="fu">unique</span>(SS<span class="sc">$</span>Competence))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>ONET_SkillsImportance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ONET_SkillsImportance.csv"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>SkillAttributes <span class="ot">&lt;-</span> <span class="fu">merge</span>(SkillAttributes, ONET_SkillsImportance, <span class="at">by.x =</span> <span class="st">"Competence"</span>, <span class="at">by.y =</span> <span class="st">"Skill"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(red, <span class="st">"OnetImportance"</span>, SkillAttributes<span class="sc">$</span>Importance)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>OnetImportance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">OnetImportance =</span> <span class="fu">get.vertex.attribute</span>(red, <span class="st">"OnetImportance"</span>))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>OnetImportance<span class="sc">$</span>OnetImportance[<span class="dv">29</span><span class="sc">:</span><span class="dv">286</span>] <span class="ot">&lt;-</span> <span class="dv">0</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>SchoolType <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">SchoolType =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">28</span>), ProgramAttributes<span class="sc">$</span>InstitutionType))</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>Region <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Region =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">28</span>), ProgramAttributes<span class="sc">$</span>Region))</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(red, <span class="st">"SchoolType"</span>, SchoolType<span class="sc">$</span>SchoolType)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(red, <span class="st">"OnetImportance"</span>, OnetImportance<span class="sc">$</span>OnetImportance)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(red, <span class="st">"Region"</span>, Region<span class="sc">$</span>Region)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>La red bipartita queda entonces conformada con 287 nodos, distribuidos en 29 nodos para la primera partición (habilidades) y 258 nodos para la segunda partición (programas) conectados a través de 2147 aristas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>red</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>red</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Network attributes:
   vertices = 287 
@@ -906,19 +929,19 @@ service orientation                   1      0       0       0       0</code></p
 </div>
 </div>
 </section>
-<section id="contraste-de-hipótesis" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Contraste de Hipótesis</h1>
+<section id="contraste-de-hipótesis" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Contraste de Hipótesis</h1>
 <p>El contraste de hipótesis sobre la red bipartita que representa la relación entre habilidades y programas contempla el planteamiento y contrastación empírica de una serie de modelos que se enumeran a continuación.</p>
-<section id="la-conectividad-de-la-red-no-ocurre-por-azar" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="la-conectividad-de-la-red-no-ocurre-por-azar"><span class="header-section-number">4.1</span> La conectividad de la red no ocurre por azar</h2>
+<section id="la-conectividad-de-la-red-no-ocurre-por-azar" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="la-conectividad-de-la-red-no-ocurre-por-azar"><span class="header-section-number">5.1</span> La conectividad de la red no ocurre por azar</h2>
 <p>Nuestro primer contraste de hipótesis supone descartar la idea de que la conexión entre habilidades y programas ocurre por azar. En otras palabras, debemos conocer si el total de conexiones está muy por encima o muy por debajo de lo que puede esperarse por azar.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1107</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>model0 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(red <span class="sc">~</span> edges, <span class="at">control =</span> <span class="fu">control.ergm</span>(</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">MCMC.burnin =</span> <span class="dv">10000</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">MCMC.interval =</span> <span class="dv">100</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model0)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1107</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>model0 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(red <span class="sc">~</span> edges, <span class="at">control =</span> <span class="fu">control.ergm</span>(</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">MCMC.burnin =</span> <span class="dv">10000</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">MCMC.interval =</span> <span class="dv">100</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model0)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 ergm(formula = red ~ edges, control = control.ergm(MCMC.burnin = 10000, 
@@ -939,13 +962,13 @@ AIC: 8971  BIC: 8978  (Smaller is better. MC Std. Err. = 0)</code></pre>
 </div>
 <p>Este primer modelo debe considerarse un modelo de línea base ya que solo incluye el término <code>edges</code>, lo que implica que la probabilidad de una conexión entre dos nodos es constante en toda la red. El coeficiente estimado para <code>edges</code> es -0.91022, lo que indica una tendencia negativa a formar enlaces (por debajo de lo esperado por azar). Es esencial interpretar este coeficiente en conjunto con otros términos del modelo (en modelos posteriores). El coeficiente es altamente significativo (p-valor &lt; 0.001), lo que sugiere que el número de enlaces es diferente de lo esperado por casualidad. La desviación nula y residual indican cuánto se reduce la falta de ajuste del modelo en comparación con un modelo nulo sin predictores. Los valores de AIC (Akaike Information Criterion) y BIC (Bayesian Information Criterion) son medidas de ajuste del modelo, y mientras más cercanos a cero tanto mejor el ajuste del modelo. Estos dos valores los usaremos para comparar este primer modelo que sirve como línea base para incorporar otros predictores.</p>
 </section>
-<section id="la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades"><span class="header-section-number">4.2</span> La conectividad de la red se explica por un grupo limitado de habilidades</h2>
+<section id="la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="la-conectividad-de-la-red-se-explica-por-un-grupo-limitado-de-habilidades"><span class="header-section-number">5.2</span> La conectividad de la red se explica por un grupo limitado de habilidades</h2>
 <p>Un segundo modelo implica contrastar la hipótesis según la cual las escasas conexiones que observamos en el modelo anterior ocurren debido a un conjunto limitado de habilidades que resultan “más atractivas” para la formación profesional de los estudiantes que se matriculan en las maestrías de marketing. Para probar esta hipótesis, debemos concentrarnos en las competencias como predictoras de la conectividad de la red y observar cuáles de ellas cuentan con un estimado positivo y estadísticamente significativo.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1107</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(red <span class="sc">~</span> <span class="fu">b1sociality</span>(<span class="at">nodes =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>)))</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1107</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(red <span class="sc">~</span> <span class="fu">b1sociality</span>(<span class="at">nodes =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>)))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 ergm(formula = red ~ b1sociality(nodes = c(1:28)))
@@ -992,7 +1015,7 @@ AIC: 7372  BIC: 7566  (Smaller is better. MC Std. Err. = 0)</code></pre>
 </div>
 <p>De esta exploración, observamos que la habilidad de pensamiento crítico (<code>b1sociality3</code>), persuasión (<code>b1sociality9</code>), y monitoreo (<code>b1sociality13</code>) son las que destacan por su conectividad sistemáticamente superior a lo esperado por azar con la mayoría de folletos.</p>
 </section>
-<section id="section" class="level2" data-number="4.3">
+<section id="section" class="level2" data-number="5.3">
 
 
 
@@ -1000,7 +1023,7 @@ AIC: 7372  BIC: 7566  (Smaller is better. MC Std. Err. = 0)</code></pre>
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">4.3 </h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">5.3 </h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Benoit2018" class="csl-entry" role="listitem">
 Benoit, K., K. Watanabe, H. Wang, P. Nulty, A. Obeng, S. Müller, y A. Matsuo. 2018. <span>«<span>quanteda: An R package for the quantitative analysis of textual data</span>»</span>. <em>Journal of Open Source Software</em> 3 (30): 774. <a href="https://doi.org/10.21105/joss.00774">https://doi.org/10.21105/joss.00774</a>.
 </div>

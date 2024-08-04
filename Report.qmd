@@ -617,8 +617,16 @@ BiM[1:5,1:5]
 
 Pasemos ahora a explorar la red bipartita que nos muestra la relación entre habilidades y programas.
 
-```{r}
-
+```{r, warning=FALSE, message=FALSE}
+V(bn2)$shape <- ifelse(V(bn2)$type, "circle", "square")
+V(bn2)$label <- ""
+plot(bn2, 
+     vertex.color = ifelse(V(bn2)$type == FALSE, "#C8102E", "#003087"),
+     vertex.size = ifelse(V(bn2)$type, 4, 5), 
+     edge.width = 0.3, 
+     edge.color = "#FFCD00",
+     layout = layout_components, 
+     main = "")
 ```
 
 
