@@ -41,6 +41,21 @@ model0 <- ergm(red ~ edges, control = control.ergm(
 ))
 summary(model0) # AIC = 8729
 
+sufficient_statistics <- summary(model0)$coef
+
+# Calcular la matriz de covarianza
+cov_matrix <- cov(sufficient_statistics)
+
+# Función para calcular la distancia de Mahalanobis
+mahalanobis_distance <- function(x, mean, cov) {
+  sqrt(t(x - mean) %*% solve(cov) %*% (x - mean))
+}
+
+# Aplicar la función a cada fila de los estadísticos suficientes
+distances <- apply(sufficient_statistics, 1, mahalanobis_distance, 
+                   mean = colMeans(sufficient_statistics), cov = cov_matrix)
+
+
 model0$coefficients
 pave <- gof(model0)
 pave2 <- gof(model0, GOF = ~model)
@@ -67,6 +82,27 @@ summary(model1) # AIC = 6828
 
 model1A <- ergm(red ~ b1sociality(nodes = c(1:28)))
 summary(model1A) # AIC = 6826
+
+sufficient_statistics <- summary(model1A)$coef
+
+# Calcular la matriz de covarianza
+cov_matrix <- cov(sufficient_statistics)
+
+# Función para calcular la distancia de Mahalanobis
+mahalanobis_distance <- function(x, mean, cov) {
+  sqrt(t(x - mean) %*% solve(cov) %*% (x - mean))
+}
+
+# Aplicar la función a cada fila de los estadísticos suficientes
+distances <- apply(sufficient_statistics, 1, mahalanobis_distance, 
+                   mean = colMeans(sufficient_statistics), cov = cov_matrix)
+if (det(cov_matrix) == 0) {
+  # Manejar el caso de matriz singular (por ejemplo, eliminar variables, reducir datos, etc.)
+} else {
+  # Calcular la distancia de Mahalanobis
+  distances <- apply(sufficient_statistics, 1, mahalanobis_distance, 
+                     mean = colMeans(sufficient_statistics), cov = cov_matrix)
+}
 
 model1a <- ergm(red ~ nodecov('OnetImportance'))
 summary(model1a) # AIC = 9024
