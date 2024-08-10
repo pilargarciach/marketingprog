@@ -3,7 +3,7 @@ library(tnet)
 data(tnet)
 net <- Davis.Southern.women.2mode
 net <- as.tnet(BiM, type = "binary two-mode tnet")
-reinforcement_tm(net)
+reinforcement_tm(net) #0.4947676
 clustering_tm(net)
 clustering_local_tm(net)
 UnoMenosD2 <- 1 - (sna::gden(red))^2
