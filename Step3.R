@@ -13,8 +13,17 @@ setdiff(todos, seleccionados)
 
 library(igraph)
 bn2 <- graph_from_data_frame(network,directed=FALSE)
+BN <- data.frame(Degree = igraph::degree(bn2),
+                 Closeness = igraph::closeness(bn2),
+                 Betweennes = igraph::betweenness(bn2),
+                 Eigen = igraph::eigen_centrality(bn2))
+BN <- BN[ -c(5:25) ]
+BN$Partition <- "First"
+BN$Partition[29:286] <- "Second"
 bipartite_mapping(bn2)
 V(bn2)$type <- bipartite_mapping(bn2)$type
+
+
 
 BiM <- as_biadjacency_matrix(bn2, types = V(bn2)$type, names = TRUE)
 statisticalSummary <- function(x) {
