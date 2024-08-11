@@ -27,9 +27,13 @@ Brochures <- BN %>% filter(., Partition == "Brochures")
 
 png("F2.png", width = 8, height = 10, units = 'in', res = 300)
 par(mfrow=c(2,1))
-hist(Skills$Degree, xlab = "Degree", main = "Degree distribution for Skills", col = "red")
-hist(Brochures$Degree, xlab = "Degree", main = "Degree distribution for Brochures", col = "blue")
+hist(Skills$Degree, freq = FALSE, xlab = "Degree", main = "Degree distribution for Skills", col = "lightgray")
+lines(x = density(x = Skills$Degree), col = "black")
+hist(Brochures$Degree, freq = FALSE, xlab = "Degree", main = "Degree distribution for Brochures", col = "lightgray")
+lines(x = density(x = Brochures$Degree), col = "black")
 dev.off()
+
+
 
 boxplot(BN$Degree ~ BN$Partition, xlab = "Node Partition", ylab = "Degree", col = "blue", notch = T)
 
