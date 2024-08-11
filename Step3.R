@@ -18,8 +18,33 @@ BN <- data.frame(Degree = igraph::degree(bn2),
                  Betweennes = igraph::betweenness(bn2),
                  Eigen = igraph::eigen_centrality(bn2))
 BN <- BN[ -c(5:25) ]
-BN$Partition <- "First"
-BN$Partition[29:286] <- "Second"
+BN$Partition <- "Skills"
+BN$Partition[29:286] <- "Brochures"
+
+library(tidyverse)
+Skills <- BN %>% filter(., Partition == "Skills")
+Brochures <- BN %>% filter(., Partition == "Brochures")
+
+png("F2.png", width = 8, height = 10, units = 'in', res = 300)
+par(mfrow=c(2,1))
+hist(Skills$Degree, xlab = "Degree", main = "Degree distribution for Skills", col = "red")
+hist(Brochures$Degree, xlab = "Degree", main = "Degree distribution for Brochures", col = "blue")
+dev.off()
+
+boxplot(BN$Degree ~ BN$Partition, xlab = "Node Partition", ylab = "Degree", col = "blue", notch = T)
+
+library(ggplot2)
+library(ggridges)
+ggplot(BN, aes(x = Degree, y = Partition, fill = Partition)) +
+  geom_density_ridges(alpha=0.6) +
+  theme_light() + 
+  theme(legend.position = "none")
+
+
+library(psych)
+describe.by(BN$Degree, group = BN$Partition, mat = TRUE, digits = 3)
+
+
 bipartite_mapping(bn2)
 V(bn2)$type <- bipartite_mapping(bn2)$type
 
