@@ -1,3 +1,7 @@
+#install.packages("devtools")
+#library(devtools)
+#devtools::install_github("jplatig/condor")
+
 load("Results/Result3.RData")
 library(ergm)
 library(network)
