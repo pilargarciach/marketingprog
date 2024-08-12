@@ -22,7 +22,7 @@ model2 <- ergm(red ~ b1sociality(nodes = c(1:28)), control = control.ergm(
 ))
 summary(model2) # AIC = 6826
 
-model3 <- ergm(red ~ gwb1dsp(fixed=FALSE, cutoff=240), 
+model3 <- ergm(red ~ gwb1dsp(decay = 2, fixed=TRUE), 
                control = control.ergm(
                  MCMC.burnin = 10000,
                  MCMC.interval = 100))
