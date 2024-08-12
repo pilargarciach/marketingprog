@@ -43,17 +43,6 @@ summary(model0) # AIC = 8729
 
 sufficient_statistics <- summary(model0)$coef
 
-# Calcular la matriz de covarianza
-cov_matrix <- cov(sufficient_statistics)
-
-# Función para calcular la distancia de Mahalanobis
-mahalanobis_distance <- function(x, mean, cov) {
-  sqrt(t(x - mean) %*% solve(cov) %*% (x - mean))
-}
-
-# Aplicar la función a cada fila de los estadísticos suficientes
-distances <- apply(sufficient_statistics, 1, mahalanobis_distance, 
-                   mean = colMeans(sufficient_statistics), cov = cov_matrix)
 
 
 model0$coefficients
