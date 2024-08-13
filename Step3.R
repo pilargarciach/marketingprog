@@ -24,6 +24,7 @@ BN$Partition[29:286] <- "Brochures"
 library(tidyverse)
 Skills <- BN %>% filter(., Partition == "Skills")
 Brochures <- BN %>% filter(., Partition == "Brochures")
+summary(Skills$Degree)
 
 png("F2.png", width = 8, height = 10, units = 'in', res = 300)
 par(mfrow=c(2,1))
