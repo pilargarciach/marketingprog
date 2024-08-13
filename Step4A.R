@@ -70,6 +70,17 @@ pave3 <- gof(Sim.M0[[1]], GOF = ~model)
 model1 <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
 summary(model1) # AIC = 6828
 
+library(texreg)
+extracted_info <- extract(model1)
+texreg_obj <- createTexreg(
+  coef.names = extracted_info@coef.names,
+  coef = extracted_info@coef,
+  se = extracted_info@se,
+  pvalues = extracted_info@pvalues
+)
+
+texreg(texreg_obj, file = "model1.tex")
+
 model1A <- ergm(red ~ b1sociality(nodes = c(1:28)))
 summary(model1A) # AIC = 6826
 
