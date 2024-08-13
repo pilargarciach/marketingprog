@@ -1,15 +1,5 @@
 load("Results/Result3.RData")
 Competences <- data.frame(rownames(BiM))
-library(tnet)
-data(tnet)
-net <- Davis.Southern.women.2mode
-net <- as.tnet(BiM, type = "binary two-mode tnet")
-reinforcement_tm(net) #0.4947676
-Clustering <- clustering_tm(net)
-ClusteringLocal <- clustering_local_tm(net)
-UnoMenosD2 <- 1 - (sna::gden(red))^2
-1 - UnoMenosD2^256
-
 library(network)
 library(ergm)
 library(coda)
@@ -19,37 +9,21 @@ sna::centralgraph(red)
 sna::components(red)
 mixingmatrix(red, 'SchoolType')
 mixingmatrix(red, 'Region')
-# terminos dependientes de díadas
-#b1concurrent (Descartado por ser infinito su estimado)
-#b1degrange
-#b1degree
-#b1dsp (Descartado "unable to reach target effective size in iterations alotted")
-#b1mindegree
-#b1star con b1star(10) me da un conteo exageradamente grande 10^17
-#b1starmix
-#b1twostar
-#gwb1degree
-#gwb1dsp
-#isolatededges
-search.ergmTerms(keywords = c("bipartite"))
+
 
 # Modelos Endógenos ----
 
 set.seed(1107)
-model0 <- ergm(red ~ edges, control = control.ergm(
-  MCMC.burnin = 10000,
-  MCMC.interval = 100
-))
+model0 <- ergm(red ~ edges, 
+               control = control.ergm(
+                 MCMC.burnin = 10000,
+                 MCMC.interval = 100))
 summary(model0) # AIC = 8729
 
-sufficient_statistics <- summary(model0)$coef
-
-
-
-model0$coefficients
-pave <- gof(model0)
+GOF0 <- gof(model0)
+GOF0
 pave2 <- gof(model0, GOF = ~model)
-pave
+
 pave2
 plot(pave)
 Sim.M0 <- simulate(model0, nsim = 1000, 
