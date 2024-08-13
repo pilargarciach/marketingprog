@@ -32,4 +32,8 @@ model2 <- ergm(red ~ b1sociality(nodes = c(1:28)), control = control.ergm(
 ))
 summary(model2) # AIC = 6826
 
-
+model2A <- ergm(red ~ edges + b1sociality(nodes = c(3,11,13,6,2,22,18,9,10,1,7,17,12,23)), control = control.ergm(
+  MCMC.burnin = 10000,
+  MCMC.interval = 100
+))
+summary(model2A)
