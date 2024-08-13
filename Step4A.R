@@ -1,4 +1,5 @@
 load("Results/Result3.RData")
+Competences <- data.frame(rownames(BiM))
 library(tnet)
 data(tnet)
 net <- Davis.Southern.women.2mode
