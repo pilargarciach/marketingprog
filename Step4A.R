@@ -72,6 +72,9 @@ summary(model1) # AIC = 6828
 
 library(texreg)
 extracted_info <- extract(model1)
+pave <- data.frame(extracted_info@coef.names,
+                   extracted_info@coef,
+                   extracted_info@se)
 texreg_obj <- createTexreg(
   coef.names = extracted_info@coef.names,
   coef = extracted_info@coef,
@@ -83,6 +86,10 @@ texreg(texreg_obj, file = "model1.tex")
 
 model1A <- ergm(red ~ b1sociality(nodes = c(1:28)))
 summary(model1A) # AIC = 6826
+extracted_info <- extract(model1A)
+pave <- data.frame(extracted_info@coef.names,
+                   extracted_info@coef,
+                   extracted_info@se)
 
 sufficient_statistics <- summary(model1A)$coef
 
