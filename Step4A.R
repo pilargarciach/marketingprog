@@ -25,7 +25,7 @@ GOF0
 pave2 <- gof(model0, GOF = ~model)
 
 pave2
-plot(pave)
+
 Sim.M0 <- simulate(model0, nsim = 1000, 
                    coef = model0$coefficients,
                    control = 
