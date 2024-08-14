@@ -70,3 +70,7 @@ ASIA$Partition <- "Skills"
 ASIA$Partition[27:58] <- "Brochures"
 
 describeBy(ASIA$Degree, group = ASIA$Partition, mat = TRUE, digit = 2)
+
+
+AllSubGraphs <- list(ASIA, EURO, AMERICAS, PUBLIC, PRIVATE)
+AllSubGraphs <- do.call(rbind, AllSubGraphs)
