@@ -45,3 +45,17 @@ AMERICAS <- data.frame(Degree = igraph::degree(americas),
 AMERICAS <- AMERICAS[ -c(5:25) ]
 AMERICAS$Partition <- "Skills"
 AMERICAS$Partition[29:286] <- "Brochures"
+
+describeBy(AMERICAS$Degree, group = AMERICAS$Partition, mat = TRUE, digit = 2)
+
+
+Euro <- graph_from_data_frame(EU,directed=FALSE)
+EURO <- data.frame(Degree = igraph::degree(Euro),
+                 Closeness = igraph::closeness(Euro),
+                 Betweennes = igraph::betweenness(Euro),
+                 Eigen = igraph::eigen_centrality(Euro))
+EURO <- EURO[ -c(5:25) ]
+EURO$Partition <- "Skills"
+EURO$Partition[28:153] <- "Brochures"
+
+describeBy(EURO$Degree, group = EURO$Partition, mat = TRUE, digit = 2)
