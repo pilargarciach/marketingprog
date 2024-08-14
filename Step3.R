@@ -6,10 +6,16 @@ Network$Competence <- tolower(Network$Competence)
 table(Network$Competence)
 network <- Network[!duplicated(Network[c(1,2,4,6,7)]),]
 
+library(tidyverse)
+Public <- network %>% filter(., grepl("Public",InstitutionType))
+Private <- network %>%  filter(., grepl("Private", InstitutionType))
+
 seleccionados <- unique(network$docname)
 load("Results/Result1.RData")
 todos <- unique(TextosData$Text)
 setdiff(todos, seleccionados)
+
+
 
 library(igraph)
 bn2 <- graph_from_data_frame(network,directed=FALSE)
