@@ -27,6 +27,8 @@ BN <- BN[ -c(5:25) ]
 BN$Partition <- "Skills"
 BN$Partition[29:286] <- "Brochures"
 
+describeBy(BN$Degree, group = BN$Partition, mat = TRUE, digit = 2)
+
 library(tidyverse)
 Skills <- BN %>% filter(., Partition == "Skills")
 Brochures <- BN %>% filter(., Partition == "Brochures")
