@@ -84,3 +84,8 @@ describeBy(ASIA$Degree, group = ASIA$Partition, mat = TRUE, digit = 2)
 
 AllSubGraphs <- list(ASIA, EURO, AMERICAS, PUBLIC, PRIVATE)
 AllSubGraphs <- do.call(rbind, AllSubGraphs)
+variable.names(AllSubGraphs)
+
+SkillsAll <- AllSubGraphs %>% filter(., grepl("Skills", Partition))
+
+boxplot(SkillsAll$Eigen.vector ~ SkillsAll$SubGraph, notch = TRUE, col = "white")
