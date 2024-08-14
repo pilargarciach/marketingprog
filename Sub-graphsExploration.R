@@ -22,6 +22,8 @@ PUBLIC <- data.frame(Degree = igraph::degree(public),
 PUBLIC <- PUBLIC[ -c(5:25) ]
 PUBLIC$Partition <- "Skills"
 PUBLIC$Partition[28:205] <- "Brochures"
+PUBLIC$Node <- rownames(PUBLIC)
+PUBLIC$SubGraph <- "Public"
 
 library(psych)
 describeBy(PUBLIC$Degree, group = PUBLIC$Partition, mat = TRUE, digit = 2)
@@ -34,7 +36,8 @@ PRIVATE <- data.frame(Degree = igraph::degree(private),
 PRIVATE <- PRIVATE[ -c(5:25) ]
 PRIVATE$Partition <- "Skills"
 PRIVATE$Partition[29:286] <- "Brochures"
-
+PRIVATE$Node <- rownames(PRIVATE)
+PRIVATE$SubGraph <- "Private"
 describeBy(PRIVATE$Degree, group = PRIVATE$Partition, mat = TRUE, digit = 2)
 
 americas <- graph_from_data_frame(network,directed=FALSE)
@@ -45,6 +48,8 @@ AMERICAS <- data.frame(Degree = igraph::degree(americas),
 AMERICAS <- AMERICAS[ -c(5:25) ]
 AMERICAS$Partition <- "Skills"
 AMERICAS$Partition[29:286] <- "Brochures"
+AMERICAS$Node <- rownames(AMERICAS)
+AMERICAS$SubGraph <- "Americas"
 
 describeBy(AMERICAS$Degree, group = AMERICAS$Partition, mat = TRUE, digit = 2)
 
@@ -57,6 +62,8 @@ EURO <- data.frame(Degree = igraph::degree(Euro),
 EURO <- EURO[ -c(5:25) ]
 EURO$Partition <- "Skills"
 EURO$Partition[28:153] <- "Brochures"
+EURO$Node <- rownames(EURO)
+EURO$SubGraph <- "EU-ME-AF"
 
 describeBy(EURO$Degree, group = EURO$Partition, mat = TRUE, digit = 2)
 
@@ -68,6 +75,9 @@ ASIA <- data.frame(Degree = igraph::degree(asia),
 ASIA <- ASIA[ -c(5:25) ]
 ASIA$Partition <- "Skills"
 ASIA$Partition[27:58] <- "Brochures"
+ASIA$Node <- rownames(ASIA)
+ASIA$SubGraph <- "Asia-Pacific"
+
 
 describeBy(ASIA$Degree, group = ASIA$Partition, mat = TRUE, digit = 2)
 
