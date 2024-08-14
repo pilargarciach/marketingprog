@@ -59,3 +59,14 @@ EURO$Partition <- "Skills"
 EURO$Partition[28:153] <- "Brochures"
 
 describeBy(EURO$Degree, group = EURO$Partition, mat = TRUE, digit = 2)
+
+asia <- graph_from_data_frame(AP,directed=FALSE)
+ASIA <- data.frame(Degree = igraph::degree(asia),
+                 Closeness = igraph::closeness(asia),
+                 Betweennes = igraph::betweenness(asia),
+                 Eigen = igraph::eigen_centrality(asia))
+ASIA <- ASIA[ -c(5:25) ]
+ASIA$Partition <- "Skills"
+ASIA$Partition[27:58] <- "Brochures"
+
+describeBy(ASIA$Degree, group = ASIA$Partition, mat = TRUE, digit = 2)
