@@ -20,7 +20,6 @@ PUBLIC <- PUBLIC[ -c(5:25) ]
 PUBLIC$Partition <- "Skills"
 PUBLIC$Partition[28:205] <- "Brochures"
 
-
 private <- graph_from_data_frame(network,directed=FALSE)
 PRIVATE <- data.frame(Degree = igraph::degree(private),
                  Closeness = igraph::closeness(private),
@@ -29,3 +28,7 @@ PRIVATE <- data.frame(Degree = igraph::degree(private),
 PRIVATE <- PRIVATE[ -c(5:25) ]
 PRIVATE$Partition <- "Skills"
 PRIVATE$Partition[29:286] <- "Brochures"
+
+
+boxplot(PUBLIC$Degree ~ PUBLIC$Partition, xlab = "Partition", ylab = "Degree")
+boxplot(PRIVATE$Degree ~ PRIVATE$Partition, xlab = "Partition", ylab = "Degree")
