@@ -36,9 +36,9 @@ summary(Skills$Degree)
 
 png("F2.png", width = 8, height = 10, units = 'in', res = 300)
 par(mfrow=c(2,1))
-hist(Skills$Degree, freq = FALSE, xlab = "Degree", main = "Degree distribution for Skills", col = "lightgray")
+hist(Skills$Degree, freq = FALSE, xlab = "Degree", main = "Degree distribution for Skills", col = "#ffd800")
 lines(x = density(x = Skills$Degree), col = "black")
-hist(Brochures$Degree, freq = FALSE, xlab = "Degree", main = "Degree distribution for Brochures", col = "lightgray")
+hist(Brochures$Degree, freq = FALSE, xlab = "Degree", main = "Degree distribution for Brochures", col = "purple3")
 lines(x = density(x = Brochures$Degree), col = "black")
 dev.off()
 
