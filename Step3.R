@@ -99,6 +99,8 @@ OnetImportance <- data.frame(OnetImportance = get.vertex.attribute(red, "OnetImp
 OnetImportance$OnetImportance[29:286] <- 0 
 SchoolType <- data.frame(SchoolType = c(rep(0, 28), ProgramAttributes$InstitutionType))
 Region <- data.frame(Region = c(rep(0,28), ProgramAttributes$Region))
+AllAtributes <- data.frame(OnetImportance, SchoolType, Region)
+write.csv(AllAtributes, file = "AllAtributes.csv")
 set.vertex.attribute(red, "SchoolType", SchoolType$SchoolType)
 get.vertex.attribute(red, "SchoolType")
 set.vertex.attribute(red, "OnetImportance", OnetImportance$OnetImportance)
