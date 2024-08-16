@@ -27,6 +27,7 @@ BN <- BN[ -c(5:25) ]
 BN$Partition <- "Skills"
 BN$Partition[29:286] <- "Brochures"
 
+library(psych)
 describeBy(BN$Degree, group = BN$Partition, mat = TRUE, digit = 2)
 
 library(tidyverse)
@@ -54,7 +55,7 @@ ggplot(BN, aes(x = Degree, y = Partition, fill = Partition)) +
   theme(legend.position = "none")
 
 
-library(psych)
+
 describe.by(BN$Degree, group = BN$Partition, mat = TRUE, digits = 3)
 
 
