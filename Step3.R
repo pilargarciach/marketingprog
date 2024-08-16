@@ -56,7 +56,7 @@ ggplot(BN, aes(x = Degree, y = Partition, fill = Partition)) +
 
 
 
-describe.by(BN$Degree, group = BN$Partition, mat = TRUE, digits = 3)
+describeBy(BN$Degree, group = BN$Partition, mat = TRUE, digits = 3)
 
 
 bipartite_mapping(bn2)
