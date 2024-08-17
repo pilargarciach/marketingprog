@@ -5,10 +5,15 @@ library(coda)
 red
 sna::gden(red)
 model0 <- ergm(red ~ edges)
-summary(model0)
+Model0 <- summary(model0)
 Simuladas0 <- simulate(model0, nsim = 1000)
 Simuladas0[1000]
 class(Simuladas0)
+
+COEF1 <- Model0$coefficients[1]
+
+
+
 
 library(tidyverse)
 
