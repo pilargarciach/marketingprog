@@ -31,6 +31,8 @@ write.csv(BN, file = "BN.csv")
 
 library(psych)
 describeBy(BN$Degree, group = BN$Partition, mat = TRUE, digit = 2)
+quantile(BN$Degree, probs = seq(.1, .99, by = .01))
+
 
 library(tidyverse)
 Skills <- BN %>% filter(., Partition == "Skills")
