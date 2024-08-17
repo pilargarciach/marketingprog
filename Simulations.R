@@ -8,7 +8,24 @@ model0 <- ergm(red ~ edges)
 summary(model0)
 Simuladas0 <- simulate(model0, nsim = 1000)
 Simuladas0[1000]
+class(Simuladas0)
 
+library(tidyverse)
+
+# Función para extraer información de una red
+extract_network_info <- function(net) {
+  data.frame(
+    nodos = network.size(net),
+    edges = network.edgecount(net),
+    densidad = network.density(net)
+  )
+}
+
+# Aplicar la función a cada red en la lista y crear un dataframe
+df_redes <- map_df(Simuladas0, extract_network_info, .id = "sim_num")
+
+# Convertir la columna sim_num a numérico (si es necesario)
+df_redes$sim_num <- as.numeric(df_redes$sim_num)
 
 
 
