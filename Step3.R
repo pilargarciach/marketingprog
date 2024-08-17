@@ -26,6 +26,8 @@ BN <- data.frame(Degree = igraph::degree(bn2),
 BN <- BN[ -c(5:25) ]
 BN$Partition <- "Skills"
 BN$Partition[29:286] <- "Brochures"
+BN$Node <- rownames(BN)
+write.csv(BN, file = "BN.csv")
 
 library(psych)
 describeBy(BN$Degree, group = BN$Partition, mat = TRUE, digit = 2)
