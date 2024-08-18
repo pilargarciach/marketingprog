@@ -5,7 +5,7 @@ library(ergm)
 library(network)
 library(coda)
 set.seed(1107)
-ModelC <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)))
+ModelC <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)), control = control.ergm(MCMC.samplesize = 10000))
 summary(ModelC) # AIC = 7461
 ModelD <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
 summary(ModelD) # AIC = 6828
@@ -61,8 +61,13 @@ abline(v = COEF1, col = "red", lwd = 2)
 p_value <- mean(coef_df1[2] >= COEF1)
 p_value
 
+GOF <- gof(ModelC)
 GOF1 <- gof(ModelC, GOF = ~model)
+plot(GOF)
+plot(GOF1)
 GOF1
+
+mcmc.diagnostics(ModelC)
 
 media_sim <- colMeans(coef_df1[c(3,5:9)])
 cov_sim <- cov(coef_df1[c(3,5:9)])
@@ -88,7 +93,7 @@ if (det(cov_sim) == 0) {
   stop("La matriz de covarianza es singular, no se puede calcular la distancia de Mahalanobis")
 }
 
-
+mcmc.diagnostics(ModelC)
 
 mcmc_output <- mcmc(coef_df1[c(3,5:9)])
 
