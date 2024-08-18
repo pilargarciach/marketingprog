@@ -1,6 +1,5 @@
 load("Results/Result3.RData")
 rm(list=setdiff(ls(), c("red")))
-SkillsNumber <- data.frame(Skill = rownames(BiM))
 library(ergm)
 library(network)
 library(coda)
@@ -10,8 +9,19 @@ ModelC <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)),
                                       MCMC.burnin = 5000,
                                       MCMLE.maxit = 10))
 summary(ModelC) # AIC = 7461
+GOF <- gof(ModelC)
+GOF1 <- gof(ModelC, GOF = ~model)
+plot(GOF)
+plot(GOF1)
+GOF1
 
 
+ModelC <- ergm(formula = red ~ edges + b1sociality(c(3, 11, 13, 2, 6)), 
+               control = control.ergm(MCMC.samplesize = 10000, MCMC.burnin = 5000, 
+                                      MCMLE.maxit = 10, force.main = TRUE))
+
+mcmc.diagnostics(ModelC)
+gof(ModelC, GOF=~model)
 
 Simuladas1 <- simulate(ModelC, nsim = 1000, 
                        coef = ModelC$coefficients,
@@ -60,91 +70,22 @@ hist(coef_df1$b1sociality3, main = "Distribución del estadístico en las redes 
 abline(v = COEF1, col = "red", lwd = 2)
 
 
-p_value <- mean(coef_df1[2] >= COEF1)
-p_value
+t.test(coef_df1$edges, mu = ModelC$coefficients[1])
+t.test(coef_df1$b1sociality3, mu = ModelC$coefficients[2])
 
-GOF <- gof(ModelC)
-GOF1 <- gof(ModelC, GOF = ~model)
-plot(GOF)
-plot(GOF1)
-GOF1
-
-mcmc.diagnostics(ModelC)
-
-media_sim <- colMeans(coef_df1[c(3,5:9)])
 cov_sim <- cov(coef_df1[c(3,5:9)])
+observed_stats <- ModelC$coefficients
+coef <- coef_df1[c(3,5:9)]
 
-# Vector de estadísticos de la red observada
-Z <- coef(ModelC)
+MD <- mahalanobis(x = t(observed_stats), center = colMeans(coef), cov = cov_sim)
 
-Z <- as.matrix(Z)
-rownames(Z)
+hist(MD, main = "Distribución de las distancias de Mahalanobis", 
+     xlab = "Distancia de Mahalanobis")
+abline(v = MD, col = "red", lwd = 2)
 
-media_sim <- as.matrix(media_sim)
-rownames(media_sim)
-
-dim(Z)
-dim(media_sim)
-dim(cov_sim)
-
-det(cov_sim)
-
-
-mcmc.diagnostics(ModelC)
-
-mcmc_output <- mcmc(coef_df1[c(3,5:9)])
-
-# Trazar las cadenas de Markov
-plot(mcmc_output)
-
-# Calcular estadísticas de convergencia
-# Geweke diagnóstico
-geweke.diag(mcmc_output)
-
-# Estadístico de Gelman-Rubin
-gelman.diag(mcmc_output)
-
-
-
-# Calcular la distancia de Mahalanobis
-distancia_mahalanobis <- sqrt((Z - media_sim) %*% solve(cov_sim) %*% t(Z - media_sim))
-
-print(distancia_mahalanobis)
+cor(observed_stats, colMeans(coef[1:6]))
 
 
 
 
-
-# Convertir las simulaciones a un objeto mcmc
-mcmc_output <- mcmc.list(lapply(simulations, mcmc))
-class(mcmc_output[1])
-mcmc_list_as_dataframes <- lapply(mcmc_output, as.data.frame)
-
-# Combinar las matrices en un único data frame
-df <- do.call(rbind, mcmc_list_as_matrices)
-
-# Calcular estadísticas de convergencia
-gelman.diag(mcmc_output)
-
-
-
-
-
-
-
-
-# Modelo con efecto de homofilia en las competencias
-
-
-
-
-
-
-# Modelo sin intercepto (no recomendado en general)
-model2 <- ergm(red ~ b1sociality(nodes = c(1:28))) 
-
-model3 <- ergm(red ~ edges + b1star(75))
-summary(model3) # Modelo degenerado
-mcmc.diagnostics(model3)
-
-model3 <- ergm(red ~ edges + b2dsp(8))
+mcmc.diagnostics(ModelC) # it works only if force MCMC 
