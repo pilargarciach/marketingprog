@@ -9,8 +9,8 @@ ModelAA <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)) +
                  b2factor('Region', levels = TRUE) + 
                  b2factor('SchoolType', levels = TRUE) + 
                  nodecov('OnetImportance'), 
-               control = control.ergm(MCMC.samplesize = 10000,
-                                      MCMC.burnin = 5000,
+               control = control.ergm(MCMC.samplesize = 100000, 
+                                      MCMC.burnin = 10000, 
                                       MCMLE.maxit = 10))
 summary(ModelAA) # AIC = 7469
 
@@ -18,8 +18,10 @@ ModelA <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)) +
                  b2factor('Region', levels = TRUE) + 
                  b2factor('SchoolType', levels = TRUE) + 
                  nodecov('OnetImportance'), 
-               control = control.ergm(MCMC.samplesize = 100000, MCMC.burnin = 10000, 
-                                      MCMLE.maxit = 10, force.main = TRUE))
+               control = control.ergm(MCMC.samplesize = 100000, 
+                                      MCMC.burnin = 10000, 
+                                      MCMLE.maxit = 10, 
+                                      force.main = TRUE))
 
 summary(ModelA)
 mcmc.diagnostics(ModelA)
