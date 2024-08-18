@@ -15,13 +15,9 @@ Simuladas1 <- simulate(ModelC, nsim = 1000,
                        coef = ModelC$coefficients,
                        control = 
                          control.simulate.ergm(
-                           MCMC.burnin = 50000, 
-                           MCMC.interval = 100))
+                           MCMC.burnin = 100000, 
+                           MCMC.interval = 500))
 
-simulations <- lapply(1:4, function(i) {
-  simulate(ModelC, nsim = 1000, coef = ModelC$coefficients, 
-           control = control.simulate.ergm(MCMC.burnin = 15000, MCMC.interval = 1000))
-})
 
 library(tidyverse)
 extract_coefs_simulations <- function(Simuladas1, model) {
@@ -79,16 +75,19 @@ rownames(Z)
 
 media_sim <- as.matrix(media_sim)
 rownames(media_sim)
-# Verificar la invertibilidad de la matriz de covarianza
-if (det(cov_sim) == 0) {
-  stop("La matriz de covarianza es singular, no se puede calcular la distancia de Mahalanobis")
-}
 
 dim(Z)
 dim(media_sim)
 dim(cov_sim)
 
 det(cov_sim)
+
+
+# Verificar la invertibilidad de la matriz de covarianza
+if (det(cov_sim) == 0) {
+  stop("La matriz de covarianza es singular, no se puede calcular la distancia de Mahalanobis")
+}
+
 
 
 mcmc_output <- mcmc(coef_df1[c(3,5:9)])
