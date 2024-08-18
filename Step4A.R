@@ -1,5 +1,6 @@
 load("Results/Result3.RData")
-Competences <- data.frame(rownames(BiM))
+SkillsNumber <- data.frame(Skill = rownames(BiM))
+
 library(network)
 library(ergm)
 library(coda)
@@ -43,6 +44,8 @@ pave3 <- gof(Sim.M0[[1]], GOF = ~model)
 
 model1 <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
 summary(model1) # AIC = 6828
+
+
 
 library(texreg)
 extracted_info <- extract(model1)
