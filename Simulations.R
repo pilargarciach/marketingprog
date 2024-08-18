@@ -15,7 +15,7 @@ Simuladas1 <- simulate(ModelC, nsim = 1000,
                        coef = ModelC$coefficients,
                        control = 
                          control.simulate.ergm(
-                           MCMC.burnin = 20000, 
+                           MCMC.burnin = 50000, 
                            MCMC.interval = 100))
 
 simulations <- lapply(1:4, function(i) {
@@ -62,7 +62,8 @@ hist(coef_df1$b1sociality3, main = "Distribución del estadístico en las redes 
 abline(v = COEF1, col = "red", lwd = 2)
 
 
-p_value <- mean(df_redes$edges_ergm >= COEF1)
+p_value <- mean(coef_df1[2] >= COEF1)
+p_value
 
 GOF1 <- gof(ModelC, GOF = ~model)
 GOF1
