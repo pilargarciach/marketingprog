@@ -4,13 +4,7 @@ SkillsNumber <- data.frame(Skill = rownames(BiM))
 library(ergm)
 library(network)
 library(coda)
-red
-sna::gden(red)
 set.seed(1107)
-ModelA <- ergm(red ~ edges)
-summary(ModelA) # AIC = 8729
-ModelB <- ergm(red ~ b1sociality(nodes = c(3, 11, 13, 2, 6)))
-summary(ModelB) # AIC = 9650 PEOR!
 ModelC <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)))
 summary(ModelC) # AIC = 7461
 ModelD <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
@@ -21,7 +15,7 @@ Simuladas1 <- simulate(ModelC, nsim = 1000,
                        coef = ModelC$coefficients,
                        control = 
                          control.simulate.ergm(
-                           MCMC.burnin = 10000, 
+                           MCMC.burnin = 20000, 
                            MCMC.interval = 100))
 
 simulations <- lapply(1:4, function(i) {
