@@ -1,14 +1,16 @@
 load("Results/Result3.RData")
-rm(list=setdiff(ls(), c("red", "BiM", "BN")))
+rm(list=setdiff(ls(), c("red")))
 SkillsNumber <- data.frame(Skill = rownames(BiM))
 library(ergm)
 library(network)
 library(coda)
 set.seed(1107)
-ModelC <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)), control = control.ergm(MCMC.samplesize = 10000))
+ModelC <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)), 
+               control = control.ergm(MCMC.samplesize = 10000,
+                                      MCMC.burnin = 5000,
+                                      MCMLE.maxit = 10))
 summary(ModelC) # AIC = 7461
-ModelD <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
-summary(ModelD) # AIC = 6828
+
 
 
 Simuladas1 <- simulate(ModelC, nsim = 1000, 
@@ -87,11 +89,6 @@ dim(cov_sim)
 
 det(cov_sim)
 
-
-# Verificar la invertibilidad de la matriz de covarianza
-if (det(cov_sim) == 0) {
-  stop("La matriz de covarianza es singular, no se puede calcular la distancia de Mahalanobis")
-}
 
 mcmc.diagnostics(ModelC)
 
