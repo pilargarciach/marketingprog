@@ -13,7 +13,16 @@ ModelAA <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)) +
                                       MCMC.burnin = 5000,
                                       MCMLE.maxit = 10))
 summary(ModelAA) # AIC = 7469
+
+ModelA <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)) + 
+                 b2factor('Region', levels = TRUE) + 
+                 b2factor('SchoolType', levels = TRUE) + 
+                 nodecov('OnetImportance'), 
+               control = control.ergm(MCMC.samplesize = 100000, MCMC.burnin = 10000, 
+                                      MCMLE.maxit = 10, force.main = TRUE))
+
 summary(ModelA)
+mcmc.diagnostics(ModelA)
 
 GOF <- gof(ModelA)
 GOF1 <- gof(ModelA, GOF = ~model)
@@ -22,15 +31,10 @@ plot(GOF1)
 GOF1
 
 
-ModelA <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)) + 
-                 b2factor('Region', levels = TRUE) + 
-                 b2factor('SchoolType', levels = TRUE) + 
-                 nodecov('OnetImportance'), 
-               control = control.ergm(MCMC.samplesize = 10000, MCMC.burnin = 5000, 
-                                      MCMLE.maxit = 10, force.main = TRUE))
+
 
 summary(ModelA)
-mcmc.diagnostics(ModelA)
+
 gof(ModelA, GOF=~model)
 
 Simuladas1 <- simulate(ModelA, nsim = 1000, 
