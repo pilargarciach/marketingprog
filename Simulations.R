@@ -79,13 +79,14 @@ coef <- coef_df1[c(3,5:9)]
 
 MD <- mahalanobis(x = t(observed_stats), center = colMeans(coef), cov = cov_sim)
 
-hist(MD, main = "Distribución de las distancias de Mahalanobis", 
+hist(observed_stats, main = "Distribución de las distancias de Mahalanobis", 
      xlab = "Distancia de Mahalanobis")
 abline(v = MD, col = "red", lwd = 2)
 
 cor(observed_stats, colMeans(coef[1:6]))
-
-
+Resumen <- summary(ModelC)
+Resumen$aic
+Resumen$bic
 
 
 mcmc.diagnostics(ModelC) # it works only if force MCMC 
