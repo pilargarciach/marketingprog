@@ -17,7 +17,18 @@ ModelD <- ergm(red ~ edges + b1sociality(nodes = c(1:28)))
 summary(ModelD) # AIC = 6828
 
 
-Simuladas1 <- simulate(ModelC, nsim = 1000)
+Simuladas1 <- simulate(ModelC, nsim = 1000, 
+                       coef = ModelC$coefficients,
+                       control = 
+                         control.simulate.ergm(
+                           MCMC.burnin = 10000, 
+                           MCMC.interval = 100))
+
+simulations <- lapply(1:4, function(i) {
+  simulate(ModelC, nsim = 1000, coef = ModelC$coefficients, 
+           control = control.simulate.ergm(MCMC.burnin = 15000, MCMC.interval = 1000))
+})
+
 library(tidyverse)
 extract_coefs_simulations <- function(Simuladas1, model) {
   # Obtener el número de simulaciones
@@ -62,8 +73,62 @@ p_value <- mean(df_redes$edges_ergm >= COEF1)
 GOF1 <- gof(ModelC, GOF = ~model)
 GOF1
 
+media_sim <- colMeans(coef_df1[c(3,5:9)])
+cov_sim <- cov(coef_df1[c(3,5:9)])
+
+# Vector de estadísticos de la red observada
+Z <- coef(ModelC)
+
+Z <- as.matrix(Z)
+rownames(Z)
+
+media_sim <- as.matrix(media_sim)
+rownames(media_sim)
+# Verificar la invertibilidad de la matriz de covarianza
+if (det(cov_sim) == 0) {
+  stop("La matriz de covarianza es singular, no se puede calcular la distancia de Mahalanobis")
+}
+
+dim(Z)
+dim(media_sim)
+dim(cov_sim)
+
+det(cov_sim)
 
 
+mcmc_output <- mcmc(coef_df1[c(3,5:9)])
+
+# Trazar las cadenas de Markov
+plot(mcmc_output)
+
+# Calcular estadísticas de convergencia
+# Geweke diagnóstico
+geweke.diag(mcmc_output)
+
+# Estadístico de Gelman-Rubin
+gelman.diag(mcmc_output)
+
+
+
+# Calcular la distancia de Mahalanobis
+distancia_mahalanobis <- sqrt((Z - media_sim) %*% solve(cov_sim) %*% t(Z - media_sim))
+
+print(distancia_mahalanobis)
+
+
+
+
+
+# Convertir las simulaciones a un objeto mcmc
+mcmc_output <- mcmc.list(lapply(simulations, mcmc))
+class(mcmc_output[1])
+mcmc_list_as_dataframes <- lapply(mcmc_output, as.data.frame)
+
+# Combinar las matrices en un único data frame
+df <- do.call(rbind, mcmc_list_as_matrices)
+
+# Calcular estadísticas de convergencia
+gelman.diag(mcmc_output)
 
 
 
@@ -73,6 +138,9 @@ GOF1
 
 
 # Modelo con efecto de homofilia en las competencias
+
+
+
 
 
 
