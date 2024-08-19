@@ -6,8 +6,25 @@ SkillsBN$Skill <- rownames(SkillsBN)
 rm(list=setdiff(ls(), c("Alignment", "SkillsBN")))
 alignment <- merge(Alignment, SkillsBN, by = "Skill")
 colnames(alignment)[2] <- "O*NET.Importance"
-library(psych)
+hist(alignment$`O*NET.Importance`)
+
+library(ggplot2)
 png("F3.png", width = 10, height = 8, units = 'in', res = 300)
+ggplot(alignment, mapping = aes(x = reorder(Skill, `O*NET.Importance`), `O*NET.Importance`)) + 
+  geom_bar(stat = "identity", fill="#ffd800") + 
+  theme_minimal() +
+  theme(axis.text.x=element_text(size=14),
+        axis.text.y = element_text(size = 14),
+         axis.title.x=element_text(size=16,face="bold"),
+         axis.title.y=element_text(size = 16,face = "bold")) +
+  coord_flip() +
+  xlab("Skill") +
+  ylab("O*NET importance")
+dev.off()
+
+
+library(psych)
+png("F4.png", width = 10, height = 8, units = 'in', res = 300)
 pairs.panels(alignment[2:6], 
              digits = 2, 
              method = "pearson",
