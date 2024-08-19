@@ -78,6 +78,7 @@ observed_stats <- ModelC$coefficients
 coef <- coef_df1[c(3,5:9)]
 
 MD <- mahalanobis(x = t(observed_stats), center = colMeans(coef), cov = cov_sim)
+MD
 
 hist(observed_stats, main = "Distribución de las distancias de Mahalanobis", 
      xlab = "Distancia de Mahalanobis")
