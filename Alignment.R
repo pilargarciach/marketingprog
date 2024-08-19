@@ -11,7 +11,7 @@ hist(alignment$`O*NET.Importance`)
 library(ggplot2)
 png("F3.png", width = 10, height = 8, units = 'in', res = 300)
 ggplot(alignment, mapping = aes(x = reorder(Skill, `O*NET.Importance`), `O*NET.Importance`)) + 
-  geom_bar(stat = "identity", fill="#ffd800") + 
+  geom_bar(stat = "identity", color = "black", fill="#ffd800") + 
   theme_minimal() +
   theme(axis.text.x=element_text(size=14),
         axis.text.y = element_text(size = 14),
