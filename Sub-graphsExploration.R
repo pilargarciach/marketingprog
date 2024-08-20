@@ -7,6 +7,7 @@ table(Network$Competence)
 network <- Network[!duplicated(Network[c(1,2,4,6,7)]),]
 
 library(tidyverse)
+
 Public <- network %>% filter(., grepl("Public",InstitutionType))
 Private <- network %>%  filter(., grepl("Private", InstitutionType))
 AM <- network %>% filter(., grepl("AM", Region))
@@ -14,6 +15,21 @@ EU <- network %>% filter(., grepl("EU-ME-AF", Region))
 AP <- network %>% filter(., grepl("AP", Region))
 
 library(igraph)
+entirenetwork <- graph_from_data_frame(network, directed=FALSE)
+ENTIRENETWORK <- data.frame(Degree = igraph::degree(entirenetwork),
+                            Closeness = igraph::closeness(entirenetwork),
+                            Betweennes = igraph::betweenness(entirenetwork),
+                            Eigen = igraph::eigen_centrality(entirenetwork))
+ENTIRENETWORK <- ENTIRENETWORK[ -c(5:25) ]
+ENTIRENETWORK$Partition <- "Skills"
+rownames(ENTIRENETWORK)
+ENTIRENETWORK$Partition[29:286] <- "Brochures"
+ENTIRENETWORK$Node <- rownames(ENTIRENETWORK)
+ENTIRENETWORK$SubGraph <- "ENTIRENETWORK"
+library(psych)
+describeBy(ENTIRENETWORK$Degree, group = ENTIRENETWORK$Partition, mat = TRUE, digit = 2)
+
+
 public <- graph_from_data_frame(Public, directed=FALSE)
 PUBLIC <- data.frame(Degree = igraph::degree(public),
                  Closeness = igraph::closeness(public),
@@ -86,6 +102,8 @@ describeBy(ASIA$Degree, group = ASIA$Partition, mat = TRUE, digit = 2)
 AllSubGraphs <- list(ASIA, EURO, AMERICAS, PUBLIC, PRIVATE)
 AllSubGraphs <- do.call(rbind, AllSubGraphs)
 variable.names(AllSubGraphs)
+describeBy(AllSubGraphs$Degree, group = AllSubGraphs$Partition, mat = TRUE, digit = 2)
+
 
 SkillsAll <- AllSubGraphs %>% filter(., grepl("Skills", Partition))
 
