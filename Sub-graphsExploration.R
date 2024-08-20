@@ -28,26 +28,27 @@ PUBLIC$SubGraph <- "Public"
 library(psych)
 describeBy(PUBLIC$Degree, group = PUBLIC$Partition, mat = TRUE, digit = 2)
 
-private <- graph_from_data_frame(network,directed=FALSE)
+private <- graph_from_data_frame(Private,directed=FALSE)
 PRIVATE <- data.frame(Degree = igraph::degree(private),
                  Closeness = igraph::closeness(private),
                  Betweennes = igraph::betweenness(private),
                  Eigen = igraph::eigen_centrality(private))
 PRIVATE <- PRIVATE[ -c(5:25) ]
 PRIVATE$Partition <- "Skills"
-PRIVATE$Partition[29:286] <- "Brochures"
+PRIVATE$Partition[29:108] <- "Brochures"
 PRIVATE$Node <- rownames(PRIVATE)
 PRIVATE$SubGraph <- "Private"
 describeBy(PRIVATE$Degree, group = PRIVATE$Partition, mat = TRUE, digit = 2)
 
-americas <- graph_from_data_frame(network,directed=FALSE)
+americas <- graph_from_data_frame(AM,directed=FALSE)
 AMERICAS <- data.frame(Degree = igraph::degree(americas),
                  Closeness = igraph::closeness(americas),
                  Betweennes = igraph::betweenness(americas),
                  Eigen = igraph::eigen_centrality(americas))
 AMERICAS <- AMERICAS[ -c(5:25) ]
 AMERICAS$Partition <- "Skills"
-AMERICAS$Partition[29:286] <- "Brochures"
+rownames(AMERICAS)
+AMERICAS$Partition[29:128] <- "Brochures"
 AMERICAS$Node <- rownames(AMERICAS)
 AMERICAS$SubGraph <- "Americas"
 
