@@ -89,3 +89,5 @@ variable.names(AllSubGraphs)
 SkillsAll <- AllSubGraphs %>% filter(., grepl("Skills", Partition))
 
 boxplot(SkillsAll$Eigen.vector ~ SkillsAll$SubGraph, notch = TRUE, col = "white")
+
+describeBy(AllSubGraphs$Degree, group = AllSubGraphs$Partition, mat = TRUE, digits = 2)
