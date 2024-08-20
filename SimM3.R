@@ -5,16 +5,8 @@ library(ergm)
 library(network)
 library(coda)
 set.seed(9615)
-ModelAAA <- ergm(red ~ edges + b1sociality(c(3, 11, 13)) + 
-                  b2factor('SchoolType', levels = TRUE), 
-                control = control.ergm(MCMC.samplesize = 100000, 
-                                       MCMC.burnin = 10000, 
-                                       MCMLE.maxit = 10))
-summary(ModelAAA) # AIC = 7466
-
-
 ModelAA <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)) + 
-                 b2factor('Region', levels = TRUE) + 
+                 b2factor('Region', levels = -1) + 
                  b2factor('SchoolType', levels = TRUE) + 
                  nodecov('OnetImportance'), 
                control = control.ergm(MCMC.samplesize = 100000, 
