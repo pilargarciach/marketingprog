@@ -84,8 +84,8 @@ hist(observed_stats, main = "Distribución de las distancias de Mahalanobis",
      xlab = "Distancia de Mahalanobis")
 abline(v = MD, col = "red", lwd = 2)
 
-cor(observed_stats, colMeans(coef[1:6]))
-Resumen <- summary(ModelA)
+cor(observed_stats, colMeans(coef[1:7]))
+Resumen <- summary(ModelAA)
 Resumen$aic
 Resumen$bic
 
