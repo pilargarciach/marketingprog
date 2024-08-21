@@ -12,13 +12,13 @@ abstract: |
 
 # Introducción
 
-El valor de las habilidades o competencias y su vínculo con el alto rendimiento en el trabajo es una idea bien establecida desde hace décadas [@Spencer1993]. La investigación sobre las habilidades cuenta con varias aproximaciones conceptuales y metodológicas, entre las que resalta una enfoque que aprovecha el concepto de "datos relacionales" [@Butts2008]. Con datos relacionales se pueden analizar cuantitativamente las relaciones multivariadas entre las habilidades y los conocimientos educativos necesarios para ejecutar con destreza las tareas cotidianas de un puesto de trabajo. Esa multiplicidad de relaciones se conceptualizó como un red compleja de información ocupacional [@Peterson2001]. Dicha red compleja de información ocupacional ha estimulado una fructífera línea de investigación sobre competencias en varios países, incluyendo a los Estados Unidos de América [@Borner2018;@Vista2020], Hungría [@Gadar2018], o Colombia [@Garciachitiva2024] por mencionar unos pocos. 
+El valor de las habilidades o competencias y su vínculo con el alto rendimiento en el trabajo es una idea bien establecida desde hace décadas [@Spencer1993]. La investigación sobre las habilidades cuenta con varias aproximaciones conceptuales y metodológicas, entre las que resalta una enfoque que aprovecha el concepto de "datos relacionales" [@Butts2008]. Con datos relacionales se pueden analizar cuantitativamente las relaciones multivariadas entre las habilidades y los conocimientos educativos necesarios para ejecutar con destreza las tareas cotidianas de un puesto de trabajo. Esa multiplicidad de relaciones se conceptualizó como un red compleja de información ocupacional [@Peterson2001]. Dicha red compleja de información ocupacional ha estimulado una fructífera línea de investigación sobre competencias en varios países, incluyendo a los Estados Unidos de América [@Borner2018; @Vista2020], Hungría [@Gadar2018], o Colombia [@Garciachitiva2024] por mencionar unos pocos.
 
-En este reporte, usamos el perfil de habilidades asociadas con la posición de gerentes de marketing descrito en la red de información ocupacional disponible en [O*NET](https://www.onetonline.org/link/table/details/sk/11-2021.00/Skills_11-2021-00.xlsx?fmt=xlsx&s=IM&t=-10) para medir la cercanía de estas habilidades con la oferta académica de programas de maestría en marketing por parte de universidades que cuentan con la acreditación de la la "_Association to Advance Collegiate Schools of Business_" ([AACSB](https://www.aacsb.edu/members?educations=masters)). 
+En este reporte, usamos el perfil de habilidades asociadas con la posición de gerentes de marketing descrito en la red de información ocupacional disponible en [O\*NET](https://www.onetonline.org/link/table/details/sk/11-2021.00/Skills_11-2021-00.xlsx?fmt=xlsx&s=IM&t=-10) para medir la cercanía de estas habilidades con la oferta académica de programas de maestría en marketing por parte de universidades que cuentan con la acreditación de la la "*Association to Advance Collegiate Schools of Business*" ([AACSB](https://www.aacsb.edu/members?educations=masters)).
 
 # Contexto Empírico de los datos
 
-Para investigar la relación entre la oferta académica de los programas de maestría en marketing y el perfil profesional de ejecutivos de marketing según O*NET, aprovechamos la técnica conocida como "_búsqueda de palabras clave en contexto_" [@Benoit2018]. Esta técnica permite extraer de los folletos que promocionan los programas de marketing aquellas palabras o frases que describen las habilidades que debe reunir un profesional de marketing. Para realizar esta búsqueda, sin embargo, primero se hace necesario construir un corpus lingüístico digital en el que se registra palabra por palabra cada folleto de marketing. 
+Para investigar la relación entre la oferta académica de los programas de maestría en marketing y el perfil profesional de ejecutivos de marketing según O\*NET, aprovechamos la técnica conocida como "*búsqueda de palabras clave en contexto*" [@Benoit2018]. Esta técnica permite extraer de los folletos que promocionan los programas de marketing aquellas palabras o frases que describen las habilidades que debe reunir un profesional de marketing. Para realizar esta búsqueda, sin embargo, primero se hace necesario construir un corpus lingüístico digital en el que se registra palabra por palabra cada folleto de marketing.
 
 ```{r, message=FALSE}
 library(readtext)
@@ -82,7 +82,7 @@ Programs <- tokens(Textos,
 
 ## Construcción de diccionario de habilidades
 
-Llegados a este punto, pasamos a desarrollar un diccionario ad-hoc de habilidades que reflejen las habilidades del ejecutivo de marketing que describe O*NET.
+Llegados a este punto, pasamos a desarrollar un diccionario ad-hoc de habilidades que reflejen las habilidades del ejecutivo de marketing que describe O\*NET.
 
 ```{r}
 s1 <- data.frame(kwic(Programs, pattern = c(phrase("active learning"),
@@ -589,7 +589,8 @@ SS <- merge(SS, TextosData, by.x = "docname", by.y = "Text")
 ```
 
 ## Construcción de la matriz término-documento
-Con la construcción del diccionario de habilidades, ahora es posible pasar a  construir una matriz rectangular término-documento [@Benoit2018]. Esta matriz término-documento está compuesta por un número _n_ de filas y un número _c_ de columnas, donde las habilidades se disponen en filas y los programas en columnas y los valores en las celdas de tal matriz solo pueden tener dos valores posibles (i.e., 1 para indicar que la habilidad está explícitamente mencionada en el folleto que promociona el programa o cero para indicar lo contrario).
+
+Con la construcción del diccionario de habilidades, ahora es posible pasar a construir una matriz rectangular término-documento [@Benoit2018]. Esta matriz término-documento está compuesta por un número *n* de filas y un número *c* de columnas, donde las habilidades se disponen en filas y los programas en columnas y los valores en las celdas de tal matriz solo pueden tener dos valores posibles (i.e., 1 para indicar que la habilidad está explícitamente mencionada en el folleto que promociona el programa o cero para indicar lo contrario).
 
 ```{r, message=FALSE, warning=FALSE}
 Network <- SS[c(8,1,10:15)]
@@ -599,10 +600,9 @@ Network$Competence <- tolower(Network$Competence)
 network <- Network[!duplicated(Network[c(1,2,4,6,7)]),]
 ```
 
-
 ## Configuración de la matriz término-documento como red bipartita
 
-Ahora nuestro próximo paso consiste en configurar la matriz término-documento como una red bipartita para lo cual se necesita usar la librería `igraph` [@Csardi2024]. A continuación mostramos una fracción de dicha matriz al revelar las primeras cinco filas y las primeras cinco columnas. 
+Ahora nuestro próximo paso consiste en configurar la matriz término-documento como una red bipartita para lo cual se necesita usar la librería `igraph` [@Csardi2024]. A continuación mostramos una fracción de dicha matriz al revelar las primeras cinco filas y las primeras cinco columnas.
 
 ```{r, warning=FALSE, message=FALSE}
 library(igraph)
@@ -628,8 +628,6 @@ plot(bn2,
      layout = layout_components, 
      main = "")
 ```
-
-
 
 # Especificación y modelación de red bipartita como grafo aleatorio
 
@@ -659,7 +657,7 @@ load("Results/Result1.RData")
 todos <- unique(TextosData$Text)
 ```
 
-Los nodos de la primera partición (habilidades) tienen un atributo llamado `OnetImportance` que refleja la importancia de dicha habilidad según la red de información ocupacional O*NET. Otro atributo aplica para los nodos de la segunda partición (programas) se llama `SchoolType` para reflejar si el programa proviene de una universidad pública o privada. Otro atributo llamado `Region` también aplica para la segunda partición (programas) para reflejar si el programa es de una universidad ubicada geográficamente en la región Asia-Pacífico, Americas, o Europa-Medio Oriente-Africa.
+Los nodos de la primera partición (habilidades) tienen un atributo llamado `OnetImportance` que refleja la importancia de dicha habilidad según la red de información ocupacional O\*NET. Otro atributo aplica para los nodos de la segunda partición (programas) se llama `SchoolType` para reflejar si el programa proviene de una universidad pública o privada. Otro atributo llamado `Region` también aplica para la segunda partición (programas) para reflejar si el programa es de una universidad ubicada geográficamente en la región Asia-Pacífico, Americas, o Europa-Medio Oriente-Africa.
 
 ```{r, message=FALSE, warning=FALSE}
 ProgramAttributes <- TextosData[TextosData$Text %in% seleccionados, ]
@@ -677,20 +675,19 @@ set.vertex.attribute(red, "OnetImportance", OnetImportance$OnetImportance)
 set.vertex.attribute(red, "Region", Region$Region)
 ```
 
-
 La red bipartita queda entonces conformada con 287 nodos, distribuidos en 29 nodos para la primera partición (habilidades) y 258 nodos para la segunda partición (programas) conectados a través de 2147 aristas.
 
 ```{r}
 red
 ```
 
-# Contraste de Hipótesis 
+# Contraste de Hipótesis
 
 El contraste de hipótesis sobre la red bipartita que representa la relación entre habilidades y programas contempla el planteamiento y contrastación empírica de una serie de modelos que se enumeran a continuación.
 
 ## La conectividad de la red no ocurre por azar
 
-Nuestro primer contraste de hipótesis supone descartar la idea de que la conexión entre habilidades y programas ocurre por azar. En otras palabras, debemos conocer si el total de conexiones está muy por encima o muy por debajo de lo que puede esperarse por azar. 
+Nuestro primer contraste de hipótesis supone descartar la idea de que la conexión entre habilidades y programas ocurre por azar. En otras palabras, debemos conocer si el total de conexiones está muy por encima o muy por debajo de lo que puede esperarse por azar.
 
 ```{r, message=FALSE}
 set.seed(1107)
@@ -701,11 +698,11 @@ model0 <- ergm(red ~ edges, control = control.ergm(
 summary(model0)
 ```
 
-Este primer modelo debe considerarse un modelo de línea base ya que solo incluye el término `edges`, lo que implica que la probabilidad de una conexión entre dos nodos es constante en toda la red. El coeficiente estimado para `edges` es -0.91022, lo que indica una tendencia negativa a formar enlaces (por debajo de lo esperado por azar). Es esencial interpretar este coeficiente en conjunto con otros términos del modelo (en modelos posteriores). El coeficiente es altamente significativo (p-valor < 0.001), lo que sugiere que el número de enlaces es diferente de lo esperado por casualidad. La desviación nula y residual indican cuánto se reduce la falta de ajuste del modelo en comparación con un modelo nulo sin predictores. Los valores de AIC (Akaike Information Criterion) y BIC (Bayesian Information Criterion) son medidas de ajuste del modelo, y mientras más cercanos a cero tanto mejor el ajuste del modelo. Estos dos valores los usaremos para comparar este primer modelo que sirve como línea base para incorporar otros predictores.
+Este primer modelo debe considerarse un modelo de línea base ya que solo incluye el término `edges`, lo que implica que la probabilidad de una conexión entre dos nodos es constante en toda la red. El coeficiente estimado para `edges` es -0.91022, lo que indica una tendencia negativa a formar enlaces (por debajo de lo esperado por azar). Es esencial interpretar este coeficiente en conjunto con otros términos del modelo (en modelos posteriores). El coeficiente es altamente significativo (p-valor \< 0.001), lo que sugiere que el número de enlaces es diferente de lo esperado por casualidad. La desviación nula y residual indican cuánto se reduce la falta de ajuste del modelo en comparación con un modelo nulo sin predictores. Los valores de AIC (Akaike Information Criterion) y BIC (Bayesian Information Criterion) son medidas de ajuste del modelo, y mientras más cercanos a cero tanto mejor el ajuste del modelo. Estos dos valores los usaremos para comparar este primer modelo que sirve como línea base para incorporar otros predictores.
 
 ## La conectividad de la red se explica por un grupo limitado de habilidades
 
-Un segundo modelo implica contrastar la hipótesis según la cual las escasas conexiones que observamos en el modelo anterior ocurren debido a un conjunto limitado de habilidades que resultan "más atractivas" para la formación profesional de los estudiantes que se matriculan en las maestrías de marketing. Para probar esta hipótesis, debemos concentrarnos en las competencias como predictoras de la conectividad de la red y observar cuáles de ellas cuentan con un estimado positivo y estadísticamente significativo. 
+Un segundo modelo implica contrastar la hipótesis según la cual las escasas conexiones que observamos en el modelo anterior ocurren debido a un conjunto limitado de habilidades que resultan "más atractivas" para la formación profesional de los estudiantes que se matriculan en las maestrías de marketing. Para probar esta hipótesis, debemos concentrarnos en las competencias como predictoras de la conectividad de la red y observar cuáles de ellas cuentan con un estimado positivo y estadísticamente significativo.
 
 ```{r, message=FALSE}
 set.seed(1107)
@@ -713,6 +710,6 @@ model1 <- ergm(red ~ b1sociality(nodes = c(1:28)))
 summary(model1)
 ```
 
-De esta exploración, observamos que la habilidad de pensamiento crítico (`b1sociality3`), persuasión (`b1sociality9`), y monitoreo (`b1sociality13`) son las que destacan por su conectividad sistemáticamente superior a lo esperado por azar con la mayoría de folletos. 
+De esta exploración, observamos que la habilidad de pensamiento crítico (`b1sociality3`), persuasión (`b1sociality9`), y monitoreo (`b1sociality13`) son las que destacan por su conectividad sistemáticamente superior a lo esperado por azar con la mayoría de folletos.
 
 ## 
