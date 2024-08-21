@@ -6,8 +6,8 @@ library(network)
 library(coda)
 set.seed(9615)
 ModelAAA <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)) + 
-                   b2factor('SchoolType', levels = TRUE) +
-                   b2factor('Region', levels = TRUE), 
+                   b2factor('SchoolType', levels = "Public") +
+                   b2factor('Region', levels = "EU-ME-AF"), 
                  control = control.ergm(MCMC.samplesize = 100000, 
                                         MCMC.burnin = 10000, 
                                         MCMLE.maxit = 10))
