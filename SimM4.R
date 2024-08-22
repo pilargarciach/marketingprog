@@ -4,39 +4,18 @@ red
 library(ergm)
 library(network)
 library(coda)
-set.seed(9615)
+set.seed(2758)
 ModelAAA <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)) + 
                    b2factor('SchoolType', levels = "Public") +
-                   b2factor('Region', levels = "EU-ME-AF"), 
+                   b2factor('Region', levels = "EU-ME-AF") + 
+                   nodecov('OnetImportance'), 
                  control = control.ergm(MCMC.samplesize = 100000, 
                                         MCMC.burnin = 10000, 
                                         MCMLE.maxit = 10))
 summary(ModelAAA) # AIC = 7466
 
 
-ModelAA <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)) + 
-                  b2factor('Region', levels = c("AP", "EU-ME-AF")) + 
-                  b2factor('SchoolType', levels = 1) + 
-                  nodecov('OnetImportance'), 
-                control = control.ergm(MCMC.samplesize = 100000, 
-                                       MCMC.burnin = 10000, 
-                                       MCMLE.maxit = 10))
-summary(ModelAA) # AIC = 7469
-
-ModelA <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)) + 
-                 b2factor('Region', levels = c("AM", "EU-ME-AF")) + 
-                 b2factor('SchoolType', levels = -1) + 
-                 nodecov('OnetImportance'), 
-               control = control.ergm(MCMC.samplesize = 100000, 
-                                      MCMC.burnin = 10000, 
-                                      MCMLE.maxit = 10, 
-                                      force.main = TRUE))
-
-summary(ModelA)
-mcmc.diagnostics(ModelA)
-
-GOF <- gof(ModelA)
-GOF1 <- gof(ModelA, GOF = ~model)
+GOF <- gof(ModelAAA)
 plot(GOF)
 plot(GOF1)
 GOF1
