@@ -8,24 +8,9 @@
 # their position in the bi-adjacency matrix BiM).
 
 load("Results/Result3.RData")
-rm(list=setdiff(ls(), c("BN", "red", "BiM")))
-programs <- data.frame(Position = colnames(BiM))
-library(tidyverse)
-Brochures <- BN %>% filter(., Partition == "Brochures")
-hist(Brochures$Degree)
-
+rm(list=setdiff(ls(), c("red")))
 red
 library(ergm)
 library(network)
 library(coda)
 red
-set.seed(4692)
-ModelAAAA <- ergm(red ~ edges + b1sociality(c(3, 11, 13)) +
-                   b2sociality(c(36, 66, 248)) +
-                   b2factor('SchoolType', levels = "Public") +
-                   b2factor('Region', levels = "EU-ME-AF") + 
-                   nodecov('OnetImportance'), 
-                 control = control.ergm(MCMC.samplesize = 100000, 
-                                        MCMC.burnin = 10000, 
-                                        MCMLE.maxit = 10))
-summary(ModelAAAA) # AIC = 7466
