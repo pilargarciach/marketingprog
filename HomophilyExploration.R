@@ -161,12 +161,12 @@ hist(coef_df1$b1sociality3, main = "Distribución del estadístico en las redes 
 abline(v = COEF1, col = "red", lwd = 2)
 
 
-t.test(coef_df1$edges, mu = Model3h$coefficients[1])
-t.test(coef_df1$b1sociality3, mu = Model3h$coefficients[2])
+t.test(coef_df1$edges, mu = Model3H$coefficients[1])
+t.test(coef_df1$b1sociality3, mu = Model3H$coefficients[2])
 
-cov_sim <- cov(coef_df1[c(3,5:8)])
+cov_sim <- cov(coef_df1[c(3,5:10)])
 observed_stats <- Model3H$coefficients
-coef <- coef_df1[c(3,5:8)]
+coef <- coef_df1[c(3,5:10)]
 
 MD <- mahalanobis(x = t(observed_stats), center = colMeans(coef), cov = cov_sim)
 MD
@@ -175,10 +175,10 @@ hist(observed_stats, main = "Distribución de las distancias de Mahalanobis",
      xlab = "Distancia de Mahalanobis")
 abline(v = MD, col = "red", lwd = 2)
 
-cor(observed_stats, colMeans(coef[1:5]))
-Resumen <- summary(Model3h)
+cor(observed_stats, colMeans(coef[1:7]))
+Resumen <- summary(Model3H)
 Resumen$aic
 Resumen$bic
 
 
-mcmc.diagnostics(Model3h) # it works only if force MCMC 
+mcmc.diagnostics(Model3H) # it works only if force MCMC 
