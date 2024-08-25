@@ -112,8 +112,8 @@ mcmc.diagnostics(Model3H)
 gof(Model3H, GOF =~model)
 
 
-Simuladas1 <- simulate(Model3h, nsim = 1000, 
-                       coef = Model3h$coefficients,
+Simuladas2 <- simulate(Model3H, nsim = 1000, 
+                       coef = Model3H$coefficients,
                        control = 
                          control.simulate.ergm(
                            MCMC.burnin = 100000, 
@@ -121,9 +121,9 @@ Simuladas1 <- simulate(Model3h, nsim = 1000,
 
 
 library(tidyverse)
-extract_coefs_simulations <- function(Simuladas1, model) {
+extract_coefs_simulations <- function(Simuladas2, model) {
   # Obtener el número de simulaciones
-  num_sims <- length(Simuladas1)
+  num_sims <- length(Simuladas2)
   
   # Crear un data frame vacío para almacenar los coeficientes
   coef_df1 <- data.frame(
@@ -138,8 +138,9 @@ extract_coefs_simulations <- function(Simuladas1, model) {
   
   # Iterar sobre cada red simulada y extraer los coeficientes
   for (i in 1:num_sims) {
-    sim_net <- Simuladas1[[i]]
-    sim_model <- ergm(sim_net ~ edges + b1sociality(c(3, 11, 13)) + 
+    sim_net <- Simuladas2[[i]]
+    sim_model <- ergm(sim_net ~ edges + 
+                        b1sociality(c(3, 11, 13, 2, 6)) + 
                         b1nodematch("OnetImportance"))
     sim_coefs <- coef(sim_model)
     
@@ -150,9 +151,9 @@ extract_coefs_simulations <- function(Simuladas1, model) {
   return(coef_df1)
 }
 
-coef_df1 <- extract_coefs_simulations(Simuladas1, Model3h)
+coef_df1 <- extract_coefs_simulations(Simuladas2, Model3H)
 
-COEF1 <- Model3h$coefficients[2]
+COEF1 <- Model3H$coefficients[2]
 
 
 hist(coef_df1$b1sociality3, main = "Distribución del estadístico en las redes simuladas",
@@ -164,7 +165,7 @@ t.test(coef_df1$edges, mu = Model3h$coefficients[1])
 t.test(coef_df1$b1sociality3, mu = Model3h$coefficients[2])
 
 cov_sim <- cov(coef_df1[c(3,5:8)])
-observed_stats <- Model3h$coefficients
+observed_stats <- Model3H$coefficients
 coef <- coef_df1[c(3,5:8)]
 
 MD <- mahalanobis(x = t(observed_stats), center = colMeans(coef), cov = cov_sim)
