@@ -99,7 +99,7 @@ mcmc.diagnostics(Model3h) # it works only if force MCMC
 
 
 
-
+# Modelo 4
 
 Model3H <- ergm(red ~ edges + 
                    b1sociality(c(3, 11, 13, 2, 6)) + 
