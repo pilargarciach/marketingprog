@@ -8,7 +8,7 @@ set.seed(9615)
 ModelAA <- ergm(red ~ edges + b1sociality(c(3, 11, 13)) + 
                   b2factor('SchoolType', levels = "Public") +
                   b2factor('Region', levels = "EU-ME-AF") + 
-                 nodecov('OnetImportance'), 
+                  b1nodematch("OnetImportance"), 
                control = control.ergm(MCMC.samplesize = 100000, 
                                       MCMC.burnin = 10000, 
                                       MCMLE.maxit = 10))
