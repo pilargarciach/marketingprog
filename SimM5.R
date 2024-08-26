@@ -50,7 +50,7 @@ extract_coefs_simulations <- function(Simuladas1, model) {
     sim_model <- ergm(sim_net ~ edges + b1sociality(c(3, 11, 13)) + 
                         b2factor('SchoolType', levels = "Public") +
                         b2factor('Region', levels = "EU-ME-AF") + 
-                        nodecov('OnetImportance'))
+                        b1nodematch("OnetImportance"))
     sim_coefs <- coef(sim_model)
     
     # Agregar los coeficientes al data frame
