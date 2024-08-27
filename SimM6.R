@@ -12,14 +12,11 @@ ModelAAA <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)) +
                  control = control.ergm(MCMC.samplesize = 100000, 
                                         MCMC.burnin = 10000, 
                                         MCMLE.maxit = 10))
-summary(ModelAAA) # AIC = 7466
+summary(ModelAAA) # AIC = 7452
 
 
 GOF <- gof(ModelAAA)
 plot(GOF)
-plot(GOF1)
-GOF1
-
 
 Simuladas2 <- simulate(ModelAAA, nsim = 1000, 
                        coef = ModelAAA$coefficients,
@@ -27,7 +24,6 @@ Simuladas2 <- simulate(ModelAAA, nsim = 1000,
                          control.simulate.ergm(
                            MCMC.burnin = 100000, 
                            MCMC.interval = 500))
-
 
 library(tidyverse)
 extract_coefs_simulations <- function(Simuladas2, model) {
