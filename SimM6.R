@@ -70,9 +70,9 @@ abline(v = COEF1, col = "red", lwd = 2)
 t.test(coef_df1$edges, mu = ModelAAA$coefficients[1])
 t.test(coef_df1$b1sociality3, mu = ModelAAA$coefficients[2])
 
-cov_sim <- cov(coef_df1[c(3,5:10)])
+cov_sim <- cov(coef_df1[c(3,5:12)])
 observed_stats <- ModelAAA$coefficients
-coef <- coef_df1[c(3,5:10)]
+coef <- coef_df1[c(3,5:12)]
 
 MD <- mahalanobis(x = t(observed_stats), center = colMeans(coef), cov = cov_sim)
 MD
@@ -81,7 +81,7 @@ hist(observed_stats, main = "Distribución de las distancias de Mahalanobis",
      xlab = "Distancia de Mahalanobis")
 abline(v = MD, col = "red", lwd = 2)
 
-cor(observed_stats, colMeans(coef[1:7]))
+cor(observed_stats, colMeans(coef[1:9]))
 Resumen <- summary(ModelAAA)
 Resumen$aic
 Resumen$bic
