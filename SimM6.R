@@ -21,14 +21,8 @@ plot(GOF1)
 GOF1
 
 
-
-
-summary(ModelA)
-
-gof(ModelA, GOF=~model)
-
-Simuladas1 <- simulate(ModelA, nsim = 1000, 
-                       coef = ModelA$coefficients,
+Simuladas2 <- simulate(ModelAAA, nsim = 1000, 
+                       coef = ModelAAA$coefficients,
                        control = 
                          control.simulate.ergm(
                            MCMC.burnin = 100000, 
@@ -36,9 +30,9 @@ Simuladas1 <- simulate(ModelA, nsim = 1000,
 
 
 library(tidyverse)
-extract_coefs_simulations <- function(Simuladas1, model) {
+extract_coefs_simulations <- function(Simuladas2, model) {
   # Obtener el número de simulaciones
-  num_sims <- length(Simuladas1)
+  num_sims <- length(Simuladas2)
   
   # Crear un data frame vacío para almacenar los coeficientes
   coef_df1 <- data.frame(
@@ -53,8 +47,11 @@ extract_coefs_simulations <- function(Simuladas1, model) {
   
   # Iterar sobre cada red simulada y extraer los coeficientes
   for (i in 1:num_sims) {
-    sim_net <- Simuladas1[[i]]
-    sim_model <- ergm(sim_net ~ edges + b1sociality(c(3, 11, 13, 2, 6)))
+    sim_net <- Simuladas2[[i]]
+    sim_model <- ergm(sim_net ~ edges + b1sociality(c(3, 11, 13, 2, 6)) + 
+                        b2factor('SchoolType', levels = "Public") +
+                        b2factor('Region', levels = "EU-ME-AF") + 
+                        b1nodematch("OnetImportance"))
     sim_coefs <- coef(sim_model)
     
     # Agregar los coeficientes al data frame
@@ -64,9 +61,9 @@ extract_coefs_simulations <- function(Simuladas1, model) {
   return(coef_df1)
 }
 
-coef_df1 <- extract_coefs_simulations(Simuladas1, ModelA)
+coef_df1 <- extract_coefs_simulations(Simuladas2, ModelAAA)
 
-COEF1 <- ModelA$coefficients[2]
+COEF1 <- ModelAAA$coefficients[2]
 
 
 hist(coef_df1$b1sociality3, main = "Distribución del estadístico en las redes simuladas",
@@ -74,23 +71,24 @@ hist(coef_df1$b1sociality3, main = "Distribución del estadístico en las redes 
 abline(v = COEF1, col = "red", lwd = 2)
 
 
-t.test(coef_df1$edges, mu = ModelA$coefficients[1])
-t.test(coef_df1$b1sociality3, mu = ModelA$coefficients[2])
+t.test(coef_df1$edges, mu = ModelAAA$coefficients[1])
+t.test(coef_df1$b1sociality3, mu = ModelAAA$coefficients[2])
 
-cov_sim <- cov(coef_df1[c(3,5:9)])
-observed_stats <- ModelA$coefficients
-coef <- coef_df1[c(3,5:9)]
+cov_sim <- cov(coef_df1[c(3,5:10)])
+observed_stats <- ModelAAA$coefficients
+coef <- coef_df1[c(3,5:10)]
 
 MD <- mahalanobis(x = t(observed_stats), center = colMeans(coef), cov = cov_sim)
+MD
 
 hist(observed_stats, main = "Distribución de las distancias de Mahalanobis", 
      xlab = "Distancia de Mahalanobis")
 abline(v = MD, col = "red", lwd = 2)
 
-cor(observed_stats, colMeans(coef[1:6]))
-Resumen <- summary(ModelA)
+cor(observed_stats, colMeans(coef[1:7]))
+Resumen <- summary(ModelAAA)
 Resumen$aic
 Resumen$bic
 
 
-mcmc.diagnostics(ModelA) # it works only if force MCMC 
+mcmc.diagnostics(ModelAAA) # it works only if force MCMC 
