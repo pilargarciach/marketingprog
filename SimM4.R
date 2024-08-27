@@ -16,9 +16,7 @@ GOF <- gof(Model4)
 plot(GOF)
 GOF
 
-gof(Model4, GOF=~model)
-
-Simuladas1 <- simulate(Model4, nsim = 1000, 
+Simuladas4 <- simulate(Model4, nsim = 1000, 
                        coef = Model4$coefficients,
                        control = 
                          control.simulate.ergm(
@@ -27,9 +25,9 @@ Simuladas1 <- simulate(Model4, nsim = 1000,
 
 
 library(tidyverse)
-extract_coefs_simulations <- function(Simuladas1, model) {
+extract_coefs_simulations <- function(Simuladas4, model) {
   # Obtener el número de simulaciones
-  num_sims <- length(Simuladas1)
+  num_sims <- length(Simuladas4)
   
   # Crear un data frame vacío para almacenar los coeficientes
   coef_df1 <- data.frame(
@@ -44,10 +42,8 @@ extract_coefs_simulations <- function(Simuladas1, model) {
   
   # Iterar sobre cada red simulada y extraer los coeficientes
   for (i in 1:num_sims) {
-    sim_net <- Simuladas1[[i]]
-    sim_model <- ergm(sim_net ~ edges + b1sociality(c(3, 11, 13)) + 
-                        b2factor('SchoolType', levels = "Public") +
-                        b2factor('Region', levels = "EU-ME-AF") + 
+    sim_net <- Simuladas4[[i]]
+    sim_model <- ergm(sim_net ~ edges + b1sociality(c(3, 11, 13, 2, 6)) + 
                         b1nodematch("OnetImportance"))
     sim_coefs <- coef(sim_model)
     
@@ -58,7 +54,7 @@ extract_coefs_simulations <- function(Simuladas1, model) {
   return(coef_df1)
 }
 
-coef_df1 <- extract_coefs_simulations(Simuladas1, Model4)
+coef_df1 <- extract_coefs_simulations(Simuladas4, Model4)
 
 COEF1 <- Model4$coefficients[2]
 
