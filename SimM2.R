@@ -10,18 +10,8 @@ ModelC <- ergm(red ~ edges + b1sociality(c(3, 11, 13, 2, 6)),
                                       MCMLE.maxit = 10))
 summary(ModelC) # AIC = 7461
 GOF <- gof(ModelC)
-GOF1 <- gof(ModelC, GOF = ~model)
 plot(GOF)
-plot(GOF1)
-GOF1
 
-
-ModelC <- ergm(formula = red ~ edges + b1sociality(c(3, 11, 13, 2, 6)), 
-               control = control.ergm(MCMC.samplesize = 10000, MCMC.burnin = 5000, 
-                                      MCMLE.maxit = 10, force.main = TRUE))
-
-mcmc.diagnostics(ModelC)
-gof(ModelC, GOF=~model)
 
 Simuladas1 <- simulate(ModelC, nsim = 1000, 
                        coef = ModelC$coefficients,
