@@ -90,4 +90,4 @@ Resumen$aic
 Resumen$bic
 
 
-mcmc.diagnostics(ModelA) # it works only if force MCMC 
+mcmc.diagnostics(ModelAA) # it works only if force MCMC 
