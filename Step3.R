@@ -19,6 +19,17 @@ setdiff(todos, seleccionados)
 
 library(igraph)
 bn2 <- graph_from_data_frame(network,directed=FALSE)
+V(bn2)$type <- bipartite_mapping(bn2)$type
+V(bn2)$shape <- ifelse(V(bn2)$type, "circle", "square")
+V(bn2)$size <- 3.5
+V(bn2)$label <- ""
+plot(bn2,
+     vertex.color = ifelse(V(bn2)$type == FALSE, "#FFCD00", ""),
+     edge.width = 0.3, 
+     edge.color = "lightgray",
+     layout = layout_components, 
+     main = "")
+
 BN <- data.frame(Degree = igraph::degree(bn2),
                  Closeness = igraph::closeness(bn2),
                  Betweennes = igraph::betweenness(bn2),
