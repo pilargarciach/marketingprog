@@ -23,13 +23,15 @@ V(bn2)$type <- bipartite_mapping(bn2)$type
 V(bn2)$shape <- ifelse(V(bn2)$type, "circle", "square")
 V(bn2)$size <- 3.5
 V(bn2)$label <- ""
+set.seed(7093)
+png("F3.png", width = 15, height = 15, units = 'in', res = 300)
 plot(bn2,
      vertex.color = ifelse(V(bn2)$type == FALSE, "#FFCD00", "purple3"),
      edge.width = 0.3, 
-     edge.color = "lightgray",
-     layout = layout_components, 
+     edge.color = "gray",
+     layout = layout_with_gem, 
      main = "")
-
+dev.off()
 BN <- data.frame(Degree = igraph::degree(bn2),
                  Closeness = igraph::closeness(bn2),
                  Betweennes = igraph::betweenness(bn2),
