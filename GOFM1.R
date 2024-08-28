@@ -9,3 +9,4 @@ load("~/Documents/GitHub/marketingprog/Results/ResultsSimM3.RData")
 GOF
 rm(list = ls())
 load("~/Documents/GitHub/marketingprog/Results/ResultsSimM4.RData")
+GOF
