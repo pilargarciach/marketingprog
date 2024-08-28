@@ -24,7 +24,7 @@ V(bn2)$shape <- ifelse(V(bn2)$type, "circle", "square")
 V(bn2)$size <- 3.5
 V(bn2)$label <- ""
 plot(bn2,
-     vertex.color = ifelse(V(bn2)$type == FALSE, "#FFCD00", ""),
+     vertex.color = ifelse(V(bn2)$type == FALSE, "#FFCD00", "purple3"),
      edge.width = 0.3, 
      edge.color = "lightgray",
      layout = layout_components, 
