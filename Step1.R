@@ -50,7 +50,7 @@ variable.names(Inst)
 
 library(png)
 library(treemap)
-png("F00.png", width = 15, height = 7, units = 'in', res = 300)
+png("F00.png", width = 20, height = 7, units = 'in', res = 300)
 treemap(Inst,
         index=c("Geolocation", "School Type"),
         vSize="value",
