@@ -5,6 +5,7 @@ Network$Competence <- tolower(Network$Competence)
 
 table(Network$Competence)
 network <- Network[!duplicated(Network[c(1,2,4,6,7)]),]
+network <- network[, c(2, 1, 3, 4, 5, 6, 7, 8)]
 
 library(tidyverse)
 Public <- network %>% filter(., grepl("Public",InstitutionType))
@@ -14,8 +15,6 @@ seleccionados <- unique(network$docname)
 load("Results/Result1.RData")
 todos <- unique(TextosData$Text)
 setdiff(todos, seleccionados)
-
-
 
 library(igraph)
 bn2 <- graph_from_data_frame(network,directed=FALSE)
@@ -29,17 +28,17 @@ plot(bn2,
      vertex.color = ifelse(V(bn2)$type == FALSE, "#FFCD00", "purple3"),
      edge.width = 0.3, 
      edge.color = "gray",
-     layout = layout_with_gem, 
+     layout = layout_components, 
      main = "")
 dev.off()
 BN <- data.frame(Degree = igraph::degree(bn2),
                  Closeness = igraph::closeness(bn2),
                  Betweennes = igraph::betweenness(bn2),
-                 Eigen = igraph::eigen_centrality(bn2))
-BN <- BN[ -c(5:25) ]
-BN$Partition <- "Skills"
-BN$Partition[29:286] <- "Brochures"
+                 Eigenvector = igraph::eigen_centrality(bn2)$vector)
 BN$Node <- rownames(BN)
+BN <- mutate(BN,
+             Partition = ifelse(
+                        grepl("text", Node), "Program", "Skill"))
 write.csv(BN, file = "BN.csv")
 
 library(psych)
@@ -48,8 +47,8 @@ quantile(BN$Degree, probs = seq(.1, .99, by = .01))
 
 
 library(tidyverse)
-Skills <- BN %>% filter(., Partition == "Skills")
-Brochures <- BN %>% filter(., Partition == "Brochures")
+Skills <- BN %>% filter(., Partition == "Skill")
+Brochures <- BN %>% filter(., Partition == "Program")
 summary(Skills$Degree)
 
 png("F2.png", width = 8, height = 10, units = 'in', res = 300)
@@ -125,4 +124,5 @@ set.vertex.attribute(red, "OnetImportance", OnetImportance$OnetImportance)
 set.vertex.attribute(red, "Region", Region$Region)
 red
 get.vertex.attribute(red, "OnetImportance")
+red
 save.image("Results/Result3.RData")
