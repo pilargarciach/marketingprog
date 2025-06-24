@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -133,13 +133,13 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Formación de Habilidades en Maestrías de Marketing Acreditadas en AACSB</li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -838,9 +838,9 @@ div.csl-indent {
 <pre><code>                                  text1 text10 text100 text101 text102
 active learning                       1      1       1       0       0
 active listening                      1      0       1       0       1
-service orientation                   1      0       0       0       0
 management of personnel resources     1      1       1       1       1
-management of financial resources     1      0       1       1       1</code></pre>
+management of financial resources     1      0       1       1       1
+service orientation                   1      0       0       0       0</code></pre>
 </div>
 </div>
 </section>
@@ -887,7 +887,7 @@ management of financial resources     1      0       1       1       1</code></p
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(coda)</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>sna<span class="sc">::</span><span class="fu">gden</span>(red)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.05233791</code></pre>
+<pre><code>[1] 0.05231354</code></pre>
 </div>
 </div>
 <p>En esta red bipartita, las habilidades son definidas como nodos de la primera partición y los folletos promocionales de los programas de marketing se definen como los nodos de la segunda partición. A esta red se le pueden adjuntar atributos a dichos nodos de la siguiente manera.</p>
@@ -918,9 +918,9 @@ management of financial resources     1      0       1       1       1</code></p
   loops = FALSE 
   multiple = FALSE 
   bipartite = 29 
-  total edges= 2148 
+  total edges= 2147 
     missing edges= 0 
-    non-missing edges= 2148 
+    non-missing edges= 2147 
 
  Vertex attribute names: 
     OnetImportance Region SchoolType vertex.names 
@@ -950,14 +950,14 @@ ergm(formula = red ~ edges, control = control.ergm(MCMC.burnin = 10000,
 Maximum Likelihood Results:
 
       Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
-edges -0.90956    0.02555      0  -35.59   &lt;1e-04 ***
+edges -0.91022    0.02556      0  -35.62   &lt;1e-04 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
      Null Deviance: 10372  on 7482  degrees of freedom
- Residual Deviance:  8971  on 7481  degrees of freedom
+ Residual Deviance:  8969  on 7481  degrees of freedom
  
-AIC: 8973  BIC: 8980  (Smaller is better. MC Std. Err. = 0)</code></pre>
+AIC: 8971  BIC: 8978  (Smaller is better. MC Std. Err. = 0)</code></pre>
 </div>
 </div>
 <p>Este primer modelo debe considerarse un modelo de línea base ya que solo incluye el término <code>edges</code>, lo que implica que la probabilidad de una conexión entre dos nodos es constante en toda la red. El coeficiente estimado para <code>edges</code> es -0.91022, lo que indica una tendencia negativa a formar enlaces (por debajo de lo esperado por azar). Es esencial interpretar este coeficiente en conjunto con otros términos del modelo (en modelos posteriores). El coeficiente es altamente significativo (p-valor &lt; 0.001), lo que sugiere que el número de enlaces es diferente de lo esperado por casualidad. La desviación nula y residual indican cuánto se reduce la falta de ajuste del modelo en comparación con un modelo nulo sin predictores. Los valores de AIC (Akaike Information Criterion) y BIC (Bayesian Information Criterion) son medidas de ajuste del modelo, y mientras más cercanos a cero tanto mejor el ajuste del modelo. Estos dos valores los usaremos para comparar este primer modelo que sirve como línea base para incorporar otros predictores.</p>
@@ -975,42 +975,42 @@ ergm(formula = red ~ b1sociality(nodes = c(1:28)))
 
 Maximum Likelihood Results:
 
-              Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
-b1sociality1  -0.74595    0.13328      0  -5.597   &lt;1e-04 ***
-b1sociality2   0.06204    0.12457      0   0.498   0.6185    
-b1sociality3  -1.78724    0.17763      0 -10.062   &lt;1e-04 ***
-b1sociality4   2.53202    0.23836      0  10.623   &lt;1e-04 ***
-b1sociality5   0.00000    0.12451      0   0.000   1.0000    
-b1sociality6  -0.83625    0.13556      0  -6.169   &lt;1e-04 ***
-b1sociality7  -1.00764    0.14065      0  -7.164   &lt;1e-04 ***
-b1sociality8   1.58179    0.16553      0   9.556   &lt;1e-04 ***
-b1sociality9  -0.62415    0.13063      0  -4.778   &lt;1e-04 ***
-b1sociality10 -0.89200    0.13711      0  -6.506   &lt;1e-04 ***
-b1sociality11 -1.30587    0.15201      0  -8.591   &lt;1e-04 ***
-b1sociality12  0.72824    0.13286      0   5.481   &lt;1e-04 ***
-b1sociality13 -0.59020    0.12998      0  -4.541   &lt;1e-04 ***
-b1sociality14 -1.42552    0.15750      0  -9.051   &lt;1e-04 ***
-b1sociality15 -1.66633    0.17029      0  -9.785   &lt;1e-04 ***
-b1sociality16 -1.35272    0.15410      0  -8.778   &lt;1e-04 ***
-b1sociality17 -0.89200    0.13711      0  -6.506   &lt;1e-04 ***
-b1sociality18 -0.40870    0.12712      0  -3.215   0.0013 ** 
-b1sociality19 -2.93631    0.28461      0 -10.317   &lt;1e-04 ***
-b1sociality20 -2.93631    0.28461      0 -10.317   &lt;1e-04 ***
-b1sociality21 -0.24935    0.12548      0  -1.987   0.0469 *  
-b1sociality22 -1.99096    0.19148      0 -10.398   &lt;1e-04 ***
-b1sociality23 -0.96843    0.13940      0  -6.947   &lt;1e-04 ***
-b1sociality24 -1.78724    0.17763      0 -10.062   &lt;1e-04 ***
-b1sociality25 -1.40089    0.15633      0  -8.961   &lt;1e-04 ***
-b1sociality26 -3.73767    0.41308      0  -9.048   &lt;1e-04 ***
-b1sociality27 -2.65158    0.25094      0 -10.566   &lt;1e-04 ***
-b1sociality28 -4.15104    0.50391      0  -8.238   &lt;1e-04 ***
+                Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
+b1sociality1  -7.459e-01  1.333e-01      0  -5.597   &lt;1e-04 ***
+b1sociality2   6.204e-02  1.246e-01      0   0.498   0.6185    
+b1sociality3   2.532e+00  2.384e-01      0  10.623   &lt;1e-04 ***
+b1sociality4   2.212e-16  1.245e-01      0   0.000   1.0000    
+b1sociality5  -1.787e+00  1.776e-01      0 -10.062   &lt;1e-04 ***
+b1sociality6  -1.008e+00  1.407e-01      0  -7.164   &lt;1e-04 ***
+b1sociality7  -8.362e-01  1.356e-01      0  -6.169   &lt;1e-04 ***
+b1sociality8  -6.242e-01  1.306e-01      0  -4.778   &lt;1e-04 ***
+b1sociality9   1.582e+00  1.655e-01      0   9.556   &lt;1e-04 ***
+b1sociality10 -5.902e-01  1.300e-01      0  -4.541   &lt;1e-04 ***
+b1sociality11 -8.920e-01  1.371e-01      0  -6.506   &lt;1e-04 ***
+b1sociality12 -1.306e+00  1.520e-01      0  -8.591   &lt;1e-04 ***
+b1sociality13  7.106e-01  1.325e-01      0   5.365   &lt;1e-04 ***
+b1sociality14 -1.666e+00  1.703e-01      0  -9.785   &lt;1e-04 ***
+b1sociality15 -1.426e+00  1.575e-01      0  -9.051   &lt;1e-04 ***
+b1sociality16 -1.353e+00  1.541e-01      0  -8.778   &lt;1e-04 ***
+b1sociality17 -8.920e-01  1.371e-01      0  -6.506   &lt;1e-04 ***
+b1sociality18 -4.087e-01  1.271e-01      0  -3.215   0.0013 ** 
+b1sociality19 -2.936e+00  2.846e-01      0 -10.317   &lt;1e-04 ***
+b1sociality20 -2.936e+00  2.846e-01      0 -10.317   &lt;1e-04 ***
+b1sociality21 -2.493e-01  1.255e-01      0  -1.987   0.0469 *  
+b1sociality22 -1.991e+00  1.915e-01      0 -10.398   &lt;1e-04 ***
+b1sociality23 -9.684e-01  1.394e-01      0  -6.947   &lt;1e-04 ***
+b1sociality24 -1.787e+00  1.776e-01      0 -10.062   &lt;1e-04 ***
+b1sociality25 -1.401e+00  1.563e-01      0  -8.961   &lt;1e-04 ***
+b1sociality26 -3.738e+00  4.131e-01      0  -9.048   &lt;1e-04 ***
+b1sociality27 -2.652e+00  2.509e-01      0 -10.566   &lt;1e-04 ***
+b1sociality28 -4.151e+00  5.039e-01      0  -8.238   &lt;1e-04 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
      Null Deviance: 10372  on 7482  degrees of freedom
- Residual Deviance:  7315  on 7454  degrees of freedom
+ Residual Deviance:  7316  on 7454  degrees of freedom
  
-AIC: 7371  BIC: 7565  (Smaller is better. MC Std. Err. = 0)</code></pre>
+AIC: 7372  BIC: 7566  (Smaller is better. MC Std. Err. = 0)</code></pre>
 </div>
 </div>
 <p>De esta exploración, observamos que la habilidad de pensamiento crítico (<code>b1sociality3</code>), persuasión (<code>b1sociality9</code>), y monitoreo (<code>b1sociality13</code>) son las que destacan por su conectividad sistemáticamente superior a lo esperado por azar con la mayoría de folletos.</p>
@@ -1090,18 +1090,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1133,7 +1122,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1141,7 +1152,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
