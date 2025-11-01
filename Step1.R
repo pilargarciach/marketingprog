@@ -1,3 +1,4 @@
+# Hola Karen
 # 1.Initialization ----
 # Step 1: Opening the sample of texts
 # this local folder is a clone of the GitHub Repo
