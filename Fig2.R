@@ -1,3 +1,37 @@
+load("Results/Result2.RData")
+Network <- SS[c(8,1,10:15)]
+rm(list=setdiff(ls(), c("Network", "SS")))
+Network$Competence <- tolower(Network$Competence)
+
+table(Network$Competence)
+network <- Network[!duplicated(Network[c(1,2,4,6,7)]),]
+network <- network[, c(2, 1, 3, 4, 5, 6, 7, 8)]
+
+library(tidyverse)
+Public <- network %>% filter(., grepl("Public",InstitutionType))
+Private <- network %>%  filter(., grepl("Private", InstitutionType))
+
+seleccionados <- unique(network$docname)
+load("Results/Result1.RData")
+todos <- unique(TextosData$Text)
+setdiff(todos, seleccionados)
+
+library(igraph)
+bn2 <- graph_from_data_frame(network,directed=FALSE)
+V(bn2)$type <- bipartite_mapping(bn2)$type
+V(bn2)$shape <- ifelse(V(bn2)$type, "circle", "square")
+V(bn2)$size <- 3.5
+V(bn2)$label <- ""
+set.seed(7093)
+png("F3.png", width = 15, height = 15, units = 'in', res = 300)
+plot(bn2,
+     vertex.color = ifelse(V(bn2)$type == FALSE, "#FFCD00", "purple3"),
+     edge.width = 0.3, 
+     edge.color = "gray",
+     layout = layout_components, 
+     main = "")
+dev.off()
+
 library(readr)
 Data_Figure2 <- read_csv("hypotheticaldata.csv")
 
